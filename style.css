@@ -1,0 +1,75 @@
+/*==================================================
+1. VARIAVEIS DE CORES
+==================================================*/
+
+:root{
+    /* Cores de Fundo (Mapas) */
+    --fundo-base: #858B74;
+    
+    /* Painéis e Elementos Metálicos */
+    --metal-chumbo: #1E2021;
+    --metal-cinza-escuro: #2A2D2E;
+    --metal-cinza-claro: #8a8d8f;
+    --sombra-intensa: rgba(0, 0, 0, 0.7);
+
+    /* Textos e Destaques */
+    --texto-branco: #F0F2F5;
+    --dourado-titulos: #C5A866;
+}
+
+/*==================================================
+2. RESET BASICO E FUNDO
+==================================================*/
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    background-image: url("WT\ -\ Artes/WT\ - BG/BG3.png");
+    font-family: "Arial",sans-serif;
+    display:flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+/*==================================================
+3. A PLACA DA LOGO (Estilo Metalico)
+==================================================*/
+
+.logo-container{
+    text-align: center; /* Centraliza a imagem caso o container seja maior que ela */
+    margin-bottom: 20px; /*Da um espaço legal antes do painel*/
+
+    width: 80%;
+    margin: 0 auto;
+}
+
+.logo-img{
+    width: 100%; /*A principio ela ocupa todo o espaço disponivel*/
+
+    max-width: 400px; /*Trava de segurança para altura, para que não passe deste valor*/ 
+    height:auto; /*Isso mantem a imagem proporcional*/
+}
+
+.logo-plate {
+    position: relative;
+    
+    /* Criando o efeito de metal com um gradiente linear */
+    background: linear-gradient(135deg, var(--metal-cinza-claro), var(--metal-cinza-escuro));
+    
+    padding: 15px 40px;
+    border-radius: 8px; /* Cantos levemente arredondados */
+    
+    /* Borda para dar a sensação de espessura da placa */
+    border: 5px solid #5a5f63; 
+    
+    /* A sombra intensa mencionada na sua paleta para desgrudar a placa do fundo */
+    box-shadow: 5px 5px 15px var(--sombra-intensa), 
+                inset 2px 2px 5px rgba(255, 255, 255, 0.1); /* Brilho interno para volume */
+    
+    text-align: center;
+    display: inline-block;
+}
