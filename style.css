@@ -5,6 +5,8 @@
 :root{
     /* Cores de Fundo (Mapas) */
     --fundo-base: #858B74;
+    --fundo-base-marrom: #514029;
+
     
     /* Painéis e Elementos Metálicos */
     --metal-chumbo: #1E2021;
@@ -15,6 +17,7 @@
     /* Textos e Destaques */
     --texto-branco: #F0F2F5;
     --dourado-titulos: #C5A866;
+    --dourado-titulos-claro: #DBC386;
 }
 
 /*==================================================
@@ -30,8 +33,12 @@
 body{
     background-image: url("WT\ -\ Artes/WT\ - BG/BG3.png");
     font-family: "Arial",sans-serif;
+
     display:flex;
-    justify-content: center;
+    
+   flex-direction: column; /* Essa é a mágica: muda o eixo de linha para coluna (empilha os itens) */
+    align-items: center; /* Centraliza a logo e o painel no meio da tela */
+
     padding: 50px;
 }
 
@@ -39,18 +46,26 @@ body{
 3. A PLACA DA LOGO (Estilo Metalico)
 ==================================================*/
 
-.logo-container{
-    text-align: center; /* Centraliza a imagem caso o container seja maior que ela */
-    margin-bottom: 20px; /*Da um espaço legal antes do painel*/
+.top-header{
+    /*position: sticky; /*Deixa a logo gruadada no topo quando rolar*/
+    top: 10px; /* A que distancia do topo ele vai ficar*/
+    z-index: 100; /*Garante que ela vai ficar por cima de todos os elementos*/
 
-    width: 80%;
+    width: 100%;
+    text-align: center; /* Centraliza a imagem caso o container seja maior que ela */
+    margin-bottom: 30px; /*Da um espaço legal antes do painel a baixo*/
+
+
+}
+
+.logo-container{
+    width: 50%;
     margin: 0 auto;
 }
 
 .logo-img{
     width: 100%; /*A principio ela ocupa todo o espaço disponivel*/
-
-    max-width: 400px; /*Trava de segurança para altura, para que não passe deste valor*/ 
+    max-width: 200px; /*Trava de segurança para altura, para que não passe deste valor*/ 
     height:auto; /*Isso mantem a imagem proporcional*/
 }
 
@@ -72,4 +87,65 @@ body{
     
     text-align: center;
     display: inline-block;
+}
+
+/* ==================================================
+   4. PAINEL PRINCIPAL (Área Home)
+   ================================================== */
+
+.main-panel{
+    background-color: var(--fundo-base-marrom);
+    border-radius: 15px;
+    padding: 40px;
+
+    /* Uma borda sutil para separar bem a caixa do fundo */
+    border: 2px solid var(--metal-cinza-claro);
+    box-shadow: 10px 10px 25px var(--sombra-intensa);
+
+    /* Controle de largura: ocupando 100% do espaço disponível, mas trava em 900px 
+       para não ficar esticado demais em monitores grandes */
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto; /* Centraliza a caixa na tela */
+
+    color: var(--texto-branco);
+}
+
+.panel-title{
+
+    color: var(--dourado-titulos);
+    font-size: 40px;
+    letter-spacing: 2px; /*Espaçamento de letras para deixar mais estiloso*/
+
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--metal-cinza-claro);
+    padding-bottom: 10px;
+
+}
+
+/* ==================================================
+   5. TEXTOS E APRESENTAÇÃO
+   ================================================== */
+
+.presentation-section{
+    margin-bottom: 40px;
+
+}
+
+.section-subtitle{
+    color: var(--dourado-titulos-claro);
+    font-size: 25px;
+    margin-bottom: 15px;
+    
+}
+
+.paragraph{
+color: var(--texto-branco);
+font-size: 14px;
+
+line-height: 1.6;
+margin-bottom: 15px;
+
+text-align: justify;
+
 }
