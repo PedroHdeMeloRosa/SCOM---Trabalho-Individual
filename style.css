@@ -19,6 +19,7 @@
     --texto-branco: #F0F2F5;
     --dourado-titulos: #C5A866;
     --dourado-titulos-claro: #DBC386;
+    --ouro-inativo: #8E7A4A;
 }
 
 /*==================================================
@@ -225,22 +226,22 @@ text-indent: 30px;
 }
 
 .card-usa {
-    background-image: url("WT - Artes/WT - Flags/WT USA Flag.jpg"); 
+    background-image: url("WT - Artes/USA/USA Flags/WT USA Flag.jpg"); 
 }
 
 .card-ger{
-    background-image: url("WT - Artes/WT - Flags/WT GER Flag.jpg");
+    background-image: url("WT - Artes/GER/Ger Flags/WT GER Flag.jpg");
 }
 
 .card-rus{
-    background-image: url("WT - Artes/WT - Flags/WT RUS Flag.jpg");
+    background-image: url("WT - Artes/RUS/RUS Flags/WT RUS Flag.jpg");
 }
 
 .tank-silhueta{
     filter: brightness(0%);
 
     width: 90%; /* O tanque vai ocupar quase toda a largura da carta */
-    max-width: 2000px;
+    max-width: 200px;
     height: auto;
 
     margin-top: auto;
@@ -324,4 +325,134 @@ text-indent: 30px;
 
 .card-rus:hover, .card-rus:focus {
     border-color: #A32020; /* Vermelho RUS (exatamente como na sua imagem de referência) */
+}
+
+/* ==================================================
+   10. PÁGINA DA NAÇÃO (Banner e Lista)
+   ================================================== */
+
+/* O truque do degradê! Ele vai do chumbo sólido na esquerda até ficar transparente na direita, revelando a bandeira */
+.nation-banner {
+    width: 100%;
+    height: 120px;
+    border-radius: 8px;
+    border: 2px solid var(--dourado-titulos);
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    padding-left: 40px;
+    box-shadow: 5px 5px 15px var(--sombra-intensa);
+    
+    /* Fundo base escuro para cobrir os espaços vazios */
+    background-color: var(--metal-cinza-escuro);
+    
+    /* O degradê agora se mistura com a bandeira posicionada à direita */
+    background-image: linear-gradient(to right, var(--sombra-intensa) 50%, transparent 100%), var(--flag-bg);
+    
+    /* A bandeira fica na direita, centralizada verticalmente */
+    background-position: left center, right center;
+    
+    /* A MÁGICA CONTRA O ZOOM: auto 100% faz a bandeira ter a altura exata da caixa */
+    background-size: cover, auto 100%;
+    
+    /* Impede que a bandeira vire um mosaico repetido */
+    background-repeat: no-repeat, no-repeat;
+}
+
+.nation-title-large {
+    color: var(--dourado-titulos);
+    font-size: 36px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 5px #000;
+}
+
+/* ==================================================
+   11. ITENS DA LISTA DE TANQUES
+   ================================================== */
+
+.tank-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    
+    /* Garante o limite e a centralização da lista inteira */
+    width: 100%;
+    max-width: 900px; 
+    margin: 0 auto; 
+}
+
+
+
+.tank-item {
+    display: flex;
+    align-items: center;
+    /* Trocamos height para min-height. Assim a caixa abraça a imagem se ela crescer */
+    min-height: 90px; 
+    padding: 15px 25px; /* Mais espaço interno para a caixa ficar bem definida */
+    border-radius: 8px;
+    border: 2px solid var(--metal-cinza-claro); /* Borda mais grossa para marcar a caixa */
+    
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--ouro-inativo), var(--metal-chumbo));
+    
+    /* Transição suave para a caixa inteira */
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+}
+
+.list-silhouette {
+    /* ESTADO INICIAL (Pequeno) */
+    width: 80px; 
+    margin-right: 20px;
+    filter: drop-shadow(0px 5px 5px #000) brightness(0.8);
+    
+    /* A mágica está aqui: dizemos que a mudança de tamanho deve ser animada */
+    transition: width 0.4s cubic-bezier(0.25, 1, 0.5, 1), filter 0.4s ease;
+}
+
+.tank-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tank-name {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--dourado-titulos);
+    margin-bottom: 4px; 
+}
+
+.tank-desc {
+    font-size: 13px;
+    color: var(--texto-branco);
+    font-style: italic;
+    opacity: 0.8; 
+}
+
+/* --- A MÁGICA DO HOVER NA LISTA --- */
+
+/* 1. Escurece os não selecionados */
+.tank-list:hover .tank-item,
+.tank-list:focus-within .tank-item {
+    filter: grayscale(100%) brightness(0.6);
+}
+
+/* 2. O item selecionado ganha destaque na caixa */
+.tank-list .tank-item:hover,
+.tank-list .tank-item:focus {
+    filter: grayscale(0%) brightness(1.2);
+    box-shadow: inset 0px 0px 15px rgba(197, 168, 102, 0.15); 
+    border-color: var(--dourado-titulos-claro);
+    transform: translateX(15px);
+    outline: none;
+}
+
+/* 3. O EFEITO DE INCHAR A IMAGEM! */
+/* Quando o item for selecionado, dobramos a largura da imagem. 
+   O Flexbox automaticamente empurra o texto para o lado. */
+.tank-list .tank-item:hover .list-silhouette,
+.tank-list .tank-item:focus .list-silhouette {
+    width: 160px; /* Tamanho dobrado! */
+    filter: drop-shadow(0px 10px 10px #000) brightness(1); /* Sombra maior e 100% visível */
 }
