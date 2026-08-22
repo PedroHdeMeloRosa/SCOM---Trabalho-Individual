@@ -6,6 +6,7 @@
     /* Cores de Fundo (Mapas) */
     --fundo-base: #858B74;
     --fundo-base-marrom: #514029;
+    --verde-caqui-escuro: #6D735D;
 
     
     /* Painéis e Elementos Metálicos */
@@ -31,7 +32,7 @@
 }
 
 body{
-    background-image: url("WT\ -\ Artes/WT\ - BG/BG3.png");
+    background-image: url("WT - Artes/WT - BG/BG3.png");
     font-family: "Arial",sans-serif;
 
     display:flex;
@@ -40,6 +41,7 @@ body{
     align-items: center; /* Centraliza a logo e o painel no meio da tela */
 
     padding: 50px;
+
 }
 
 /*==================================================
@@ -65,7 +67,7 @@ body{
 
 .logo-img{
     width: 100%; /*A principio ela ocupa todo o espaço disponivel*/
-    max-width: 200px; /*Trava de segurança para altura, para que não passe deste valor*/ 
+    max-width: 500px; /*Trava de segurança para altura, para que não passe deste valor*/ 
     height:auto; /*Isso mantem a imagem proporcional*/
 }
 
@@ -73,7 +75,7 @@ body{
     position: relative;
     
     /* Criando o efeito de metal com um gradiente linear */
-    background: linear-gradient(135deg, var(--metal-cinza-claro), var(--metal-cinza-escuro));
+    background: linear-gradient(180deg, var(--metal-cinza-claro), var(--metal-cinza-escuro));
     
     padding: 15px 40px;
     border-radius: 8px; /* Cantos levemente arredondados */
@@ -94,7 +96,7 @@ body{
    ================================================== */
 
 .main-panel{
-    background-color: var(--fundo-base-marrom);
+    background-color: var(--metal-chumbo);
     border-radius: 15px;
     padding: 40px;
 
@@ -147,5 +149,179 @@ line-height: 1.6;
 margin-bottom: 15px;
 
 text-align: justify;
+text-indent: 30px;
 
+}
+
+/* ==================================================
+   6. SEÇÃO DE CARTAS (Nações)
+   ================================================== */
+
+.tank-section{
+    margin-top: 30px;
+    
+}
+
+/* Classe utilitária: aproveita o estilo do .section-subtitle, 
+   mas força a centralização para este título específico */
+.center-text{
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.cards-container{
+    display: flex; /*Transforma as caixas em uma linha flexivel*/
+    justify-content: space-between; /*Distribui o espaço vazio entre as cartas*/
+    gap: 20px; /*Deixa um vão de 20px entre as cartas.*/
+
+}
+
+.nation-card{
+    /* O flex: 1 faz com que as 3 cartas dividam o espaço igualmente (33.3% cada) */
+    flex: 1;
+ 
+    border: 3px solid var(--metal-cinza-claro);
+    border-radius: 8px;
+
+    padding: 15px;
+    min-height: 280px; /* Uma altura temporária apenas para você enxergar as caixas */
+
+    /* Efeito de sombra pesada padrão da sua UI */
+    box-shadow: 4px 4px 10px var(--sombra-intensa);
+
+    display: flex;
+    flex-direction: column; /* Empilha os itens DENTRO da carta */
+    align-items: center; /* Centraliza tudo DENTRO da carta */
+
+    /*Isso é para que quando transformei as divs em referencias para outro lugar, a caixa inteira dos card-select não fique sublinhada em azul*/
+    
+    text-decoration: none; /* Remove o sublinhado padrão dos links */
+    color: inherit; /* Garante que as cores de texto que configuramos antes sejam respeitadas */
+
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.nation-title {
+    color: var(--dourado-titulos);
+    font-size: 22px;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px var(--metal-chumbo);
+    
+    /* Garante que o título fique sempre no topo da carta, abrindo espaço embaixo */
+    margin-bottom: auto; 
+    margin-top: 10px;
+}
+
+.card-usa, .card-ger, .card-rus{
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; /* Evita que a imagem se repita como um mosaico */
+
+    /* Um truque: Adicionamos um degradê escuro por cima da imagem para garantir 
+       que o texto e o tanque não fiquem "apagados" caso a bandeira seja muito clara */
+    background-blend-mode: multiply;
+    background-color: #888; /* Escurece levemente a bandeira. Teste mudar esse valor depois! */
+
+}
+
+.card-usa {
+    background-image: url("WT - Artes/WT - Flags/WT USA Flag.jpg"); 
+}
+
+.card-ger{
+    background-image: url("WT - Artes/WT - Flags/WT GER Flag.jpg");
+}
+
+.card-rus{
+    background-image: url("WT - Artes/WT - Flags/WT RUS Flag.jpg");
+}
+
+.tank-silhueta{
+    filter: brightness(0%);
+
+    width: 90%; /* O tanque vai ocupar quase toda a largura da carta */
+    max-width: 2000px;
+    height: auto;
+
+    margin-top: auto;
+    margin-bottom: auto;
+
+    /* Se os seus tanques forem pretos, uma sombra clara ajuda a destacá-los.
+       Se forem brancos ou cinzas, mude para var(--sombra-intensa) */
+    filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.5));
+}
+
+.card-info-box {
+    /* Usando a cor de fundo mais escura da sua paleta para contrastar */
+    background-color: var(--metal-chumbo); 
+    
+    /* Uma borda fina para emoldurar o texto */
+    border: 2px solid var(--metal-cinza-claro); 
+    border-radius: 4px; /* Cantos levemente arredondados */
+    
+    padding: 10px;
+    width: 100%; /* Faz a caixa ocupar toda a largura interna da carta */
+    
+    /* Isso garante que a caixa fique sempre empurrada para o fundo da carta, 
+       mesmo que o tanque seja um pouco menor */
+    margin-top: auto; 
+    
+    /* Uma sombra interna suave (opcional) para dar profundidade */
+    box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.card-info-box p {
+    color: var(--texto-branco);
+    
+    /* Fonte bem pequena para simular descrições técnicas de veículos */
+    font-size: 11px; 
+    line-height: 1.4;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+/* ==================================================
+   9. ANIMAÇÕES DE INTERAÇÃO (Hover e Focus) / Trecho gerado com IA pelo Gemini - Responsavel pele efeito de transição de escolha dos cards de nações.
+   ================================================== */
+
+/* REGRA 1: Quando o container for focado/sobrevoado, afeta TODOS os cards dentro dele */
+/* O :focus-within garante que o efeito funcione quando você usar a tecla TAB */
+.cards-container:hover .nation-card,
+.cards-container:focus-within .nation-card {
+    /* Deixa em preto e branco e um pouco mais escuro */
+    filter: grayscale(100%) brightness(0.6); 
+    
+    /* Reduz a largura proporcional (de 1 para 0.8) */
+    flex: 0.8; 
+}
+
+/* REGRA 2: A exceção! O card exato que está com o mouse/foco ganha vida e expande */
+.cards-container .nation-card:hover,
+.cards-container .nation-card:focus {
+    /* Devolve a cor original e deixa ligeiramente mais brilhante */
+    filter: grayscale(0%) brightness(1.1); 
+    
+    /* Aumenta a largura proporcional (ele vai "espremer" os outros dois) */
+    flex: 1.4; 
+    
+    /* Dá um pequeno pulo para cima e aumenta a sombra para parecer mais próximo do usuário */
+    transform: translateY(-10px);
+    box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.9);
+    
+    /* O outline: none remove aquela caixa preta/branca padrão do navegador ao usar o TAB */
+    outline: none; 
+}
+
+/* REGRA 3: Bordas personalizadas baseadas no seu Guia de Cores WT! */
+/* Quando o card específico for ativado, ele troca a cor da borda de cinza para a cor da nação */
+.card-usa:hover, .card-usa:focus {
+    border-color: #1A3668; /* Azul USA da sua paleta */
+}
+
+.card-ger:hover, .card-ger:focus {
+    border-color: #F0F2F5; /* Branco off-white para destacar a Alemanha */
+}
+
+.card-rus:hover, .card-rus:focus {
+    border-color: #A32020; /* Vermelho RUS (exatamente como na sua imagem de referência) */
 }
