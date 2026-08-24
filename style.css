@@ -657,3 +657,19 @@ text-indent: 30px;
 .lore-text strong {
     color: var(--dourado-titulos-claro); /* Destaca palavras em negrito no meio do texto */
 }
+
+.Dedicated-note {
+    font-size: 7px;
+    color: #DEA193;
+    font-style: italic;
+    margin-top: 5px;
+    text-align: justify;
+    text-indent: 15px;
+}
+.Dedicated-note strong {
+    /* Cria o degradê do dourado para o vermelho suave */
+   color: var(--dourado-titulos);
+    
+    font-weight: bold;
+    color: var(--dourado-titulos-claro);
+}
