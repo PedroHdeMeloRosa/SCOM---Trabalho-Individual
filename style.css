@@ -20,6 +20,21 @@
     --dourado-titulos: #C5A866;
     --dourado-titulos-claro: #DBC386;
     --ouro-inativo: #8E7A4A;
+
+   /* USA (Tons profundos e dessaturados) */
+    --usa-azul: #010726;      /* Era #020F59 - Agora é um azul marinho quase preto */
+    --usa-vermelho: #660214;  /* Era #BF0426 - Agora é um tom de vinho/sangue escuro */
+    --usa-branco: #5C6673;    /* Era #F2F2F2 - Agora é um cinza chumbo azulado */
+
+    /* RUS (Tons rústicos e sombrios) */
+    --rus-vermelho: #6E1111;  /* Era #D92323 - Agora é um carmesim bem fechado */
+    --rus-azul: #01194D;      /* Era #0339A6 - Agora é um azul abissal */
+    --rus-branco: #736b6b;    /* Era #F2F2F2 - Agora é um cinza escuro levemente quente */
+
+    /* GER (Tons industriais e pesados) */
+    --ger-preto: #000000;     /* Já é o preto absoluto, mantido como âncora */
+    --ger-vermelho: #6E1111;  /* Era #D92323 - Mantido alinhado com o carmesim russo */
+    --ger-amarelo: #665200;   /* Ajustado para um tom de ouro velho/mostarda bem escuro */
 }
 
 /*==================================================
@@ -97,7 +112,7 @@ body{
    ================================================== */
 
 .main-panel{
-    background-color: var(--metal-chumbo);
+    
     border-radius: 15px;
     padding: 40px;
 
@@ -113,6 +128,25 @@ body{
 
     color: var(--texto-branco);
 }
+
+.main-bg{
+    background: var(--metal-chumbo);
+
+}
+
+.usa-bg{
+    background: linear-gradient(45deg, var(--usa-branco), var(--ger-vermelho), var(--ger-preto));
+    
+}
+
+.rus-bg{
+    background: linear-gradient(-45deg, var(--ger-preto), var(--rus-azul), var(--rus-vermelho));
+}
+
+.ger-bg{
+    background: linear-gradient(-45deg,var(--ger-preto),var(--ger-vermelho));
+}
+
 
 .panel-title{
 
@@ -404,7 +438,6 @@ text-indent: 30px;
     border: 2px solid var(--metal-cinza-claro); /* Borda mais grossa para marcar a caixa */
     
     text-decoration: none;
-    background: linear-gradient(90deg, var(--ouro-inativo), var(--metal-chumbo));
     
     /* Transição suave para a caixa inteira */
     transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
