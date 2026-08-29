@@ -1,0 +1,172 @@
+/* ==================================================
+   1. BOTÃO DE VOLTAR E CONTROLES
+   ================================================== */
+.back-button {
+    display: inline-block;
+    color: var(--dourado-titulos);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-bottom: 20px;
+    padding: 8px 16px;
+    background-color: var(--metal-cinza-escuro);
+    border: 1px solid var(--metal-cinza-claro);
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px var(--sombra-intensa);
+    transition: all 0.3s ease;
+}
+
+.back-button:hover,
+.back-button:focus {
+    color: var(--dourado-titulos-claro);
+    border-color: var(--dourado-titulos-claro);
+    background-color: var(--metal-chumbo);
+    transform: translateX(-5px);
+    outline: none;
+}
+
+.admin-controls {
+    margin-top: 30px;
+    text-align: right;
+}
+
+.btn-edit {
+    background-color: transparent;
+    color: var(--dourado-titulos);
+    border: 1px solid var(--dourado-titulos);
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s;
+}
+
+.btn-edit:hover {
+    background-color: var(--dourado-titulos);
+    color: var(--metal-chumbo);
+}
+
+/* ==================================================
+   2. FICHA TÉCNICA DO TANQUE (Dossiê)
+   ================================================== */
+.tank-sheet {
+    background-color: var(--metal-chumbo);
+    border: 2px solid var(--metal-cinza-claro);
+    border-radius: 8px;
+    box-shadow: 10px 10px 25px var(--sombra-intensa);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.sheet-header {
+    background: linear-gradient(90deg, var(--metal-cinza-escuro), var(--metal-chumbo));
+    padding: 20px 40px;
+    border-bottom: 2px solid var(--dourado-titulos);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sheet-title {
+    color: var(--dourado-titulos);
+    font-size: 28px;
+    letter-spacing: 2px;
+}
+
+.sheet-badge {
+    background-color: var(--metal-cinza-claro);
+    color: var(--metal-chumbo);
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.sheet-content {
+    display: flex;
+    padding: 40px;
+    gap: 40px;
+}
+
+/* ==================================================
+   3. COLUNA DA IMAGEM E DA TABELA
+   ================================================== */
+.sheet-visual {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px dashed var(--metal-cinza-claro);
+    padding: 20px;
+}
+
+.sheet-silhouette {
+    width: 100%;
+    max-width: 400px;
+    filter: drop-shadow(0px 10px 10px #000);
+}
+
+.data-title {
+    color: var(--dourado-titulos);
+    font-size: 18px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid var(--metal-cinza-claro);
+    padding-bottom: 10px;
+}
+
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--texto-branco);
+    font-size: 15px;
+}
+
+.data-table th, .data-table td {
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.data-table th {
+    text-align: left;
+    color: var(--metal-cinza-claro);
+    font-weight: normal;
+    width: 50%;
+}
+
+.data-table td {
+    text-align: right;
+    font-weight: bold;
+}
+
+/* ==================================================
+   4. HISTÓRICO DO TANQUE (Seção inferior)
+   ================================================== */
+.sheet-lore {
+    padding: 0 40px 40px 40px;
+}
+
+.lore-title {
+    color: var(--dourado-titulos);
+    font-size: 18px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid var(--metal-cinza-claro);
+    padding-bottom: 10px;
+}
+
+.lore-text {
+    color: var(--texto-branco);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+.lore-text strong {
+    color: var(--dourado-titulos-claro);
+}

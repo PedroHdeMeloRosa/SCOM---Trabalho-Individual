@@ -1,0 +1,351 @@
+/* ==================================================
+   1. VARIÁVEIS DE CORES
+   ================================================== */
+:root {
+    /* Cores de Fundo (Mapas) */
+    --fundo-base: #28358B74;
+    --fundo-base-marrom: #514029;
+    --verde-caqui-escuro: #6D735D;
+
+    /* Painéis e Elementos Metálicos */
+    --metal-chumbo: #1E2021;
+    --metal-cinza-escuro: #2A2D2E;
+    --metal-cinza-claro: #8a8d8f;
+    --sombra-intensa: rgba(0, 0, 0, 0.7);
+
+    /* Textos e Destaques */
+    --texto-branco: #F0F2F5;
+    --dourado-titulos: #C5A866;
+    --dourado-titulos-claro: #DBC386;
+    --ouro-inativo: #8E7A4A;
+
+    /* USA (Tons profundos e dessaturados) */
+    --usa-azul: #010726;
+    --usa-vermelho: #660214;
+    --usa-branco: #5c6673;
+
+    /* RUS (Tons rústicos e sombrios) */
+    --rus-vermelho: #6E1111;
+    --rus-azul: #01194D;
+    --rus-branco: #736b6b;
+
+    /* GER (Tons industriais e pesados) */
+    --ger-preto: #000000;
+    --ger-vermelho: #6E1111;
+    --ger-amarelo: #665200;
+
+    --icone-home: url("WT - Artes/UI-UX icons/HOME_icon.png");
+    --icone-config: url("WT - Artes/UI-UX icons/Config_icon.jpg");
+    --icone-login: url("WT - Artes/UI-UX icons/LOGIN-icon.jpg");
+    --icone-register: url("WT - Artes/UI-UX icons/Register_icon.jpg");
+
+}
+
+/* ==================================================
+   2. RESET BÁSICO E FUNDO
+   ================================================== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-image: url("WT - Artes/WT - BG/BG3.png");
+    font-family: "Arial", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 50px;
+    padding-top: 100px;
+    /* Espaço para a navbar fixa */
+}
+
+/* ==================================================
+   3. BARRA DE NAVEGAÇÃO SUPERIOR
+   ================================================== */
+.top-navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90px;
+    background-color: var(--metal-cinza-escuro, #1a1a1a);
+    border-bottom: 2px solid var(--metal-cinza-claro, #444);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    box-sizing: border-box;
+    z-index: 10000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+/* ==================================================
+RELÓGIO DE GUERRA (Centro)
+ ================================================== */
+.nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    /* Fonte estilo terminal militar */
+    text-align: center;
+    color: #F2B400;
+    /* Amarelo tático */
+    text-shadow: 0 0 5px rgba(242, 180, 0, 0.7);
+}
+
+.flip-digit {
+    display: inline-block;
+    /* Permite que o span sofra transformações 3D */
+    min-width: 28px;
+    /* Evita que o relógio fique tremendo quando o número 1 (que é mais fino) aparece */
+}
+
+.clock-time {
+    color: lightgoldenrodyellow;
+    /* Vermelho tático combinando com o botão */
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    text-shadow: 0 0 8px rgba(63, 211, 47, 0.6);
+    /* Efeito de painel LED luminoso */
+}
+
+.clock-date {
+    color: goldenrod;
+    font-size: 11px;
+    letter-spacing: 2px;
+    margin-top: 2px;
+}
+
+.nav-right {
+    justify-content: space-between;
+    gap: 50px;
+}
+
+.logo-container-nav {
+    text-decoration: none;
+}
+
+.logo-plate-nav {
+    background-color: var(--dourado-titulos);
+    border: 2px solid var(--metal-cinza-claro, #736b6b);
+    padding: 5px 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+    width: auto;
+    height: 100%;
+    max-height: 120px;
+}
+
+.logo-plate-nav:hover {
+    border-color: var(--texto-branco, #ffffff);
+}
+
+.navbar-logo-img {
+    height: 90px;
+    width: auto;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: #a0a0a0;
+    font-family: Arial, sans-serif;
+    font-size: 11px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: all 0.2s ease-in-out;
+}
+
+.icon-box {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+}
+
+.nav-icon-img {
+    width: auto;
+    height: 50px;
+    object-fit: contain;
+    transition: filter 0.2s;
+    padding-bottom: 10px;
+}
+
+.material-symbols-outlined {
+    font-size: 24px;
+    transition: filter 0.2s;
+}
+
+.nav-item:hover {
+    color: #ffffff;
+    transform: translateY(-3px);
+}
+
+.nav-item:hover .nav-icon-img,
+.nav-item:hover .material-symbols-outlined {
+    filter: brightness(1.3) drop-shadow(0px 0px 5px rgba(255, 255, 255, 0.3));
+}
+
+.btn-login {
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+
+/* ==================================================
+   4. A PLACA DA LOGO (Antiga - mantida por segurança)
+   ================================================== */
+.top-header {
+    top: 10px;
+    z-index: 100;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.logo-container {
+    width: 50%;
+    margin: 0 auto;
+}
+
+.logo-img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+
+.logo-plate {
+    position: relative;
+    background: linear-gradient(180deg, var(--metal-cinza-claro), var(--metal-cinza-escuro));
+    padding: 15px 40px;
+    border-radius: 8px;
+    border: 5px solid #5a5f63;
+    box-shadow: 5px 5px 15px var(--sombra-intensa), inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+    text-align: center;
+    display: inline-block;
+}
+
+/* ==================================================
+   5. PAINEL PRINCIPAL E TEXTOS
+   ================================================== */
+.main-panel {
+    border-radius: 15px;
+    padding: 40px;
+    border: 2px solid var(--metal-cinza-claro);
+    box-shadow: 10px 10px 25px var(--sombra-intensa);
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    color: var(--texto-branco);
+}
+
+.main-bg {
+    background: var(--metal-chumbo);
+}
+
+.usa-bg {
+    background: linear-gradient(45deg, var(--usa-branco), var(--ger-vermelho), var(--ger-preto));
+}
+
+.rus-bg {
+    background: linear-gradient(-45deg, var(--ger-preto), var(--rus-azul), var(--rus-vermelho));
+}
+
+.ger-bg {
+    background: linear-gradient(-45deg, var(--ger-preto), var(--ger-vermelho));
+}
+
+.panel-title {
+    color: var(--dourado-titulos);
+    font-size: 40px;
+    letter-spacing: 2px;
+    margin-bottom: 30px;
+    border-bottom: 1px solid var(--metal-cinza-claro);
+    padding-bottom: 10px;
+}
+
+.presentation-section {
+    margin-bottom: 40px;
+}
+
+.section-subtitle {
+    color: var(--dourado-titulos-claro);
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.paragraph {
+    color: var(--texto-branco);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+.center-text {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.Dedicated-note {
+    font-size: 11px;
+    /* Ajustei de 7px para 11px para ficar legível */
+    color: #DEA193;
+    font-style: italic;
+    margin-top: 5px;
+    text-align: justify;
+    text-indent: 15px;
+}
+
+.Dedicated-note strong {
+    color: var(--dourado-titulos-claro);
+    font-weight: bold;
+}
+
+/* ==================================================
+   6. BARRA DE NAVEGAÇÃO
+   ================================================== */
+
+.icon-home-bg {
+    background-image: var(--icone-home);
+    background-size: contain;
+    background-position: center;
+}
+
+.icon-config-bg {
+    background-image: var(--icone-config);
+    background-size: contain;
+    background-position: center;
+}
+
+.icon-login-bg {
+    background-image: var(--icone-login);
+    background-size: contain;
+    background-position: center;
+}
+
+.icon-register-bg {
+    background-image: var(--icone-register);
+    background-size: contain;
+    background-position: center;
+}
