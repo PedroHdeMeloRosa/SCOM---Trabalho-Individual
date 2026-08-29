@@ -14,10 +14,12 @@ async function injetarMenu(caminhoBase) {
     await carregarScript('clock.js');
     await carregarScript('login.js');
     await carregarScript('scroll.js');
+    await carregarScript('search.js');
 
     // 3. Executa as funções principais de cada um
     injetarInterface(caminhoBase);
     iniciarRelogio();
     iniciarLogin(caminhoBase);
-    iniciarScrollSuave(caminhoBase);
+    iniciarScrollSuave(caminhoBase)
+    inicarBusca(caminhoBase);
 }
