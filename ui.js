@@ -46,12 +46,24 @@ function injetarInterface(caminhoBase) {
             position: absolute; top: 100%; left: 0; width: 100%; background-color: var(--metal-chumbo, #1E2021);
             border: 1px solid var(--metal-cinza-claro); border-top: none; border-radius: 0 0 4px 4px; list-style: none;
             padding: 0; margin: 0; max-height: 200px; overflow-y: auto; display: none; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.8); z-index: 250000; /* [CORREÇÃO] Força a lista a aparecer na frente de tudo */
+            box-shadow: 0 4px 15px rgba(0,0,0,0.8); z-index: 25000;
         }
         .search-suggestions li {
-            padding: 10px; color: #a0a0a0; font-size: 12px; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); font-family: Arial, sans-serif; font-weight: bold;
+            padding: 0; border-bottom: 1px solid rgba(255,255,255,0.05); cursor: pointer;
         }
-        .search-suggestions li:hover { background-color: var(--rus-vermelho, #6E1111); color: #fff; }
+        .suggestion-link {
+            display: flex; align-items: center; gap: 10px; padding: 10px;
+            color: #a0a0a0; text-decoration: none; font-size: 12px;
+            font-family: Arial, sans-serif; font-weight: bold; width: 100%; box-sizing: border-box;
+        }
+        .suggestion-icon {
+            width: 24px; height: auto; object-fit: contain;
+        }
+        /* O hover do mouse e a classe .ativo que o teclado vai acionar */
+        .search-suggestions li:hover .suggestion-link,
+        .search-suggestions li.ativo .suggestion-link { 
+            background-color: var(--rus-vermelho, #6E1111); color: #fff; 
+        }
 
         /* ==================================================
            RELÓGIO DE GUERRA E RESTANTE DO CSS...

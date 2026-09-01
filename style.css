@@ -2,3 +2,49 @@
 @import url("main.css");
 @import url("trees.css");
 @import url("sheet.css");
+
+/* ==================================================
+   CARROSSEL AUTOMÁTICO (Fichas e Nações)
+   ================================================== */
+.carousel-wrapper {
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden; 
+    position: relative;
+    border-radius: 8px;
+    border: 2px dashed var(--metal-cinza-claro, #8a8d8f); 
+    padding: 4px;
+}
+
+/* ==================================================
+   A TRAVA MÁGICA: APENAS PARA A FICHA TÉCNICA
+   ================================================== */
+.sheet-visual.carousel-wrapper {
+    flex: 1 1 50%; /* Força a ocupar exatamente metade da coluna */
+    max-width: 50%; /* Trava para nunca passar da metade */
+    margin: 0; /* Remove a margem centralizada */
+    align-self: flex-start; /* Impede a caixa de esticar até o final da tabela */
+    background-color: rgba(0, 0, 0, 0.3); /* Fundo tático */
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1); 
+}
+
+.slide-item {
+    min-width: 100%;
+    width: 100%;
+    
+    /* Trava a proporção da imagem (Formato paisagem clássico 4:3) */
+    aspect-ratio: 4 / 3; 
+    
+    /* Faz a foto preencher o espaço sem amassar */
+    object-fit: cover; 
+    
+    border: none !important;
+    outline: none !important;
+    display: block;
+    border-radius: 4px; /* Suaviza as pontas da imagem dentro do pontilhado */
+}
