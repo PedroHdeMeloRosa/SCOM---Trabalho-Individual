@@ -91,6 +91,8 @@ body {
 RELÓGIO DE GUERRA (Centro)
  ================================================== */
 .nav-center {
+    font-size: 10px;
+    letter-spacing: 1px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -263,7 +265,7 @@ RELÓGIO DE GUERRA (Centro)
 }
 
 .usa-bg {
-    background: linear-gradient(45deg, var(--usa-branco), var(--ger-vermelho), var(--ger-preto));
+    background: linear-gradient(45deg, var(--usa-azul), var(--usa-branco),  var(--usa-vermelho));
 }
 
 .rus-bg {

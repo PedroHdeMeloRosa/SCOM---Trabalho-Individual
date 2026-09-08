@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,7 @@
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
-            
+
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">Pz.Kpfw. VI Tiger Ausf. H1</h2>
@@ -27,17 +28,18 @@
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
-                
+
                 <!-- Coluna 1: Imagem -->
                 <div class="sheet-visual">
                     <!-- Ajuste o caminho da imagem conforme o nome exato da sua pasta e arquivo -->
-                    <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER H1/TIGER H1 - Picture.jpg" alt="Silhueta Tiger H1" class="sheet-silhouette">
+                    <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER H1/TIGER H1 - Picture.jpg"
+                        alt="Silhueta Tiger H1" class="sheet-silhouette">
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
                     <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
-                    
+
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
                         <tbody>
@@ -65,8 +67,12 @@
                     </table>
 
                     <!-- Botão Administrativo -->
-                    <div class="admin-controls">
-                        <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
+                    <!-- Botão Administrativo -->
+                    <div class="admin-controls" style="display: none; width: 100%;">
+                        <button id="btnEditTank" class="btn-submit-militar valido"
+                            style="margin-top: 20px; width: 100%; background-color: #1a1a1a; color: #F2B400; border-color: #F2B400;"> 
+                            &#9998; EDITAR VEÍCULO (Admin)
+                        </button>
                     </div>
 
                 </div>
@@ -75,14 +81,108 @@
             <div class="sheet-lore">
                 <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
                 <p class="lore-text">
-                    O Tiger H1 é um dos tanques pesados mais icônicos da Segunda Guerra Mundial. Conhecido por sua blindagem espessa e pelo temível canhão de 88 mm, ele é uma força formidável no campo de batalha do War Thunder, capaz de destruir a grande maioria dos oponentes com um único disparo bem colocado.
+                    O Tiger H1 é um dos tanques pesados mais icônicos da Segunda Guerra Mundial. Conhecido por sua
+                    blindagem espessa e pelo temível canhão de 88 mm, ele é uma força formidável no campo de batalha do
+                    War Thunder, capaz de destruir a grande maioria dos oponentes com um único disparo bem colocado.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Diferente do Panther, a blindagem do Tiger é plana. A regra de ouro para a sobrevivência é sempre <strong>angular o chassi</strong> (formato de losango) em relação ao inimigo. Isso aumenta drasticamente a espessura efetiva da sua blindagem, tornando o tanque imensamente resistente a canhões do mesmo nível.
+                    <strong>Dica Tática:</strong> Diferente do Panther, a blindagem do Tiger é plana. A regra de ouro
+                    para a sobrevivência é sempre <strong>angular o chassi</strong> (formato de losango) em relação ao
+                    inimigo. Isso aumenta drasticamente a espessura efetiva da sua blindagem, tornando o tanque
+                    imensamente resistente a canhões do mesmo nível.
                 </p>
             </div>
-            
+
         </article>
+
+        <!-- MODAL DE EDIÇÃO DE VEÍCULO (Apenas Admin) -->
+        <!-- MODAL DE EDIÇÃO DE VEÍCULO (Apenas Admin) -->
+        <div class="modal-overlay" id="editModal"
+            style="opacity: 0; pointer-events: none; position: fixed; z-index: 20000;">
+            <div class="modal-box"
+                style="max-width: 500px; border-color: #F2B400; box-shadow: 0 0 30px rgba(242, 180, 0, 0.2);">
+                <button class="fechar-modal" id="closeEditModal">X</button>
+                <h2 class="modal-title" style="color: #F2B400;">PAINEL DE ENGENHARIA</h2>
+                <p class="modal-subtitle">Modificar Especificações de Combate</p>
+
+                <form id="editTankForm">
+                    <div class="input-group">
+                        <label>ARMAMENTO PRINCIPAL</label>
+                        <input type="text" id="editArmament" value="Canhão KwK36 de 88 mm">
+                    </div>
+                    <div class="input-group">
+                        <label>BLINDAGEM FRONTAL (TORRE)</label>
+                        <input type="text" id="editArmor" value="100 mm">
+                    </div>
+                    <div class="input-group">
+                        <label>VELOCIDADE MÁXIMA</label>
+                        <input type="text" id="editSpeed" value="45 km/h">
+                    </div>
+                    <button type="submit" class="btn-submit-militar valido"
+                        style="background-color: #2E7D32; border-color: #4CAF50; box-shadow: 0 0 15px rgba(76, 175, 80, 0.4); margin-top: 25px;">
+                        &#10004; SALVAR ALTERAÇÕES
+                    </button>
+                </form>
+            </div>
+        </div>
     </main>
+
+    <script>
+        // Execução direta: conecta o botão ao modal imediatamente
+        const btnEdit = document.getElementById('btnEditTank');
+        const editModal = document.getElementById('editModal');
+        const closeEdit = document.getElementById('closeEditModal');
+        const editForm = document.getElementById('editTankForm');
+
+        if (btnEdit && editModal) {
+
+            // Abre o painel
+            btnEdit.addEventListener('click', () => {
+
+                // Remove as travas de invisibilidade inline forçadas
+                editModal.style.opacity = ''; 
+                editModal.style.pointerEvents = '';
+
+                // Agora a classe ativa consegue funcionar livremente
+                editModal.classList.add('ativo');
+            });
+
+            // Fecha no X
+            closeEdit.addEventListener('click', () => {
+                editModal.classList.remove('ativo');
+            });
+
+            // Falso salvamento (Simulação Front-end)
+            editForm.addEventListener('submit', (e) => {
+                e.preventDefault(); // Impede a página de recarregar
+
+                // Fecha o modal
+                editModal.classList.remove('ativo');
+
+                // Dispara o Banner Tático de Sucesso
+                const banner = document.getElementById('customBanner');
+                if (banner) {
+                    document.getElementById('customBannerText').textContent = "ESPECIFICAÇÕES ATUALIZADAS NO SERVIDOR.";
+                    document.getElementById('bannerIcon').innerHTML = `&#9881;`;
+                    banner.style.borderColor = "#4CAF50";
+                    banner.style.color = "#4CAF50";
+
+                    banner.classList.add('show');
+                    
+                    setTimeout(() => {
+                        banner.classList.remove('show');
+                        
+                        // Retorna o banner para as cores originais depois de sumir
+                        setTimeout(() => {
+                            banner.style.borderColor = "var(--dourado-titulos)";
+                            banner.style.color = "var(--dourado-titulos)";
+                            document.getElementById('bannerIcon').innerHTML = "military_tech";
+                        }, 500);
+                    }, 3000);
+                }
+            });
+        }
+    </script>
 </body>
+
 </html>

@@ -48,3 +48,10 @@
     display: block;
     border-radius: 4px; /* Suaviza as pontas da imagem dentro do pontilhado */
 }
+
+/* ==================================================
+   CONTROLE DE ACESSO (Roles)
+   ================================================== */
+.admin-controls {
+    display: none; /* Oculto por padrão. O JavaScript revela se for Admin. */
+}

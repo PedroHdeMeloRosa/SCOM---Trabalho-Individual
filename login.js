@@ -1,9 +1,11 @@
 function iniciarLogin(caminhoBase) {
     // ==========================================
-    // CONFIGURAÇÃO DE CREDENCIAIS EXATAS DO PROJETO
+    // BANCO DE DADOS SIMULADO (Front-end)
     // ==========================================
-    const EMAIL_TESTE = "PAKKAoBR@gmail.com";
-    const SENHA_TESTE = "12345";
+    const CONTAS = {
+        "comandante@gmail.com": { senha: "gaijin123", role: "admin", titulo: "COMANDANTE" },
+        "soldado@gmail.com":    { senha: "gaijin123", role: "user",  titulo: "SOLDADO" }
+    };
 
     const modal = document.getElementById('loginModal');
     const btnAbrirModal = document.querySelector('.btn-login'); 
@@ -15,36 +17,63 @@ function iniciarLogin(caminhoBase) {
     const inputSenha = document.getElementById('userPassword');
     const btnSubmit = document.getElementById('btnSubmitLogin');
     const btnRadar = document.getElementById('btnRadar');
-    
     const radarIcon = document.getElementById('radarIcon');
+    const radarText = document.getElementById('radarText');
 
-    // [NOVO] Força a imagem correta do radar assim que o script carrega (evita o bug visual)
-    if(radarIcon) {
-        radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.png`;
-    }
-
-    let isAuthenticated = false; 
     let isScrambling = false;    
 
-    // [NOVO] Agora recebe o caminho da imagem e injeta uma tag <img> no banner
+    // Sistema de Banner Tático
     const mostrarBanner = (mensagem, iconeSrc = 'WT - Artes/UI-UX icons/Soldier-salute.png') => {
         const banner = document.getElementById('customBanner');
         document.getElementById('customBannerText').textContent = mensagem;
-        
-        // Substitui o antigo ícone em texto por uma imagem real
         document.getElementById('bannerIcon').innerHTML = `<img src="${caminhoBase}${iconeSrc}" style="width: 24px; height: auto; object-fit: contain;">`;
         
         banner.classList.add('show');
         setTimeout(() => { banner.classList.remove('show'); }, 4000);
     };
 
+    // ==========================================
+    // GERENCIADOR DE SESSÃO (Resolve o Deslogue)
+    // ==========================================
+    const checarSessao = () => {
+        const isAuth = localStorage.getItem('isAuth') === 'true';
+        const role = localStorage.getItem('userRole');
+        
+        if (isAuth) {
+            navLoginText.textContent = "SAIR";
+            aplicarPermissoes(role);
+        } else {
+            navLoginText.textContent = "ENTRAR";
+            aplicarPermissoes('visitante');
+        }
+    };
+
+    // ==========================================
+    // GERENCIADOR DE PERMISSÕES (Mostra/Oculta Botão)
+    // ==========================================
+    const aplicarPermissoes = (role) => {
+        // Procura todos os botões/áreas restritas na página atual
+        const adminControls = document.querySelectorAll('.admin-controls');
+        
+        adminControls.forEach(el => {
+            if (role === 'admin') {
+                el.style.display = 'block'; // Revela para o Comandante
+            } else {
+                el.style.display = 'none'; // Continua escondido para Soldados e Visitantes
+            }
+        });
+    };
+
+    // Botão de Abrir Modal / Deslogar
     btnAbrirModal.addEventListener('click', (e) => {
         e.preventDefault();
-        if (isAuthenticated) {
-            isAuthenticated = false;
+        if (localStorage.getItem('isAuth') === 'true') {
+            // DESLOGAR
+            localStorage.removeItem('isAuth');
+            localStorage.removeItem('userRole');
             navLoginText.textContent = "ENTRAR";
-            // Você pode trocar a imagem do "logout" abaixo se tiver uma específica
-            mostrarBanner("PILOTO,DESCANSAR.", "WT - Artes/UI-UX icons/Soldier-salute.png");
+            mostrarBanner("DESCONECTADO.", "WT - Artes/UI-UX icons/Logout-icon.png");
+            aplicarPermissoes('visitante'); // Esconde os botões instantaneamente
         } else {
             modal.classList.add('ativo');
         }
@@ -52,15 +81,23 @@ function iniciarLogin(caminhoBase) {
 
     btnFecharModal.addEventListener('click', () => { modal.classList.remove('ativo'); });
 
+    // Lógica Visual do Botão Radar (Ver/Ocultar)
+    // Lógica Visual do Botão Radar (Ver/Ocultar com Animação Tática)
     btnRadar.addEventListener('click', () => {
         if (isScrambling || inputSenha.value === "") return;
+        
         if (inputSenha.type === 'password') {
             isScrambling = true;
             const realPassword = inputSenha.value;
             inputSenha.type = 'text';
+            
+            // Troca a imagem e o texto para OCULTAR
             radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ver.png`; 
+            if (radarText) radarText.textContent = "OCULTAR";
+            
             inputSenha.disabled = true; 
 
+            // Efeito de Embaralhamento (Scramble)
             let iterations = 0;
             const scrambleInterval = setInterval(() => {
                 inputSenha.value = realPassword.split('').map(() => {
@@ -71,14 +108,16 @@ function iniciarLogin(caminhoBase) {
                 iterations++;
                 if (iterations > 12) {
                     clearInterval(scrambleInterval);
-                    inputSenha.value = realPassword; 
+                    inputSenha.value = realPassword; // Mostra a senha real
                     inputSenha.disabled = false;
                     isScrambling = false;
                 }
             }, 40);
         } else {
+            // Volta para modo senha normal imediatamente
             inputSenha.type = 'password';
             radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.png`;
+            if (radarText) radarText.textContent = "VER";
         }
     });
 
@@ -98,49 +137,52 @@ function iniciarLogin(caminhoBase) {
     inputEmail.addEventListener('input', validarFormulario);
     inputSenha.addEventListener('input', validarFormulario);
 
+    // ==========================================
+    // FLUXO DE LOGIN
+    // ==========================================
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault(); 
+        const emailDigitado = inputEmail.value;
+        const senhaDigitada = inputSenha.value;
 
-        // 1. VERIFICAÇÃO EXATA DE CREDENCIAIS
-        if (inputEmail.value !== EMAIL_TESTE || inputSenha.value !== SENHA_TESTE) {
-            btnSubmit.innerHTML = `ACESSO NEGADO`;
-            btnSubmit.style.backgroundColor = "#8B0000"; // Vermelho escuro de erro
-            btnSubmit.classList.remove('valido');
-            
-            setTimeout(() => {
-                btnSubmit.innerHTML = `AUTENTICAR`;
-                btnSubmit.style.backgroundColor = ""; 
-                validarFormulario();
-            }, 2000);
-            return; // Interrompe o código aqui se estiver errado
-        }
-
-        // 2. SE ESTIVER CERTO, INICIA A PROMISE
         btnSubmit.disabled = true;
-        
-        // [NOVO] Troque o "Loading-icon.png" pela sua imagem de loading. A animação de girar (spin) continuará funcionando nela!
         btnSubmit.innerHTML = `<img src="${caminhoBase}WT - Artes/UI-UX icons/Loading-icon.png" style="width: 24px; height: auto; animation: spin 1s linear infinite;"> AUTENTICANDO...`;
         btnSubmit.style.backgroundColor = "#F2B400"; 
 
-        const simularAutenticacao = new Promise((resolve) => {
-            setTimeout(() => { resolve(inputEmail.value); }, 2000); 
-        });
+        setTimeout(() => {
+            // Verifica se a conta existe no JS e se a senha bate
+            if (CONTAS[emailDigitado] && CONTAS[emailDigitado].senha === senhaDigitada) {
+                // SUCESSO: Salva os dados no navegador
+                const conta = CONTAS[emailDigitado];
+                localStorage.setItem('isAuth', 'true');
+                localStorage.setItem('userRole', conta.role);
 
-        simularAutenticacao.then((emailUser) => {
-            modal.classList.remove('ativo');
-            isAuthenticated = true;
-            const comandante = emailUser.split('@')[0].toUpperCase();
-            navLoginText.textContent = "SAIR";
-            
-            // Dispara o banner usando a imagem padrão (Soldier-salute.png configurada lá em cima)
-            mostrarBanner(`BEM-VINDO, PILOTO ${comandante}`);
+                modal.classList.remove('ativo');
+                navLoginText.textContent = "SAIR";
+                mostrarBanner(`BEM-VINDO, ${conta.titulo}`);
+                
+                // Aplica a regra de mostrar/ocultar botão
+                aplicarPermissoes(conta.role);
 
-            setTimeout(() => {
                 btnSubmit.innerHTML = `AUTENTICAR`;
                 btnSubmit.style.backgroundColor = ""; 
                 loginForm.reset();
                 validarFormulario();
-            }, 500);
-        });
+            } else {
+                // ERRO
+                btnSubmit.innerHTML = `ACESSO NEGADO`;
+                btnSubmit.style.backgroundColor = "#8B0000"; 
+                btnSubmit.classList.remove('valido');
+                
+                setTimeout(() => {
+                    btnSubmit.innerHTML = `AUTENTICAR`;
+                    btnSubmit.style.backgroundColor = ""; 
+                    validarFormulario();
+                }, 2000);
+            }
+        }, 1000); // Simulando tempo de resposta do servidor
     });
+
+    // Chama a função ao carregar a página para verificar se já estava logado
+    checarSessao();
 }

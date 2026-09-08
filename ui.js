@@ -5,11 +5,31 @@ function injetarInterface(caminhoBase) {
            BARRA DE NAVEGAÇÃO
            ================================================== */
         .top-navbar {
-            position: fixed; top: 0; left: 0; width: 100%; height: 90px;
+            position: fixed; top: 0; left: 0; width: 100%; 
+            min-height: 90px; height: auto; /* Trocamos o height fixo para permitir o wrap */
             background-color: var(--metal-cinza-escuro, #1a1a1a); border-bottom: 2px solid var(--metal-cinza-claro, #444);
             display: flex; justify-content: space-between; align-items: center;
-            padding: 0 40px; box-sizing: border-box; z-index: 10000; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+            flex-wrap: wrap; /* TRAVA 1: Permite que o relógio e os menus pulem de linha se esmagados */
+            padding: 10px 40px; box-sizing: border-box; z-index: 10000; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+            gap: 15px; /* Adiciona um respiro entre os blocos caso eles quebrem a linha */
         }
+        
+        .ui-container {
+        padding-top: 120px; 
+        display: flex;
+        flex-direction: column; /* O comando correto para empilhar de cima para baixo */
+        align-items: center;    /* Mantém a árvore principal centralizada */
+        width: 100%;
+        position: relative;
+        transition: all 0.5s ease;
+        }
+
+        .back-button {
+        align-self: flex-start; /* Crava a caixinha na esquerda */
+        margin-left: 5%;        /* Dá um respiro da borda da tela */
+        margin-bottom: 20px;
+        }
+        
         .nav-left, .nav-right { display: flex; align-items: center; }
         .nav-right { justify-content: space-between; gap: 50px; }
         .logo-container-nav { text-decoration: none; }
@@ -68,11 +88,19 @@ function injetarInterface(caminhoBase) {
         /* ==================================================
            RELÓGIO DE GUERRA E RESTANTE DO CSS...
            ================================================== */
-        .nav-center { display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Courier New', Courier, monospace; text-align: center; color: #F2B400; text-shadow: 0 0 5px rgba(242, 180, 0, 0.7); }
-        .flip-digit { display: inline-block; min-width: 28px; }
-        .clock-time { color: lightgoldenrodyellow; font-size: 20px; font-weight: bold; letter-spacing: 3px; text-shadow: 0 0 8px rgba(63, 211, 47, 0.6); }
-        .clock-date { color: goldenrod; font-size: 11px; letter-spacing: 2px; margin-top: 2px; }
+        nav-center { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            font-family: 'Courier New', Courier, monospace; text-align: center; color: #F2B400; 
+            text-shadow: 0 0 5px rgba(242, 180, 0, 0.7); 
+            max-width: 100%; white-space: nowrap; 
+        }
+        /* A min-width caiu de 28px para 18px para apertar os números */
+        .flip-digit { display: inline-block; min-width: 18px; } 
+        /* Fonte menor e zero espaçamento extra entre as letras */
+        .clock-time { color: lightgoldenrodyellow; font-size: 16px; font-weight: bold; letter-spacing: 0px; text-shadow: 0 0 8px rgba(63, 211, 47, 0.6); }
+        .clock-date { color: goldenrod; font-size: 10px; letter-spacing: 1px; margin-top: 0px; }
 
+        
         .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.8); display: flex; align-items: center; justify-content: center; z-index: 20000; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
         .modal-overlay.ativo { opacity: 1; pointer-events: auto; }
         .modal-box { background-color: var(--metal-chumbo, #1E2021); border: 2px solid var(--rus-vermelho, #6E1111); padding: 40px; border-radius: 8px; width: 90%; max-width: 400px; position: relative; box-shadow: 0 0 30px rgba(110, 17, 17, 0.4); transform: scale(0.9); transition: transform 0.3s ease; }
@@ -99,7 +127,7 @@ function injetarInterface(caminhoBase) {
     const menuHTML = `
     <nav class="top-navbar">
         <div class="nav-left">
-            <a href="${caminhoBase}index.html" class="logo-container-nav">
+            <a href="${caminhoBase}#" class="logo-container-nav">
                 <div class="logo-plate-nav">
                     <img src="${caminhoBase}WT - Artes/War-Thunder-logo.png" alt="Logo do War Thunder" class="navbar-logo-img">
                 </div>
@@ -170,4 +198,27 @@ function injetarInterface(caminhoBase) {
     </div>
     `;
     document.body.insertAdjacentHTML('afterbegin', menuHTML);
+}
+
+
+// ==========================================
+// FUNÇÃO DO BOTÃO DE MODO DE EXIBIÇÃO
+// ==========================================
+function iniciarToggleVisualizacao() {
+    const toggleBtn = document.getElementById('btnToggleView');
+    const container = document.querySelector('.nation-content');
+    
+    // Se o botão não existir na página (ex: na Home), ele simplesmente não faz nada.
+    if (!toggleBtn || !container) return; 
+
+    toggleBtn.addEventListener('click', () => {
+        container.classList.toggle('list-view');
+        
+        // Troca o visual do botão dependendo do modo ativo
+        if (container.classList.contains('list-view')) {
+            toggleBtn.innerHTML = '&#9638; MODO CAIXAS';
+        } else {
+            toggleBtn.innerHTML = '&#9776; MODO LISTA';
+        }
+    });
 }
