@@ -99,7 +99,7 @@ function injetarInterface(caminhoBase) {
     const menuHTML = `
     <nav class="top-navbar">
         <div class="nav-left">
-            <a href="${caminhoBase}index.html" class="logo-container-nav">
+            <a href="${caminhoBase}https://wiki.warthunder.com/ground" class="logo-container-nav">
                 <div class="logo-plate-nav">
                     <img src="${caminhoBase}WT - Artes/War-Thunder-logo.png" alt="Logo do War Thunder" class="navbar-logo-img">
                 </div>
