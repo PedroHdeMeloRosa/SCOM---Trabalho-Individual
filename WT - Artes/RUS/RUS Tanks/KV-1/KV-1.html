@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha Técnica - KV-1 (ZiS-5)</title>
-    <link rel="stylesheet" href="../../../../style.css">
+    <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
 </head>
 
 <body>
     <!-- CABEÇALHO FIXO -->
-    <script src="../../../../menu.js"></script>
+    <script src="../../../../js/menu.js"></script>
     <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
@@ -29,10 +29,24 @@
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem -->
-                <div class="sheet-visual">
-                    <!-- Ajuste o caminho da imagem conforme o nome exato da sua pasta e arquivo -->
-                    <img src="../../../../WT - Artes/RUS/Rus Tanks/KV-1/KV-1 foto.jpg" alt="Silhueta KV-1" class="sheet-silhouette">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper">
+                    <div class="carousel-track auto-slide">
+                        <!-- Imagem 1: Foto Padrão -->
+                        <img src="../../../../WT - Artes/RUS/Rus Tanks/KV-1/KV-1 foto.jpg" 
+                             alt="Visão Padrão KV-1" 
+                             class="slide-item sheet-silhouette">
+
+                        <!-- Imagem 2: Foto Padrão Alternativa -->
+                        <img src="../../../../WT - Artes/RUS/Rus Tanks/KV-1/KV-1 foto2.jpg" 
+                             alt="Visão Alternativa KV-1" 
+                             class="slide-item sheet-silhouette">
+                        
+                        <!-- Imagem 3: Visão Raio-X ou Silhueta -->
+                        <img src="../../../../WT - Artes/RUS/Rus Tanks/KV-1/KV-1 foto3.jpg" 
+                             alt="Visão Raio-X KV-1" 
+                             class="slide-item sheet-silhouette">
+                    </div>
                 </div>
 
                 <!-- Coluna 2: Dados -->

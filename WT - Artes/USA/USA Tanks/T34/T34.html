@@ -1,15 +1,18 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha Técnica - T34 Heavy Tank</title>
-    <link rel="stylesheet" href="../../../../style.css">
+    <!-- Roteamento atualizado para a nova pasta css -->
+    <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
 </head>
 
 <body>
-    <script src="../../../../menu.js"></script>
+    <!-- Roteamento atualizado para a nova pasta js -->
+    <script src="../../../../js/menu.js"></script>
     <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
@@ -28,10 +31,24 @@
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem -->
-                <div class="sheet-visual">
-                    <!-- Ajuste o caminho da imagem conforme o nome exato da sua pasta e arquivo -->
-                    <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto.jpg" alt="Silhueta T34 Heavy Tank" class="sheet-silhouette">
+                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
+                <div class="sheet-visual carousel-wrapper">
+                    <div class="carousel-track auto-slide">
+                        <!-- Imagem 1: Foto Padrão -->
+                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto.jpg" 
+                             alt="Visão Padrão T34 Heavy Tank" 
+                             class="slide-item sheet-silhouette">
+
+                        <!-- Imagem 2: Foto Padrão Alternativa -->
+                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto2.jpg" 
+                             alt="Visão Alternativa T34 Heavy Tank" 
+                             class="slide-item sheet-silhouette">
+                        
+                        <!-- Imagem 3: Visão Raio-X ou Silhueta -->
+                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto3.jpg" 
+                             alt="Visão Raio-X T34 Heavy Tank" 
+                             class="slide-item sheet-silhouette">
+                    </div>
                 </div>
 
                 <!-- Coluna 2: Dados -->

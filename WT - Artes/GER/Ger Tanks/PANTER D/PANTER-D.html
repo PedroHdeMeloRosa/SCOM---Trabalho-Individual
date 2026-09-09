@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha Técnica - Panther D</title>
-    <link rel="stylesheet" href="../../../../style.css">
+    <!-- Roteamento atualizado para a pasta css -->
+    <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
 </head>
 
 <body>
-    <script src="../../../../menu.js"></script>
+    <!-- Roteamento atualizado para a pasta js -->
+    <script src="../../../../js/menu.js"></script>
     <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
         <a href="../../alemanha.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
 
-        <!-- FICHA TÉCNICA (O Molde) -->
+        <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
             
             <!-- Título e Classificação -->
@@ -28,9 +30,24 @@
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem -->
-                <div class="sheet-visual">
-                    <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER D - Picture.jpg" alt="Silhueta Panther D" class="sheet-silhouette">
+                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
+                <div class="sheet-visual carousel-wrapper">
+                    <div class="carousel-track auto-slide">
+                        <!-- Imagem 1: Foto Padrão -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER D foto.jpg" 
+                             alt="Visão Padrão Panther D" 
+                             class="slide-item sheet-silhouette">
+
+                        <!-- Imagem 2: Foto Padrão Alternativa -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER D foto2.jpg" 
+                             alt="Visão Alternativa Panther D" 
+                             class="slide-item sheet-silhouette">
+                        
+                        <!-- Imagem 3: Visão Raio-X ou Silhueta -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER D foto3.jpg" 
+                             alt="Visão Raio-X Panther D" 
+                             class="slide-item sheet-silhouette">
+                    </div>
                 </div>
 
                 <!-- Coluna 2: Dados -->
@@ -63,7 +80,7 @@
                         </tbody>
                     </table>
 
-                    <!-- Botão Administrativo (Ponte para o Trabalho II) -->
+                    <!-- Botão Administrativo -->
                     <div class="admin-controls">
                         <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
                     </div>

@@ -4,12 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha Técnica - Tiger II V2</title>
-    <link rel="stylesheet" href="../../../../style.css">
+    <!-- Roteamento atualizado -->
+    <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
 </head>
 
 <body>
-    <script src="../../../../menu.js"></script>
+    <!-- CABEÇALHO FIXO -->
+    <script src="../../../../js/menu.js"></script>
     <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
@@ -28,10 +30,24 @@
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem -->
-                <div class="sheet-visual">
-                    <!-- Presumi o nome da imagem principal baseado no padrão dos anteriores. Ajuste se o arquivo se chamar diferente (ex: Tiger II Sombra3.png) -->
-                    <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto.jpg" alt="Silhueta Tiger II" class="sheet-silhouette">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper">
+                    <div class="carousel-track auto-slide">
+                        <!-- Imagem 1: Foto Padrão -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II foto.jpg" 
+                             alt="Visão Padrão Tiger II" 
+                             class="slide-item sheet-silhouette">
+
+                        <!-- Imagem 2: Foto Padrão Alternativa -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II foto2.jpg" 
+                             alt="Visão Alternativa Tiger II" 
+                             class="slide-item sheet-silhouette">
+                        
+                        <!-- Imagem 3: Visão Raio-X ou Silhueta -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II foto3.jpg" 
+                             alt="Visão Raio-X Tiger II" 
+                             class="slide-item sheet-silhouette">
+                    </div>
                 </div>
 
                 <!-- Coluna 2: Dados -->

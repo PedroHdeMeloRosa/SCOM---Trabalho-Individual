@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EUA - War Thunder</title>
-    <link rel="stylesheet" href="../../style.css">
+    <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" href="../../WT - Artes/WT-ICO.ico" type="image/png">
 </head>
 
 <body>
-    <script src="../../menu.js"></script>
+    <!-- O Orquestrador carrega toda a interface e inteligência automaticamente -->
+    <script src="../../js/menu.js"></script>
     <script>injetarMenu('../../');</script>
 
-    <!-- CONTEÚDO PRINCIPAL (Página da Nação) -->
+    <!-- CONTEÚDO PRINCIPAL -->
     <main class="ui-container">
 
         <!-- BARRA DE CONTROLE SUPERIOR -->
@@ -21,18 +22,15 @@
             <button class="btn-toggle-view" id="btnToggleView">&#9776; MODO LISTA</button>
         </div>
 
-        <!-- O CONTAINER DA ANIMAÇÃO COMEÇA AQUI -->
         <div class="nation-content">
 
-            <!-- COLUNA ESQUERDA (Ficará fixa na tela no modo Lista) -->
+            <!-- COLUNA ESQUERDA -->
             <section class="main-panel usa-bg bg-filter nation-info">
                 
-                <!-- CABEÇALHO DA NAÇÃO COM A BORDA AZUL INJETADA -->
                 <div class="nation-banner border-usa" style="--flag-bg: url('WT - Artes/USA/USA Flags/WT USA Flag.jpg'); --banner-border: #1A3668;">
                     <h2 class="nation-title-large">ESTADOS UNIDOS</h2>
                 </div>
                 
-                <!-- TEXTO DE APRESENTAÇÃO AMERICANO -->
                 <div class="presentation-section">
                     <h3 class="section-subtitle">TÁTICAS E ESTILO DE JOGO</h3>
                     <p class="paragraph">
@@ -47,10 +45,9 @@
                 </div>
             </section>
 
-            <!-- COLUNA DIREITA (Lista de cards que vai abrir/fechar) -->
+            <!-- COLUNA DIREITA -->
             <div class="tank-list">
                 
-                <!-- Item 1: M4A3E2 Jumbo -->
                 <a href="USA Tanks/JUMBO/JUMBO.html" class="tank-card usa-bg">
                     <img src="USA Tanks/JUMBO/JUMBO shadow.png" alt="Silhueta do tanque M4A3E2 Jumbo" class="list-silhouette">
                     <div class="tank-info">
@@ -59,7 +56,6 @@
                     </div>
                 </a>
 
-                <!-- Item 2: M18 Hellcat -->
                 <a href="USA Tanks/M18/Hellcat.html" class="tank-card usa-bg">
                     <img src="USA Tanks/M18/M-18_Hellcat shadow.png" alt="Silhueta do tanque M18 Hellcat" class="list-silhouette">
                     <div class="tank-info">
@@ -68,7 +64,6 @@
                     </div>
                 </a>
                 
-                <!-- Item 3: T34 Heavy -->
                 <a href="USA Tanks/T34/T34.html" class="tank-card usa-bg">
                     <img src="USA Tanks/T34/T34 shadow.png" alt="Silhueta do tanque T34 Heavy" class="list-silhouette">
                     <div class="tank-info">
@@ -77,7 +72,6 @@
                     </div>
                 </a>
 
-                <!-- Item 4: T95 Doom Turtle -->
                 <a href="USA Tanks/T95/T95.html" class="tank-card usa-bg">
                     <img src="USA Tanks/T95/T95 for shadow2.png" alt="Silhueta do tanque T95" class="list-silhouette">
                     <div class="tank-info">
@@ -86,7 +80,6 @@
                     </div>
                 </a>
 
-                <!-- Item 5: M1A2 Abrams -->
                 <a href="USA Tanks/M1A2-ABRAMS/M1A2-ABRAMS.html" class="tank-card usa-bg">
                     <img src="USA Tanks/M1A2-Abrams/M1A2-Abrams shadow.png" alt="Silhueta do tanque M1A2 Abrams" class="list-silhouette">
                     <div class="tank-info">
@@ -98,10 +91,5 @@
             </div>
         </div>
     </main>
-
-    <script src="../../ui.js"></script>
-    <script>
-        iniciarToggleVisualizacao(); 
-    </script>
 </body>
 </html>

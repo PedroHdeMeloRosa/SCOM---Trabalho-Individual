@@ -5,12 +5,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ficha Técnica - Tiger H1</title>
-    <link rel="stylesheet" href="../../../../style.css">
+    <!-- Roteamento atualizado para a pasta css -->
+    <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
 </head>
 
 <body>
-    <script src="../../../../menu.js"></script>
+    <!-- Roteamento atualizado para a pasta js -->
+    <script src="../../../../js/menu.js"></script>
     <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
@@ -29,11 +31,24 @@
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
 
-                <!-- Coluna 1: Imagem -->
-                <div class="sheet-visual">
-                    <!-- Ajuste o caminho da imagem conforme o nome exato da sua pasta e arquivo -->
-                    <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER H1/TIGER H1 - Picture.jpg"
-                        alt="Silhueta Tiger H1" class="sheet-silhouette">
+                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
+                <div class="sheet-visual carousel-wrapper">
+                    <div class="carousel-track auto-slide">
+                        <!-- Imagem 1: Foto Padrão -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER H1/TIGER H1 foto.jpg" 
+                             alt="Visão Padrão Tiger H1" 
+                             class="slide-item sheet-silhouette">
+
+                        <!-- Imagem 2: Foto Padrão Alternativa -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER H1/TIGER H1 foto2.jpg" 
+                             alt="Visão Alternativa Tiger H1" 
+                             class="slide-item sheet-silhouette">
+                        
+                        <!-- Imagem 3: Visão Raio-X ou Silhueta -->
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER H1/TIGER H1 foto3.jpg" 
+                             alt="Visão Raio-X Tiger H1" 
+                             class="slide-item sheet-silhouette">
+                    </div>
                 </div>
 
                 <!-- Coluna 2: Dados -->
@@ -66,13 +81,9 @@
                         </tbody>
                     </table>
 
-                    <!-- Botão Administrativo -->
-                    <!-- Botão Administrativo -->
-                    <div class="admin-controls" style="display: none; width: 100%;">
-                        <button id="btnEditTank" class="btn-submit-militar valido"
-                            style="margin-top: 20px; width: 100%; background-color: #1a1a1a; color: #F2B400; border-color: #F2B400;"> 
-                            &#9998; EDITAR VEÍCULO (Admin)
-                        </button>
+                    <!-- Botão Administrativo Padronizado -->
+                    <div class="admin-controls">
+                        <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
                     </div>
 
                 </div>
@@ -94,95 +105,7 @@
             </div>
 
         </article>
-
-        <!-- MODAL DE EDIÇÃO DE VEÍCULO (Apenas Admin) -->
-        <!-- MODAL DE EDIÇÃO DE VEÍCULO (Apenas Admin) -->
-        <div class="modal-overlay" id="editModal"
-            style="opacity: 0; pointer-events: none; position: fixed; z-index: 20000;">
-            <div class="modal-box"
-                style="max-width: 500px; border-color: #F2B400; box-shadow: 0 0 30px rgba(242, 180, 0, 0.2);">
-                <button class="fechar-modal" id="closeEditModal">X</button>
-                <h2 class="modal-title" style="color: #F2B400;">PAINEL DE ENGENHARIA</h2>
-                <p class="modal-subtitle">Modificar Especificações de Combate</p>
-
-                <form id="editTankForm">
-                    <div class="input-group">
-                        <label>ARMAMENTO PRINCIPAL</label>
-                        <input type="text" id="editArmament" value="Canhão KwK36 de 88 mm">
-                    </div>
-                    <div class="input-group">
-                        <label>BLINDAGEM FRONTAL (TORRE)</label>
-                        <input type="text" id="editArmor" value="100 mm">
-                    </div>
-                    <div class="input-group">
-                        <label>VELOCIDADE MÁXIMA</label>
-                        <input type="text" id="editSpeed" value="45 km/h">
-                    </div>
-                    <button type="submit" class="btn-submit-militar valido"
-                        style="background-color: #2E7D32; border-color: #4CAF50; box-shadow: 0 0 15px rgba(76, 175, 80, 0.4); margin-top: 25px;">
-                        &#10004; SALVAR ALTERAÇÕES
-                    </button>
-                </form>
-            </div>
-        </div>
     </main>
-
-    <script>
-        // Execução direta: conecta o botão ao modal imediatamente
-        const btnEdit = document.getElementById('btnEditTank');
-        const editModal = document.getElementById('editModal');
-        const closeEdit = document.getElementById('closeEditModal');
-        const editForm = document.getElementById('editTankForm');
-
-        if (btnEdit && editModal) {
-
-            // Abre o painel
-            btnEdit.addEventListener('click', () => {
-
-                // Remove as travas de invisibilidade inline forçadas
-                editModal.style.opacity = ''; 
-                editModal.style.pointerEvents = '';
-
-                // Agora a classe ativa consegue funcionar livremente
-                editModal.classList.add('ativo');
-            });
-
-            // Fecha no X
-            closeEdit.addEventListener('click', () => {
-                editModal.classList.remove('ativo');
-            });
-
-            // Falso salvamento (Simulação Front-end)
-            editForm.addEventListener('submit', (e) => {
-                e.preventDefault(); // Impede a página de recarregar
-
-                // Fecha o modal
-                editModal.classList.remove('ativo');
-
-                // Dispara o Banner Tático de Sucesso
-                const banner = document.getElementById('customBanner');
-                if (banner) {
-                    document.getElementById('customBannerText').textContent = "ESPECIFICAÇÕES ATUALIZADAS NO SERVIDOR.";
-                    document.getElementById('bannerIcon').innerHTML = `&#9881;`;
-                    banner.style.borderColor = "#4CAF50";
-                    banner.style.color = "#4CAF50";
-
-                    banner.classList.add('show');
-                    
-                    setTimeout(() => {
-                        banner.classList.remove('show');
-                        
-                        // Retorna o banner para as cores originais depois de sumir
-                        setTimeout(() => {
-                            banner.style.borderColor = "var(--dourado-titulos)";
-                            banner.style.color = "var(--dourado-titulos)";
-                            document.getElementById('bannerIcon').innerHTML = "military_tech";
-                        }, 500);
-                    }, 3000);
-                }
-            });
-        }
-    </script>
 </body>
 
 </html>
