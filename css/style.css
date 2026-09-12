@@ -471,53 +471,122 @@ body {
 .nation-banner {
     width: 100%; height: 120px; border-radius: 8px; margin-bottom: 30px; display: flex; align-items: center; 
     padding-left: 40px; box-shadow: 5px 5px 15px var(--sombra-intensa); 
-    
-    /* 1. O fundo base escuro */
     background-color: var(--metal-cinza-escuro);
-    
-    /* 2. A MÁGICA: Um gradiente escuro na esquerda + A variável da bandeira na direita */
     background-image: linear-gradient(to right, var(--sombra-intensa) 50%, transparent 100%), var(--flag-bg);
-    
-    /* 3. Posicionamento: Gradiente na esquerda (left center), Bandeira na direita (right center) */
     background-position: left center, right center;
-    
-    /* 4. Tamanho: Gradiente cobre tudo (cover), Bandeira ocupa 100% da altura (auto 100%) */
     background-size: cover, auto 100%;
-    
     background-repeat: no-repeat;
 }
+
 .border-rus { border: 2px solid #A32020; }
 .border-ger { border: 2px solid var(--dourado-titulos); }
 .border-usa { border: 2px solid #1A3668; }
 .border-jpn { border: 2px solid #C00000; }
 .border-swe { border: 2px solid #005293; }
+
 .nation-title-large { color: var(--dourado-titulos); font-size: 36px; letter-spacing: 3px; text-shadow: 2px 2px 5px #000; }
 
-/* Modo Caixas (Padrão) */
-.nation-content { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 90%; max-width: 1200px; transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
-.tank-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; transition: all 0.6s ease; }
-.tank-card { display: flex; flex-direction: column; align-items: center; text-align: center; width: calc(50% - 15px); min-height: 90px; padding: 20px; border-radius: 8px; border: 2px solid var(--metal-cinza-claro); text-decoration: none; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); overflow: hidden; transform-origin: center center; }
-.list-silhouette { width: 120px; margin-bottom: 15px; filter: brightness(0) drop-shadow(0px 0px 1px rgba(254, 255, 255, 0.978)); transition: all 0.4s ease; }
+/* ==========================
+   Modo Caixas (Grade 5 Colunas com Scroll Interno)
+   ========================== */
+.nation-content { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    gap: 30px; 
+    width: 90%; 
+    max-width: 1200px; 
+    transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+}
+
+.tank-list { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: flex-start; 
+    align-content: flex-start; /* Mantém as linhas agrupadas no topo */
+    gap: 20px; 
+    width: 100%; 
+    max-height: 650px; /* LIMITE DE ALTURA: Ativa a rolagem */
+    
+    padding: 15px; /* Protege o efeito hover de ser cortado */
+    box-sizing: border-box;
+    
+    overflow-y: auto; /* ROLAGEM VERTICAL LIGADA */
+    overflow-x: hidden; 
+    transition: all 0.6s ease; 
+}
+
+.tank-card { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    /* 5 colunas perfeitas (subtraindo as margens) */
+    width: calc(20% - 16px); 
+    min-height: 120px; 
+    padding: 20px 10px; 
+    border-radius: 8px; 
+    border: 2px solid var(--metal-cinza-claro); 
+    text-decoration: none; 
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); 
+    overflow: hidden; 
+    transform-origin: center center; 
+    box-sizing: border-box;
+}
+
+.list-silhouette { width: 90px; margin-bottom: 15px; filter: brightness(0) drop-shadow(0px 0px 1px rgba(254, 255, 255, 0.978)); transition: all 0.4s ease; }
 .tank-info { display: flex; flex-direction: column; justify-content: center; }
-.tank-name { font-size: 20px; font-weight: bold; color: var(--dourado-titulos); margin-bottom: 4px; }
-.tank-desc { font-size: 13px; color: var(--texto-branco); font-style: italic; opacity: 0.8; }
+.tank-name { font-size: 16px; font-weight: bold; color: var(--dourado-titulos); margin-bottom: 4px; }
+.tank-desc { font-size: 11px; color: var(--texto-branco); font-style: italic; opacity: 0.8; }
 
-.tank-list:hover .tank-card, .tank-list:focus-within .tank-card { filter: grayscale(100%) brightness(0.6); }
-.tank-list .tank-card:hover, .tank-list .tank-card:focus { filter: grayscale(0%) brightness(1.2); box-shadow: inset 0px 0px 15px rgba(197, 168, 102, 0.15); border-color: var(--dourado-titulos-claro); transform: scale(1.05); outline: none; }
-.tank-list .tank-card:hover .list-silhouette, .tank-list .tank-card:focus .list-silhouette { width: 150px; filter: drop-shadow(0px 10px 10px #000) brightness(1); }
+@media (hover: hover) {
+    .tank-list:hover .tank-card:not(:hover):not(.selecionado) { filter: grayscale(100%) brightness(0.6); }
+    .tank-list .tank-card:hover, .tank-list .tank-card:focus { 
+        filter: grayscale(0%) brightness(1.2); 
+        box-shadow: inset 0px 0px 15px rgba(197, 168, 102, 0.15); 
+        border-color: var(--dourado-titulos-claro); 
+        transform: scale(1.08); 
+        outline: none; 
+        z-index: 2;
+    }
+    .tank-list .tank-card:hover .list-silhouette, .tank-list .tank-card:focus .list-silhouette { width: 110px; filter: drop-shadow(0px 10px 10px #000) brightness(1); }
+}
 
-/* Modo Lista (Ativado via Botão) */
+/* ==========================
+   Modo Lista (Rolagem Interna Independente)
+   ========================== */
 .nation-content.list-view { flex-direction: row; align-items: flex-start; justify-content: space-between; }
-.nation-content.list-view .nation-info { width: 35%; position: sticky; top: 130px; }
-.nation-content.list-view .tank-list { width: 60%; flex-direction: column; } 
-.nation-content.list-view .tank-card { width: 100%; flex-direction: row; text-align: left; align-items: center; padding: 15px 25px; transform-origin: left center; }
-.nation-content.list-view .list-silhouette { width: 80px; margin-bottom: 0; margin-right: 20px; }
-.nation-content.list-view .tank-card:hover { transform: translateX(15px); }
+.nation-content.list-view .nation-info { width: 30%; position: sticky; top: 130px; }
+
+.nation-content.list-view .tank-list { 
+    width: 68%; 
+    flex-direction: column; 
+    flex-wrap: nowrap;
+    max-height: 1200px; /* LIMITE DE ALTURA PRO MODO LISTA */
+    padding-right: 15px; /* Evita que a barra grude no texto */
+} 
+
+.nation-content.list-view .tank-card { width: 100%; flex-direction: row; text-align: left; align-items: center; padding: 20px 25px; min-height: 130px; }
+.nation-content.list-view .list-silhouette { width: 110px; margin-bottom: 0; margin-right: 30px; }
+.nation-content.list-view .tank-name { font-size: 22px; }
+.nation-content.list-view .tank-desc { font-size: 14px; }
+
+@media (hover: hover) {
+    .nation-content.list-view .tank-card:hover { transform: translateX(15px); }
+    .nation-content.list-view .tank-card:hover .list-silhouette { width: 120px; }
+}
+
+/* ==========================
+   Customização da Barra de Rolagem (Estética HUD Militar)
+   ========================== */
+.tank-list::-webkit-scrollbar { width: 10px; }
+.tank-list::-webkit-scrollbar-track { background: #1E2021; border-radius: 8px; }
+.tank-list::-webkit-scrollbar-thumb { background: #8a8d8f; border-radius: 8px; border: 1px solid #1E2021; }
+.tank-list::-webkit-scrollbar-thumb:hover { background: var(--dourado-titulos); }
 
 /* Botão de Alternância de Visão */
 .btn-toggle-view { background-color: var(--metal-cinza-escuro); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 10px 20px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: all 0.3s; display: flex; align-items: center; gap: 8px; }
 .btn-toggle-view:hover { background-color: var(--dourado-titulos); color: #000; }
-
 /* ==================================================
    8. FICHA TÉCNICA (O Dossiê do Tanque)
    ================================================== */
