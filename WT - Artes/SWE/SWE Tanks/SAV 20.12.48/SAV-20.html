@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAV 20.12.48 - Ficha Técnica</title>
+    
+    <!-- Ajuste as rotas "../" conforme a localização do seu arquivo -->
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+</head>
+
+<body>
+    <!-- Roteamento do Menu Superior -->
+    <script src="../../../../js/menu.js"></script>
+    <script>injetarMenu('../../../../');</script>
+
+    <main class="ui-container">
+        <!-- Botão Voltar -->
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../suecia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA SUÉCIA</a>
+        </div>
+
+        <!-- A FICHA DO TANQUE -->
+        <article class="tank-sheet">
+            
+            <!-- Cabeçalho -->
+            <header class="sheet-header">
+                <h2 class="sheet-title">SAV 20.12.48</h2>
+                <span class="sheet-badge" style="background-color: #005293; color: #fff;">Caça-Tanques Experimental</span>
+            </header>
+
+            <!-- Layout Flex (Carrossel + Tabela) -->
+            <div class="sheet-content">
+                
+                <!-- CARROSSSEL DE IMAGENS -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    
+                    <div class="carousel-track" id="sav-track">
+                        <!-- Substitua os 'src' pelas suas imagens do SAV 20.12.48 -->
+                        <img src="SAV 20.12.48 foto.webp" alt="SAV 20.12.48 no hangar" class="slide-item">
+                        <img src="SAV 20.12.48 foto2.webp" alt="Visão frontal evidenciando o canhão de 120mm" class="slide-item">
+                        <img src="SAV 20.12.48 foto3.webp" alt="SAV 20.12.48 emboscando adversários" class="slide-item">
+                    </div>
+
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
+                </div>
+
+                <!-- Especificações -->
+                <div class="sheet-data">
+                    <h3 class="data-title">Especificações Técnicas</h3>
+                    <table class="data-table">
+                        <tbody>
+                            <tr><th>Armamento Principal</th><td>Canhão 120 mm akan m/89</td></tr>
+                            <tr><th>Cadência de Tiro</th><td>1.2 Segundos (Autoloader de 6 tiros)</td></tr>
+                            <tr><th>Blindagem Frontal</th><td>30 mm</td></tr>
+                            <tr><th>Tripulação</th><td>3 Membros</td></tr>
+                            <tr><th>Velocidade Máxima</th><td>45 km/h</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <!-- Lore / Histórico e Dicas -->
+            <div class="sheet-lore">
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
+                <p class="lore-text">
+                    O <strong>Stormartillerivagn 20.12.48</strong> (SAV 20.12.48) foi um projeto sueco experimental radical desenhado logo após a Segunda Guerra Mundial. A doutrina militar sueca buscava um veículo ágil e de perfil baixo, capaz de realizar táticas de "bater e correr" (hit-and-run) contra forças blindadas superiores. Para isso, os engenheiros montaram um massivo canhão de 120 mm em um chassi leve, mas o seu verdadeiro diferencial era o mecanismo de alimentação automática impiedoso, permitindo uma rajada de tiros digna de armas de infantaria, mas com calibres anti-tanque.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>A Metralhadora de 120mm:</strong> Com 1.2 segundos de recarga entre os tiros no seu carregador de 6 projéteis, você não precisa se preocupar se o primeiro tiro errar o ponto fraco. Mire na esteira para imobilizar, e o segundo e terceiro tiros garantirão a eliminação (ou punirão múltiplos alvos empilhados).</li>
+                    <li style="margin-bottom: 10px;"><strong>Gestão de Cartuchos (Magazine):</strong> O seu poder absoluto dura exatos 7.2 segundos. Depois que o seu autoloader de 6 tiros esvaziar, a recarga do compartimento demorará bastante. Nunca gaste seu último tiro se não tiver uma rota de fuga garantida para trás de uma cobertura segura.</li>
+                    <li><strong>Predador de Curto Alcance:</strong> A munição e a balística do SAV não foram feitas para combates a 1.500 metros. Aproveite seus 45 km/h para se esgueirar por rotas urbanas, ruas estreitas ou colinas, atacando onde o inimigo não tem espaço para manobrar ou fugir da sua rajada.</li>
+                </ul>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('sav-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
+</body>
+</html>

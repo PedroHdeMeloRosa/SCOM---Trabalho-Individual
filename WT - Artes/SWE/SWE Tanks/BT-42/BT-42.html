@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BT-42 - Ficha Técnica</title>
+    
+    <!-- Ajuste as rotas "../" conforme a localização do seu arquivo -->
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+</head>
+
+<body>
+    <!-- Roteamento do Menu Superior -->
+    <script src="../../../../js/menu.js"></script>
+    <script>injetarMenu('../../../../');</script>
+
+    <main class="ui-container">
+        <!-- Botão Voltar -->
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../suecia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA SUÉCIA</a>
+        </div>
+
+        <!-- A FICHA DO TANQUE -->
+        <article class="tank-sheet">
+            
+            <!-- Cabeçalho -->
+            <header class="sheet-header">
+                <h2 class="sheet-title">BT-42</h2>
+                <span class="sheet-badge" style="background-color: var(--metal-cinza-claro); color: var(--metal-chumbo);">Tanque de Assalto (Finlândia)</span>
+            </header>
+
+            <!-- Layout Flex (Carrossel + Tabela) -->
+            <div class="sheet-content">
+                
+                <!-- CARROSSSEL DE IMAGENS -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    
+                    <div class="carousel-track" id="bt42-track">
+                        <!-- Substitua os 'src' pelas suas imagens do BT-42 -->
+                        <img src="BT-42 foto 1.webp" alt="BT-42 no hangar" class="slide-item">
+                        <img src="BT-42 foto 2.webp" alt="Perfil lateral mostrando a torre gigantesca" class="slide-item">
+                        <img src="BT-42 foto 3.webp" alt="BT-42 flanqueando em alta velocidade" class="slide-item">
+                    </div>
+
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
+                </div>
+
+                <!-- Especificações -->
+                <div class="sheet-data">
+                    <h3 class="data-title">Especificações Técnicas</h3>
+                    <table class="data-table">
+                        <tbody>
+                            <tr><th>Armamento Principal</th><td>Obuseiro 114 mm (114 Psv.H/18)</td></tr>
+                            <tr><th>Munição Padrão</th><td>HEAT (Alta Penetração) / HE</td></tr>
+                            <tr><th>Blindagem Frontal</th><td>20 mm (Chassi) / 16 mm (Torre)</td></tr>
+                            <tr><th>Tripulação</th><td>3 Membros</td></tr>
+                            <tr><th>Velocidade Máxima</th><td>53 km/h</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <!-- Lore / Histórico e Dicas -->
+            <div class="sheet-lore">
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
+                <p class="lore-text">
+                    O <strong>BT-42</strong> é um dos maiores Frankenstein da Segunda Guerra Mundial e motivo de muito orgulho para os finlandeses. Durante a Guerra de Continuação, o exército da Finlândia capturou vários tanques leves soviéticos BT-7. Desesperados por apoio de fogo móvel, os engenheiros finlandeses removeram a torre original e instalaram uma enorme torre improvisada abrigando um obuseiro britânico de 4.5 polegadas (114 mm) da Primeira Guerra Mundial, doado pelo Reino Unido. O resultado foi um veículo absurdamente veloz, de perfil desproporcional e dono de um canhão que exigia um verdadeiro mestre para ser domado.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Demônio da Velocidade:</strong> O chassi do BT-7 herdou a suspensão Christie e uma impressionante relação peso-potência. Use isso para iniciar a partida acelerando até posições inesperadas de flanco ou para capturar pontos neutros antes de qualquer outra unidade pesada pisar no terreno.</li>
+                    <li style="margin-bottom: 10px;"><strong>Balística de "Catapulta":</strong> O obuseiro de 114 mm tem uma velocidade de saída de projétil péssima. Acertar alvos em movimento a mais de 400 metros exige calcular uma grande parábola. Prefira combates urbanos e de curta distância onde sua munição HEAT ignora a blindagem da maioria dos adversários.</li>
+                    <li><strong>Sobrevivência Pelo Caos:</strong> Sua blindagem tem míseros 20 mm, e a torre enorme é um imã de tiros. Nunca troque tiros parado. Atire, use sua impressionante manobrabilidade em ré (e para frente) para sumir atrás de coberturas, e ataque de um ângulo diferente.</li>
+                </ul>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('bt42-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
+</body>
+</html>

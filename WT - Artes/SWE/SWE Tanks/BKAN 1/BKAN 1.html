@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bkan 1C - Ficha Técnica</title>
+    
+    <!-- Ajuste as rotas "../" conforme a localização do seu arquivo -->
+    <link rel="stylesheet" href="../../../../css/style.css">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+</head>
+
+<body>
+    <!-- Roteamento do Menu Superior -->
+    <script src="../../../../js/menu.js"></script>
+    <script>injetarMenu('../../../../');</script>
+
+    <main class="ui-container">
+        <!-- Botão Voltar -->
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../suecia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA SUÉCIA</a>
+        </div>
+
+        <!-- A FICHA DO TANQUE -->
+        <article class="tank-sheet">
+            
+            <!-- Cabeçalho -->
+            <header class="sheet-header">
+                <h2 class="sheet-title">Bkan 1C</h2>
+                <span class="sheet-badge" style="background-color: #005293; color: #fff;">Artilharia Autopropulsada (SPG)</span>
+            </header>
+
+            <!-- Layout Flex (Carrossel + Tabela) -->
+            <div class="sheet-content">
+                
+                <!-- CARROSSSEL DE IMAGENS -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    
+                    <div class="carousel-track" id="bkan-track">
+                        <!-- Substitua os 'src' pelas suas imagens do Bkan 1 -->
+                        <img src="BKAN 1 foto.webp" alt="Bkan 1C no hangar" class="slide-item">
+                        <img src="BKAN 1 fot2.webp" alt="Visão lateral do carregador automático" class="slide-item">
+                        <img src="BKAN 1 foto3.webp" alt="Bkan 1C disparando em campo aberto" class="slide-item">
+                    </div>
+
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
+                </div>
+
+                <!-- Especificações -->
+                <div class="sheet-data">
+                    <h3 class="data-title">Especificações Técnicas</h3>
+                    <table class="data-table">
+                        <tbody>
+                            <tr><th>Armamento Principal</th><td>Obuseiro 155 mm m/60</td></tr>
+                            <tr><th>Cadência de Tiro</th><td>3.2 Segundos (Autoloader)</td></tr>
+                            <tr><th>Blindagem Frontal</th><td>15 mm</td></tr>
+                            <tr><th>Tripulação</th><td>5 Membros</td></tr>
+                            <tr><th>Velocidade Máxima</th><td>28 km/h</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+            </div>
+
+            <!-- Lore / Histórico e Dicas -->
+            <div class="sheet-lore">
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
+                <p class="lore-text">
+                    O <strong>Bandkanon 1</strong> (abreviado como Bkan 1) foi uma das maravilhas da engenharia militar sueca da Guerra Fria. Desenvolvido para fornecer fogo de artilharia rápido e devastador, ele contava com um sistema de recarga automática revolucionário para a época. Seu chassi maciço foi modificado a partir do Strv 103 (o tanque sem torre) e da artilharia antiaérea VEAK 40, criando uma plataforma capaz de esvaziar seu carregador inteiro de 14 tiros de 155 mm em chocantes 45 segundos, criando uma zona de aniquilação inigualável.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Rei do Overpressure:</strong> Suas munições High Explosive (HE) e HE-VT têm uma massa explosiva massiva. Mirar sob o chassi inimigo, no teto da torre ou nas esteiras ativará a mecânica de "Overpressure" (Sob Pressão), vaporizando a tripulação inimiga mesmo em tanques superpesados.</li>
+                    <li style="margin-bottom: 10px;"><strong>Logística de Munição:</strong> O Bkan só carrega 14 projéteis. Com uma recarga de 3.2 segundos, você pode ficar sem munição em menos de um minuto. Se possível, posicione-se dentro ou muito próximo a um ponto de captura aliado para reabastecer sua munição continuamente enquanto atira.</li>
+                    <li><strong>Gigante Frágil:</strong> Você tem o tamanho de um prédio de dois andares e blindagem de papel (15 mm). Além disso, a sua enorme caixa de munição traseira é um alvo fácil. Aviões (CAS) e ataques de artilharia inimiga são sua maior fraqueza. Mantenha a consciência situacional e evite campo aberto.</li>
+                </ul>
+            </div>
+
+        </article>
+    </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('bkan-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
+</body>
+</html>
