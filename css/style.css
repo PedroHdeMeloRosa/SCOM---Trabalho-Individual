@@ -32,6 +32,13 @@
     --ger-vermelho: #6E1111;
     --ger-amarelo: #665200;
 
+    --swe-dourado: #cd9105;
+    --swe-azul: #28358B;
+
+    --jpn-vermelho: #c00000a4;
+    --jpn-branco: #f0f2f538;
+
+
     /* Ícones da NavBar */
     --icone-home: url("WT - Artes/UI-UX icons/HOME_icon.png");
     --icone-config: url("WT - Artes/UI-UX icons/Config_icon.jpg");
@@ -50,7 +57,7 @@
 
 body {
     /* O fundo agora é o gradiente de metal escuro em toda a tela */
-    background: linear-gradient(var(--metal-cinza-escuro), var(--ger-preto));
+    background: rgb(50, 0, 0);
     background-attachment: fixed;
     font-family: "Arial", sans-serif;
     display: flex;
@@ -79,7 +86,7 @@ body {
 .top-navbar {
     position: fixed; top: 0; left: 0; width: 100%; 
     min-height: 90px; height: auto; /* Permite o wrap em telas menores */
-    background-color: var(--metal-cinza-escuro, #1a1a1a); 
+    background-color: var(--metal-chumbo, #1E2021); 
     border-bottom: 2px solid var(--metal-cinza-claro, #444);
     display: flex; justify-content: space-between; align-items: center;
     flex-wrap: wrap; 
@@ -193,13 +200,97 @@ body {
 }
 
 .main-bg { background: var(--metal-chumbo); }
-.usa-bg { background: linear-gradient(-45deg, var(--usa-azul), var(--usa-branco), var(--usa-vermelho)); }
-.rus-bg { background: linear-gradient(-45deg, var(--ger-preto), var(--rus-azul), var(--rus-vermelho)); }
-.ger-bg { background: linear-gradient(-45deg, var(--ger-preto), var(--ger-vermelho)); }
+.nation-bg  {background: linear-gradient(to right, var(--metal-cinza-escuro), var(--ger-preto)); } 
+
 
 .presentation-section { margin-bottom: 40px; }
 .section-subtitle { color: var(--dourado-titulos-claro); font-size: 25px; margin-bottom: 15px; }
 .paragraph { color: var(--texto-branco); font-size: 14px; line-height: 1.6; margin-bottom: 15px; text-align: justify; text-indent: 30px; }
+
+
+/* ==================================================
+   NOVO: ELEMENTOS DA HOME WIKI (Stats e Features)
+   ================================================== */
+.wiki-quick-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    background-color: var(--metal-cinza-escuro);
+    border: 1px solid var(--metal-cinza-claro);
+    padding: 8px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 2px 2px 5px rgba(0,0,0,0.5);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.stat-badge:hover {
+    transform: translateY(-3px);
+    border-color: var(--dourado-titulos);
+}
+
+.stat-icon {
+    font-size: 18px;
+    filter: grayscale(100%) brightness(1.5); /* Deixa os emojis com tom neutro/metálico */
+}
+
+.stat-text {
+    color: var(--dourado-titulos);
+    font-weight: bold;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.wiki-features-grid {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-box {
+    flex: 1;
+    background-color: rgba(30, 32, 33, 0.7); /* metal-chumbo com transparência */
+    border-left: 3px solid var(--rus-vermelho); /* Destaque militar */
+    padding: 15px 20px;
+    border-radius: 0 4px 4px 0;
+}
+
+.feature-title {
+    color: var(--texto-branco);
+    font-size: 15px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.feature-desc {
+    color: var(--metal-cinza-claro);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Responsividade para o Grid da Introdução */
+@media (max-width: 768px) {
+    .wiki-features-grid {
+        flex-direction: column;
+    }
+    .wiki-quick-stats {
+        gap: 10px;
+    }
+    .stat-badge {
+        flex: 1 1 calc(50% - 10px);
+        justify-content: center;
+    }
+}
+
+
+
 
 /* Botão de Voltar Unificado */
 .back-button {
@@ -212,6 +303,71 @@ body {
 .back-button:hover, .back-button:focus {
     color: var(--dourado-titulos-claro); border-color: var(--dourado-titulos-claro);
     background-color: var(--metal-chumbo); transform: translateX(-5px); outline: none;
+}
+
+/* ==================================================
+   CABEÇALHO CINEMATOGRÁFICO DE GIF (HERO FRAME)
+   ================================================== */
+.hero-gif-frame {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--metal-cinza-claro);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    margin-bottom: 40px;
+}
+
+.hero-gif-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.65) contrast(1.1); /* Escurece para o texto branco sobressair */
+    transition: filter 0.5s ease;
+}
+
+.hero-gif-frame:hover .hero-gif-img {
+    filter: brightness(0.9) contrast(1.1); /* Ilumina quando o mouse passa por cima */
+}
+
+.hero-gif-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, rgba(30, 32, 33, 1) 0%, transparent 100%);
+    padding: 30px 20px 15px;
+    text-align: left;
+    pointer-events: none;
+}
+
+.hero-gif-title {
+    color: var(--dourado-titulos);
+    font-size: 26px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 5px #000;
+    margin: 0;
+    font-weight: bold;
+}
+
+/* Formatação especial para isolar a Nota Acadêmica no fundo da página */
+.academic-note-box {
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px dashed var(--metal-cinza-claro);
+}
+
+/* Responsividade do Quadro de GIF para Celulares */
+@media (max-width: 768px) {
+    .hero-gif-frame {
+        height: 180px;
+        margin-bottom: 25px;
+    }
+    .hero-gif-title {
+        font-size: 18px;
+        letter-spacing: 1px;
+    }
 }
 
 /* ==================================================
@@ -281,12 +437,17 @@ body {
 .card-usa { background-image: url("../WT - Artes/USA/USA Flags/WT USA Flag.jpg"); }
 .card-ger { background-image: url("../WT - Artes/GER/Ger Flags/WT GER Flag.jpg"); }
 .card-rus { background-image: url("../WT - Artes/RUS/RUS Flags/WT RUS Flag.jpg"); }
-
-/* Verifique se você salvou as bandeiras do Japão e da Suíça nestas pastas exatas: */
 .card-jpn { background-image: url("../WT - Artes/JPN/JPN Flags/JPN Flag.jpg"); } 
 .card-swe { background-image: url("../WT - Artes/SWE/SWE Flags/SWE Flag.jpg"); }
-
-.tank-silhueta { filter: brightness(0%); width: 90%; max-width: 200px; height: auto; margin-top: auto; margin-bottom: auto; filter: drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.5)); }
+.tank-silhueta { 
+    width: 90%; 
+    max-width: 200px; 
+    height: auto; 
+    margin-top: auto; 
+    margin-bottom: auto; 
+    /* A MÁGICA AQUI: Combina os dois filtros na mesma propriedade */
+    filter: brightness(0) drop-shadow(0px 0px 8px rgba(255, 255, 255, 0.5)); 
+}
 .card-info-box { background-color: var(--metal-chumbo); border: 2px solid var(--metal-cinza-claro); border-radius: 4px; padding: 10px; width: 100%; margin-top: auto; box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.5); }
 .card-info-box p { color: var(--texto-branco); font-size: 11px; line-height: 1.4; text-align: justify; text-indent: 30px; }
 
@@ -309,9 +470,21 @@ body {
    ================================================== */
 .nation-banner {
     width: 100%; height: 120px; border-radius: 8px; margin-bottom: 30px; display: flex; align-items: center; 
-    padding-left: 40px; box-shadow: 5px 5px 15px var(--sombra-intensa); background-color: var(--metal-cinza-escuro);
+    padding-left: 40px; box-shadow: 5px 5px 15px var(--sombra-intensa); 
+    
+    /* 1. O fundo base escuro */
+    background-color: var(--metal-cinza-escuro);
+    
+    /* 2. A MÁGICA: Um gradiente escuro na esquerda + A variável da bandeira na direita */
     background-image: linear-gradient(to right, var(--sombra-intensa) 50%, transparent 100%), var(--flag-bg);
-    background-position: left center, right center; background-size: cover, auto 100%; background-repeat: no-repeat, no-repeat;
+    
+    /* 3. Posicionamento: Gradiente na esquerda (left center), Bandeira na direita (right center) */
+    background-position: left center, right center;
+    
+    /* 4. Tamanho: Gradiente cobre tudo (cover), Bandeira ocupa 100% da altura (auto 100%) */
+    background-size: cover, auto 100%;
+    
+    background-repeat: no-repeat;
 }
 .border-rus { border: 2px solid #A32020; }
 .border-ger { border: 2px solid var(--dourado-titulos); }
@@ -324,7 +497,7 @@ body {
 .nation-content { display: flex; flex-direction: column; align-items: center; gap: 30px; width: 90%; max-width: 1200px; transition: all 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
 .tank-list { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; width: 100%; transition: all 0.6s ease; }
 .tank-card { display: flex; flex-direction: column; align-items: center; text-align: center; width: calc(50% - 15px); min-height: 90px; padding: 20px; border-radius: 8px; border: 2px solid var(--metal-cinza-claro); text-decoration: none; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1); overflow: hidden; transform-origin: center center; }
-.list-silhouette { width: 120px; margin-bottom: 15px; filter: drop-shadow(0px 5px 5px #000) brightness(0.8); transition: all 0.4s ease; }
+.list-silhouette { width: 120px; margin-bottom: 15px; filter: brightness(0) drop-shadow(0px 0px 1px rgba(254, 255, 255, 0.978)); transition: all 0.4s ease; }
 .tank-info { display: flex; flex-direction: column; justify-content: center; }
 .tank-name { font-size: 20px; font-weight: bold; color: var(--dourado-titulos); margin-bottom: 4px; }
 .tank-desc { font-size: 13px; color: var(--texto-branco); font-style: italic; opacity: 0.8; }
@@ -577,4 +750,139 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* ==================================================
+   10. RESPONSIVIDADE E HUD TÁTICO RETRÁTIL
+   ================================================== */
+
+/* O Botão de Gatilho da Navbar (Oculto no Desktop por padrão) */
+.nav-toggle-btn {
+    display: none;
+    background: var(--metal-cinza-escuro);
+    border: 1px solid var(--dourado-titulos);
+    color: var(--dourado-titulos);
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    white-space: nowrap;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.nav-toggle-btn:hover {
+    background: var(--dourado-titulos);
+    color: #000;
+}
+
+/* Correção Global do Relógio de Guerra (Fim do texto cortado) */
+.nav-center {
+    white-space: normal !important;
+    text-align: center;
+}
+.nav-center div:first-child {
+    white-space: normal !important;
+    word-wrap: break-word;
+    line-height: 1.2;
+}
+.clock-time {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap; /* Se faltar espaço, não quebra a interface */
+    gap: 3px;
+}
+
+/* Ajustes gerais para Tablets e Celulares */
+@media (max-width: 900px) {
+    body {
+        padding: 90px 15px 20px;
+    }
+
+    .ui-container {
+        padding-top: 0;
+        width: 100% !important;
+    }
+
+    /* Navbar Compacta no Mobile */
+    .top-navbar {
+        padding: 10px 15px;
+        min-height: 70px;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo-plate-nav { max-height: 50px; padding: 2px 8px; }
+    .navbar-logo-img { height: 40px; }
+
+    /* Exibe o botão de expansão no mobile */
+    .nav-toggle-btn { display: block; }
+
+    /* A Gaveta de Navegação Oculta (Itens e Relógio) */
+    .top-navbar .nav-right,
+    .top-navbar .nav-center {
+        display: none !important;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        background-color: transparent;
+        padding: 0;
+        margin-top: 15px;
+        gap: 15px;
+    }
+
+    /* Abertura da Gaveta via JS (.expanded) */
+    .top-navbar.expanded { padding-bottom: 20px; }
+    .top-navbar.expanded .nav-center,
+    .top-navbar.expanded .nav-right {
+        display: flex !important;
+        animation: slideDownNav 0.4s ease forwards;
+    }
+
+    /* Formatação dos ícones em linha horizontal na gaveta */
+    .top-navbar .nav-right .nav-item {
+        flex-direction: row;
+        gap: 12px;
+        font-size: 13px;
+    }
+    .top-navbar .nav-right .nav-icon-img {
+        height: 35px;
+        padding-bottom: 0;
+    }
+
+    /* Relógio destacado dentro da Gaveta */
+    .top-navbar .nav-center {
+        padding: 15px 10px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        order: 3; /* Joga pro fundo da lista */
+    }
+
+    /* Barra de pesquisa adaptada */
+    .search-container { flex: 1; max-width: 220px; margin-left: 0; }
+    #searchInput { width: 100% !important; }
+
+    /* Empilhamento Mobile do Conteúdo */
+    .nation-content, .nation-content.list-view, .sheet-content {
+        flex-direction: column !important;
+        width: 100% !important;
+        padding: 20px;
+        gap: 20px;
+    }
+    .main-panel, .tank-list, .nation-content.list-view .nation-info, .nation-content.list-view .tank-list, .tank-card {
+        width: 100% !important;
+        position: static !important;
+    }
+    .sheet-visual.carousel-wrapper { max-width: 100% !important; width: 100% !important; }
+    .slide-item { max-height: 250px; object-fit: contain; }
+    .sheet-header { padding: 15px 20px; flex-direction: column; gap: 10px; text-align: center; }
+    .sheet-lore { padding: 0 20px 20px 20px; }
+    .nation-banner { padding-left: 20px; justify-content: center; background-position: center; }
+}
+
+@keyframes slideDownNav {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japão - War Thunder</title>
+    
+    <!-- Roteamento apontando para a pasta CSS central -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="../../WT - Artes/WT-ICO.ico" type="image/png">
+</head>
+
+<body>
+    <!-- Roteamento atualizado para a pasta js e carregamento autônomo do menu -->
+    <script src="../../js/menu.js"></script>
+    <script>injetarMenu('../../');</script>
+
+    <!-- CONTEÚDO PRINCIPAL (Página da Nação) -->
+    <main class="ui-container">
+
+        <!-- BARRA DE CONTROLE SUPERIOR -->
+        <div style="display: flex; justify-content: space-between; width: 90%; max-width: 1200px; margin-bottom: 20px; align-self: center;">
+            <a href="../../index.html" class="back-button" style="margin: 0; align-self: center;">&#9664; VOLTAR À PÁGINA PRINCIPAL</a>
+            <button class="btn-toggle-view" id="btnToggleView">&#9776; MODO LISTA</button>
+        </div>
+
+        <!-- O CONTAINER DA LISTA COMEÇA AQUI -->
+        <div class="nation-content">
+
+            <!-- COLUNA ESQUERDA (Ficará fixa na tela no modo Lista) -->
+            <!-- Atenção para a classe 'nation-bg' que aplica o gradiente vermelho/preto que configuramos no CSS -->
+            <section class="main-panel nation-bg bg-filter nation-info">
+                
+                <div class="nation-banner border-jpn" style="--flag-bg: url('WT - Artes/JPN/JPN Flags/JPN Flag.jpg');">
+                    <h2 class="nation-title-large">JAPÃO</h2>
+                </div>
+                
+                <div class="presentation-section">
+                    <h3 class="section-subtitle">TÁTICAS E ESTILO DE JOGO</h3>
+                    <p class="paragraph">
+                        A árvore tecnológica japonesa no War Thunder é única e exige um estilo de jogo calculista. Nas fileiras iniciais, os tanques japoneses sofrem com blindagens extremamente finas e mobilidade mediana. No entanto, eles compensam essas fraquezas com canhões que disparam projéteis APHE com uma quantidade massiva de explosivo (filler), garantindo que quase qualquer tiro penetrante resulte na destruição completa do alvo.
+                    </p>
+                    <p class="paragraph">
+                        Outra grande vantagem tática do Japão é a excelente depressão de canhão da maioria dos seus veículos, o que os torna mestres absolutos na tática de "Hull Down" (esconder o chassi atrás de colinas e mostrar apenas a torre).
+                    </p>
+                    <p class="paragraph">
+                        Nos níveis intermediários e altos, a doutrina japonesa evolui para criar alguns dos caça-tanques e canhões autopropulsados mais exóticos e perigosos do jogo, além de tanques médios com sistemas de recarga automática ou suspensão hidropneumática ajustável. Abaixo, destacamos 3 blindados icônicos que representam bem essa nação:
+                    </p>
+                </div>
+            </section>
+
+            <!-- COLUNA DIREITA (Lista de cards de tanques) -->
+            <div class="tank-list">
+                
+                <!-- Item 1: Chi-Ha LG -->
+                <a href="JPN Tanks/CHI-RA LG/CHI-RA-LG.html" class="tank-card nation-bg">
+                    <!-- Substitua o src da silhueta pelo nome exato do arquivo SVG/PNG -->
+                    <img src="JPN Tanks/CHI-RA LG/CHI-RA LG shadow.svg" alt="Silhueta Chi-Ha LG" class="list-silhouette tank-silhueta">
+                    <div class="tank-info">
+                        <span class="tank-name">1. Chi-Ha LG</span>
+                        <span class="tank-desc">Um gigantesco canhão naval de 120 mm improvisado em um chassi leve. Poder de fogo absoluto, mas zero proteção para a tripulação.</span>
+                    </div>
+                </a>
+
+                <!-- Item 2: Ho-Ri (Production / Prototype) -->
+                <a href="JPN Tanks/HO-RI/HO-RI.html" class="tank-card nation-bg">
+                    <img src="JPN Tanks/HO-RI/HO-RI shadow.svg" alt="Silhueta Ho-Ri" class="list-silhouette tank-silhueta">
+                    <div class="tank-info">
+                        <span class="tank-name">2. Ho-Ri</span>
+                        <span class="tank-desc">O "Ferdinand Japonês". Um caça-tanques pesado com blindagem frontal formidável, alta mobilidade para seu peso e um canhão devastador de 105 mm.</span>
+                    </div>
+                </a>
+            
+                <!-- Item 3: Ta-Se -->
+                <a href="JPN Tanks/Ta-Se/Ta-Se.html" class="tank-card nation-bg">
+                    <img src="JPN Tanks/Ta-Se/Ta-Se shadow.svg" alt="Silhueta Ta-Se" class="list-silhouette tank-silhueta">
+                    <div class="tank-info">
+                        <span class="tank-name">3. Ta-Se</span>
+                        <span class="tank-desc">Um veículo antiaéreo (SPAA) ágil e mortal, armado com um canhão de 20 mm que rasga aviões de baixo nível e tanques leves com facilidade.</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Script Autônomo para o Toggle de Visão -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof iniciarToggleVisualizacao === 'function') {
+                iniciarToggleVisualizacao();
+            }
+        });
+    </script>
+</body>
+</html>

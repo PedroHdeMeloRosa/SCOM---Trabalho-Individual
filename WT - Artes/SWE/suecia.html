@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suécia - War Thunder</title>
+    
+    <!-- Roteamento apontando para a pasta CSS central -->
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="icon" href="../../WT - Artes/WT-ICO.ico" type="image/png">
+</head>
+
+<body>
+    <!-- Roteamento atualizado para a pasta js e carregamento autônomo do menu -->
+    <script src="../../js/menu.js"></script>
+    <script>injetarMenu('../../');</script>
+
+    <!-- CONTEÚDO PRINCIPAL (Página da Nação) -->
+    <main class="ui-container">
+
+        <!-- BARRA DE CONTROLE SUPERIOR -->
+        <div style="display: flex; justify-content: space-between; width: 90%; max-width: 1200px; margin-bottom: 20px; align-self: center;">
+            <a href="../../index.html" class="back-button" style="margin: 0; align-self: center;">&#9664; VOLTAR À PÁGINA PRINCIPAL</a>
+            <button class="btn-toggle-view" id="btnToggleView">&#9776; MODO LISTA</button>
+        </div>
+
+        <!-- O CONTAINER DA LISTA COMEÇA AQUI -->
+        <div class="nation-content">
+
+            <!-- COLUNA ESQUERDA (Ficará fixa na tela no modo Lista) -->
+            <section class="main-panel nation-bg bg-filter nation-info">
+                
+                <div class="nation-banner border-swe" style="--flag-bg: url(SWE Flags/);">
+                    <h2 class="nation-title-large">SUÉCIA</h2>
+                </div>
+                
+                <div class="presentation-section">
+                    <h3 class="section-subtitle">TÁTICAS E ESTILO DE JOGO</h3>
+                    <p class="paragraph">   
+                        A árvore tecnológica sueca (que também engloba veículos da Finlândia e Noruega) é indiscutivelmente uma das mais excêntricas e mortais do War Thunder. Diferente das nações maiores que apostam em blindagem bruta, a Suécia foca em engenharia não convencional: perfuração extrema (com acesso a munições APDS muito cedo), perfis ultrabaixos e suspensões ajustáveis.
+                    </p>
+                    <p class="paragraph">
+                        O verdadeiro trunfo sueco reside nos seus autoloader (sistemas de recarga automática). Muitos caça-tanques e artilharias desta nação conseguem despejar uma quantidade absurda de chumbo no inimigo em questão de segundos, punindo severamente qualquer avanço descuidado. 
+                    </p>
+                    <p class="paragraph">
+                        Contudo, a sobrevivência é baseada no posicionamento. As laterais costumam ser de papel e as tripulações pequenas não perdoam erros. O estilo de jogo exige flanqueamento, conhecimento profundo de balística e o uso cirúrgico das irregularidades do terreno. Abaixo, três dos veículos mais infames desta árvore:
+                    </p>
+                </div>
+            </section>
+
+            <!-- COLUNA DIREITA (Lista de cards de tanques) -->
+            <div class="tank-list">
+                
+                <!-- Item 1: Bkan 1C -->
+                <a href="SWE Tanks/BKAN 1/BKAN-1.html" class="tank-card nation-bg">
+                    <img src="SWE Tanks/BKAN 1/BKAN 1-shadow.svg" alt="Silhueta Bandkanon 1" class="list-silhouette tank-silhueta">
+                    <div class="tank-info">
+                        <span class="tank-name">1. Bkan 1C</span>
+                        <span class="tank-desc">Artilharia autopropulsada monumental. Dispara munições HE de 155 mm a cada 3.2 segundos graças ao seu insano autoloader de 14 tiros.</span>
+                    </div>
+                </a>
+
+                <!-- Item 2: BT-42 -->
+                <a href="SWE Tanks/BT-42/BT-42.html" class="tank-card nation-bg">
+                    <img src="SWE Tanks/BT-42/BT-42 shadow.svg" alt="Silhueta BT-42" class="list-silhouette tank-silhueta">
+                    <div class="tank-info">
+                        <span class="tank-name">2. BT-42</span>
+                        <span class="tank-desc">O lendário blindado finlandês de assalto. Combina o chassi veloz do BT-7 com um massivo obuseiro de 114 mm capaz de obliterar flancos inteiros.</span>
+                    </div>
+                </a>
+            
+                <!-- Item 3: SAV 20.12.48 -->
+                <a href="SWE Tanks/SAV 20.12.48/SAV-20.html" class="tank-card nation-bg">
+                    <img src="SWE Tanks/SAV 20.12.48/SAV 20.12.48-shadow.svg" alt="Silhueta SAV 20.12.48" class="list-silhouette tank-silhueta">
+                    <div class="tank-info">
+                        <span class="tank-name">3. SAV 20.12.48</span>
+                        <span class="tank-desc">Um pesadelo de curto alcance. Seu canhão de 120 mm possui um carregador de 6 tiros que dispara a cada 1.2 segundos, dizimando esquadrões inteiros.</span>
+                    </div>
+                </a>
+
+            </div>
+        </div>
+    </main>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof iniciarToggleVisualizacao === 'function') {
+                iniciarToggleVisualizacao();
+            }
+        });
+    </script>
+</body>
+</html>

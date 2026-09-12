@@ -17,6 +17,8 @@ function injetarInterface(caminhoBase) {
                 <input type="text" id="searchInput" placeholder="Buscar blindado..." autocomplete="off">
                 <ul class="search-suggestions" id="searchSuggestions"></ul>
             </div>
+
+            <button id="navToggleBtn" class="nav-toggle-btn">☰ MENU</button>
         </div>
         
         <div class="nav-center">
@@ -76,14 +78,14 @@ function injetarInterface(caminhoBase) {
         <span id="customBannerText">Notificação</span>
     </div>
     `;
-    
+
     document.body.insertAdjacentHTML('afterbegin', menuHTML);
 }
 
 document.addEventListener('click', (e) => {
     const trigger = document.getElementById('navToggleBtn');
     const navbar = document.querySelector('.top-navbar');
-    
+
     if (trigger && navbar) {
         if (trigger.contains(e.target)) {
             navbar.classList.toggle('expanded');
@@ -99,13 +101,13 @@ document.addEventListener('click', (e) => {
 function iniciarToggleVisualizacao() {
     const toggleBtn = document.getElementById('btnToggleView');
     const container = document.querySelector('.nation-content');
-    
+
     // Trava de Segurança
-    if (!toggleBtn || !container) return; 
+    if (!toggleBtn || !container) return;
 
     toggleBtn.addEventListener('click', () => {
         container.classList.toggle('list-view');
-        
+
         // Troca o visual do botão dependendo do modo ativo
         if (container.classList.contains('list-view')) {
             toggleBtn.innerHTML = '&#9638; MODO CAIXAS';
@@ -114,3 +116,23 @@ function iniciarToggleVisualizacao() {
         }
     });
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Adiciona o evento de clique em todo o documento para fechar ao clicar fora
+    document.addEventListener('click', (e) => {
+        const toggleBtn = document.getElementById('navToggleBtn');
+        const navbar = document.querySelector('.top-navbar');
+        
+        // Verifica se a barra e o botão existem na tela
+        if (toggleBtn && navbar) {
+            // Se o usuário clicou no botão de menu
+            if (toggleBtn.contains(e.target)) {
+                navbar.classList.toggle('expanded');
+            } 
+            // Se a barra estiver aberta e o usuário clicar fora dela, ela fecha
+            else if (!navbar.contains(e.target) && navbar.classList.contains('expanded')) {
+                navbar.classList.remove('expanded');
+            }
+        }
+    });
+});
