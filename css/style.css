@@ -323,7 +323,6 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.65) contrast(1.1); /* Escurece para o texto branco sobressair */
     transition: filter 0.5s ease;
 }
 
@@ -336,7 +335,6 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    background: linear-gradient(to top, rgba(30, 32, 33, 1) 0%, transparent 100%);
     padding: 30px 20px 15px;
     text-align: left;
     pointer-events: none;
@@ -349,6 +347,19 @@ body {
     text-shadow: 2px 2px 5px #000;
     margin: 0;
     font-weight: bold;
+}
+
+.hero-gif-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left; /* Mantém centralizado horizontalmente */
+    align-items: flex-start;  /* Joga o conteúdo para o TOPO verticalmente */
+    padding-top: 20px;       /* Um respiro opcional para não colar na borda */
+    background: linear-gradient(to top, rgba(0 , 0 , 0 , 0.8) 0%, transparent 100%);
 }
 
 /* Formatação especial para isolar a Nota Acadêmica no fundo da página */
@@ -422,6 +433,8 @@ body {
     border: 3px solid var(--metal-cinza-claro); border-radius: 8px; padding: 15px; min-height: 280px; 
     box-shadow: 4px 4px 10px var(--sombra-intensa); display: flex; flex-direction: column; align-items: center;
     text-decoration: none; color: inherit; transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    aspect-ratio: 3 / 4; /* O navegador reserva um espaço onde a largura é igual à altura (60x60) */
+    object-fit: contain; /* Garante que o SVG encaixe na caixa sem distorcer */
 }
 .nation-title { color: var(--dourado-titulos); font-size: 22px; letter-spacing: 2px; text-shadow: 2px 2px 4px var(--metal-chumbo); margin-bottom: auto; margin-top: 10px; }
 
@@ -503,17 +516,18 @@ body {
     display: flex; 
     flex-wrap: wrap; 
     justify-content: flex-start; 
-    align-content: flex-start; /* Mantém as linhas agrupadas no topo */
+    align-content: flex-start; 
     gap: 20px; 
-    width: 100%; 
-    max-height: 650px; /* LIMITE DE ALTURA: Ativa a rolagem */
     
-    padding: 15px; /* Protege o efeito hover de ser cortado */
+    width: 95%; /* OCUPA TODO O ESPAÇO DIREITO AO LADO DO TEXTO */
+    max-height: 950px; 
+    
+    padding: 15px; 
     box-sizing: border-box;
     
-    overflow-y: auto; /* ROLAGEM VERTICAL LIGADA */
+    overflow-y: auto; 
     overflow-x: hidden; 
-    transition: all 0.6s ease; 
+    transition: all 0.6s ease;
 }
 
 .tank-card { 
@@ -521,7 +535,8 @@ body {
     flex-direction: column; 
     align-items: center; 
     text-align: center; 
-    /* 5 colunas perfeitas (subtraindo as margens) */
+    
+    /* 5 colunas perfeitas distribuídas no espaço */
     width: calc(20% - 16px); 
     min-height: 120px; 
     padding: 20px 10px; 

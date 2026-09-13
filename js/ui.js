@@ -7,7 +7,7 @@ function injetarInterface(caminhoBase) {
         <div class="nav-left">
             <a href="${caminhoBase}https://wiki.warthunder.com/ground" class="logo-container-nav">
                 <div class="logo-plate-nav">
-                    <img src="${caminhoBase}WT - Artes/War-Thunder-logo.png" alt="Logo do War Thunder" class="navbar-logo-img">
+                    <img src="${caminhoBase}WT - Artes/War-Thunder-logo.png" alt="Logo do War Thunder",width="120" height="60" class="navbar-logo-img">
                 </div>
             </a>
             
@@ -63,7 +63,7 @@ function injetarInterface(caminhoBase) {
                     <div class="password-wrapper">
                         <input type="password" id="userPassword" placeholder="Insira a chave exata" required>
                         <button type="button" id="btnRadar" class="radar-toggle" title="Alternar Senha">
-                            <img src="${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.png" id="radarIcon" style="width: 24px; height: auto;">
+                            <img src="${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.png" alt="Ícone de Radar para alterar visibilidade da senha",width="120" height="60" id="radarIcon" style="width: 24px; height: auto;">
                         </button>
                     </div>
                 </div>
