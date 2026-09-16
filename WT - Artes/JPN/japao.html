@@ -33,8 +33,17 @@
             <!-- Atenção para a classe 'nation-bg' que aplica o gradiente vermelho/preto que configuramos no CSS -->
             <section class="main-panel nation-bg bg-filter nation-info">
                 
-                <div class="nation-banner border-jpn" style="--flag-bg: url('WT - Artes/JPN/JPN Flags/JPN Flag.jpg');">
-                    <h2 class="nation-title-large">JAPÃO</h2>
+               <!-- BANNER COM A BANDEIRA INSERIDA DE FORMA BLINDADA -->
+                <div class="nation-banner border-jpn" style="position: relative; overflow: hidden;">
+                    <!-- Camada da Bandeira -->
+                    <img src="../../WT - Artes/JPN/JPN Flags/JPN Flag.jpg" alt="Bandeira Japão"
+                        style="position: absolute; right: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: right; z-index: 1;">
+                    <!-- Camada do Gradiente de Escurecimento -->
+                    <div
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.9) 40%, transparent 100%); z-index: 2;">
+                    </div>
+                    <!-- Camada do Título -->
+                    <h2 class="nation-title-large" style="position: relative; z-index: 3; margin: 0;">JAPÃO</h2>
                 </div>
                 
                 <div class="presentation-section">
@@ -86,13 +95,5 @@
         </div>
     </main>
 
-    <!-- Script Autônomo para o Toggle de Visão -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            if (typeof iniciarToggleVisualizacao === 'function') {
-                iniciarToggleVisualizacao();
-            }
-        });
-    </script>
 </body>
 </html>

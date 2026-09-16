@@ -1,28 +1,32 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alemanha - War Thunder</title>
-    
+
     <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../css/style.css">
     <link rel="icon" href="../../WT - Artes/WT-ICO2.ico" type="image/png">
 
-    <meta name="description" content="Enciclopédia tática de War Thunder. Descubra especificações, blindagens e doutrinas de combate dos principais blindados do jogo.">
+    <meta name="description"
+        content="Enciclopédia tática de War Thunder. Descubra especificações, blindagens e doutrinas de combate dos principais blindados do jogo.">
 </head>
 
 <body>
     <!-- Roteamento atualizado para a pasta js e carregamento autônomo -->
-    <script src="../../js/menu.min.js" ></script>
+    <script src="../../js/menu.min.js"></script>
     <script>injetarMenu('../../');</script>
 
     <!-- CONTEÚDO PRINCIPAL (Página da Nação) -->
     <main class="ui-container">
 
         <!-- BARRA DE CONTROLE SUPERIOR -->
-        <div style="display: flex; justify-content: space-between; width: 90%; max-width: 1200px; margin-bottom: 20px; align-self: center;">
-            <a href="../../index.html" class="back-button" style="margin: 0; align-self: center;">&#9664; VOLTAR À PÁGINA PRINCIPAL</a>
+        <div
+            style="display: flex; justify-content: space-between; width: 90%; max-width: 1200px; margin-bottom: 20px; align-self: center;">
+            <a href="../../index.html" class="back-button" style="margin: 0; align-self: center;">&#9664; VOLTAR À
+                PÁGINA PRINCIPAL</a>
             <button class="btn-toggle-view" id="btnToggleView">&#9776; MODO LISTA</button>
         </div>
 
@@ -31,61 +35,90 @@
 
             <!-- COLUNA ESQUERDA (Ficará fixa na tela no modo Lista) -->
             <section class="main-panel nation-bg bg-filter nation-info">
-                
-                <div class="nation-banner border-ger" style="--flag-bg: url('Ger Flags/GER Flag.jpg');">
-                    <h2 class="nation-title-large">ALEMANHA</h2>
+
+                <!-- BANNER COM A BANDEIRA INSERIDA DE FORMA BLINDADA -->
+                <div class="nation-banner border-ger" style="position: relative; overflow: hidden;">
+                    <!-- Camada da Bandeira -->
+                    <img src="../../WT - Artes/GER/Ger Flags/WT GER Flag.jpg" alt="Bandeira Alemanha"
+                        style="position: absolute; right: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: right; z-index: 1;">
+                    <!-- Camada do Gradiente de Escurecimento -->
+                    <div
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.9) 40%, transparent 100%); z-index: 2;">
+                    </div>
+                    <!-- Camada do Título -->
+                    <h2 class="nation-title-large" style="position: relative; z-index: 3; margin: 0;">ALEMANHA</h2>
                 </div>
-                
+
                 <div class="presentation-section">
                     <h3 class="section-subtitle">TÁTICAS E ESTILO DE JOGO</h3>
                     <p class="paragraph">
-                        A árvore tecnológica alemã é famosa por sua letalidade a longas distâncias, sustentada por canhões de altíssima precisão e excelente penetração, como os lendários 75mm e 88mm. Diferente de outras nações que dependem da mobilidade pura, o estilo de jogo alemão exige paciência, posicionamento tático e um entendimento profundo das mecânicas de blindagem. Dominar técnicas como o "sidescraping" e a angulação constante do chassi é fundamental para transformar seus pesados em verdadeiras fortalezas intransponíveis.
+                        A árvore tecnológica alemã é famosa por sua letalidade a longas distâncias, sustentada por
+                        canhões de altíssima precisão e excelente penetração, como os lendários 75mm e 88mm. Diferente
+                        de outras nações que dependem da mobilidade pura, o estilo de jogo alemão exige paciência,
+                        posicionamento tático e um entendimento profundo das mecânicas de blindagem. Dominar técnicas
+                        como o "sidescraping" e a angulação constante do chassi é fundamental para transformar seus
+                        pesados em verdadeiras fortalezas intransponíveis.
                     </p>
                     <p class="paragraph">
-                        À medida que você avança para os níveis intermediários e altos, a doutrina muda de veículos leves de flanco para plataformas colossais projetadas para dominar a linha de frente. O foco recai sobre a sobrevivência por meio da espessura bruta ou da inclinação inteligente das placas frontais. Contudo, essa troca sacrifica a velocidade e a rotação da torre, tornando o suporte aliado e a proteção contra flanqueadores essenciais para o sucesso da equipe.
+                        À medida que você avança para os níveis intermediários e altos, a doutrina muda de veículos
+                        leves de flanco para plataformas colossais projetadas para dominar a linha de frente. O foco
+                        recai sobre a sobrevivência por meio da espessura bruta ou da inclinação inteligente das placas
+                        frontais. Contudo, essa troca sacrifica a velocidade e a rotação da torre, tornando o suporte
+                        aliado e a proteção contra flanqueadores essenciais para o sucesso da equipe.
                     </p>
                     <p class="paragraph">
-                        Abaixo, estão catalogados os 5 blindados mais representativos desta nação. Desde a confiabilidade predatória do Panther e do Tiger H1, passando pelo terror do Tiger II, até os exóticos monstros de cerco como o Sturmtiger e o MAUS, estes veículos definem perfeitamente o poder de fogo devastador da engenharia alemã no jogo.
+                        Abaixo, estão catalogados os 5 blindados mais representativos desta nação. Desde a
+                        confiabilidade predatória do Panther e do Tiger H1, passando pelo terror do Tiger II, até os
+                        exóticos monstros de cerco como o Sturmtiger e o MAUS, estes veículos definem perfeitamente o
+                        poder de fogo devastador da engenharia alemã no jogo.
                     </p>
                 </div>
             </section>
 
             <!-- COLUNA DIREITA (Lista de cards que vai abrir/fechar) -->
             <div class="tank-list">
-                
+
                 <!-- Item 1: Panther D -->
                 <a href="Ger Tanks/PANTER D/PANTER-D.html" class="tank-card nation-bg">
-                    <img src="Ger Tanks/PANTER D/Panter D shadow.svg" alt="Silhueta do tanque Panther D" class="list-silhouette">
+                    <img src="Ger Tanks/PANTER D/Panter D shadow.svg" alt="Silhueta do tanque Panther D"
+                        class="list-silhouette">
                     <div class="tank-info">
                         <span class="tank-name">1. Panther D</span>
-                        <span class="tank-desc">Blindagem frontal inclinada e canhão letal de 75mm em longas distâncias.</span>
+                        <span class="tank-desc">Blindagem frontal inclinada e canhão letal de 75mm em longas
+                            distâncias.</span>
                     </div>
                 </a>
 
                 <!-- Item 2: Tiger H1 -->
                 <a href="Ger Tanks/TIGER H1/TIGER-H1.html" class="tank-card nation-bg">
-                    <img src="Ger Tanks/TIGER H1/TIGER H1 shadow.svg" alt="Silhueta do tanque Tiger H" class="list-silhouette">
+                    <img src="Ger Tanks/TIGER H1/TIGER H1 shadow.svg" alt="Silhueta do tanque Tiger H"
+                        class="list-silhouette">
                     <div class="tank-info">
                         <span class="tank-name">2. Tiger H1</span>
-                        <span class="tank-desc">O monstro quadrado de 56 toneladas que dominou os campos da Europa.</span>
+                        <span class="tank-desc">O monstro quadrado de 56 toneladas que dominou os campos da
+                            Europa.</span>
                     </div>
                 </a>
-            
+
                 <!-- Item 3: Tiger II V2 -->
                 <a href="Ger Tanks/TIGER II V2/TIGERII.html" class="tank-card nation-bg">
-                    <img src="Ger Tanks/TIGER II V2/Tiger II shadow.svg" alt="Silhueta do tanque Tiger II" class="list-silhouette">
+                    <img src="Ger Tanks/TIGER II V2/Tiger II shadow.svg" alt="Silhueta do tanque Tiger II"
+                        class="list-silhouette">
                     <div class="tank-info">
                         <span class="tank-name">3. Tiger II V2</span>
-                        <span class="tank-desc">O ápice dos tanques pesados, combinando o letal canhão de 88mm com uma forte blindagem inclinada.</span>
+                        <span class="tank-desc">O ápice dos tanques pesados, combinando o letal canhão de 88mm com uma
+                            forte blindagem inclinada.</span>
                     </div>
                 </a>
 
                 <!-- Item 4: Sturmtiger -->
                 <a href="Ger Tanks/STURMTIGER/Sturmtiger.html" class="tank-card nation-bg">
-                    <img src="Ger Tanks/STURMTIGER/Sturmtiger shadow.svg" alt="Silhueta do tanque Sturmtiger" class="list-silhouette">
+                    <img src="Ger Tanks/STURMTIGER/Sturmtiger shadow.svg" alt="Silhueta do tanque Sturmtiger"
+                        class="list-silhouette">
                     <div class="tank-info">
                         <span class="tank-name">4. Sturmtiger</span>
-                        <span class="tank-desc">Um canhão de assalto brutal, famoso por disparar foguetes maciços de 380mm para obliterar fortificações.</span>
+                        <span class="tank-desc">Um canhão de assalto brutal, famoso por disparar foguetes maciços de
+                            380mm para obliterar fortificações.</span>
                     </div>
                 </a>
 
@@ -94,7 +127,8 @@
                     <img src="Ger Tanks/MAUS/MAUS shadow.svg" alt="Silhueta do tanque MAUS" class="list-silhouette">
                     <div class="tank-info">
                         <span class="tank-name">5. MAUS</span>
-                        <span class="tank-desc">O maior tanque superpesado já construído, sendo uma fortaleza móvel de impressionantes 188 toneladas.</span>
+                        <span class="tank-desc">O maior tanque superpesado já construído, sendo uma fortaleza móvel de
+                            impressionantes 188 toneladas.</span>
                     </div>
                 </a>
 
@@ -102,4 +136,5 @@
         </div>
     </main>
 </body>
+
 </html>
