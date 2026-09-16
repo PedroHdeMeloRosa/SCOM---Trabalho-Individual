@@ -1,59 +1,72 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - Tiger II V2</title>
-    <!-- Roteamento atualizado -->
+    <meta name="description"
+        content="Ficha técnica, blindagem e doutrinas de combate do Pz.Kpfw. VI Ausf. B (Tiger II) alemão no War Thunder.">
+    <title>Tiger II V2 - Ficha Técnica</title>
+
+    <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- CABEÇALHO FIXO com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../alemanha.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../alemanha.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
-            
+
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">Pz.Kpfw. VI Ausf. B (Tiger II)</h2>
-                <span class="sheet-badge">Tanque Pesado | Nível IV</span>
+                <span class="sheet-badge" style="background-color: #3b3b3b; color: #fff;">Tanque Pesado (Sniper Pesado) | Nível IV</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
-                
+
                 <!-- Coluna 1: Imagem (Carrossel) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="tiger2-track">
                         <!-- Imagem 1: Foto Padrão -->
-                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto.webp" 
-                             alt="Visão Padrão Tiger II" 
-                             class="slide-item sheet-silhouette">
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto.webp"
+                            alt="Visão Padrão Tiger II" class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
-                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto2.webp" 
-                             alt="Visão Alternativa Tiger II" 
-                             class="slide-item sheet-silhouette">
-                        
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto2.webp"
+                            alt="Visão Alternativa Tiger II em combate" class="slide-item">
+
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
-                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto3.webp" 
-                             alt="Visão Raio-X Tiger II" 
-                             class="slide-item sheet-silhouette">
+                        <img src="../../../../WT - Artes/GER/Ger Tanks/TIGER II V2/Tiger II - Foto3.webp"
+                            alt="Visão Raio-X Tiger II" class="slide-item">
                     </div>
+
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev"
+                        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
-                    
+                    <h3 class="data-title">Especificações Técnicas</h3>
+
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
                         <tbody>
@@ -62,12 +75,12 @@
                                 <td>Canhão KwK43 de 88 mm (L/71)</td>
                             </tr>
                             <tr>
-                                <th>Blindagem Frontal (Torre)</th>
-                                <td>185 mm</td>
+                                <th>Blindagem Frontal (Torre Henschel)</th>
+                                <td>185 mm (Quase plana)</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Chassi)</th>
-                                <td>150 mm (Inclinada)</td>
+                                <td>150 mm (Fortemente Inclinada)</td>
                             </tr>
                             <tr>
                                 <th>Tripulação</th>
@@ -88,17 +101,93 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    O Tiger II representa o ápice do desenvolvimento de tanques pesados alemães. Ele combina o design de blindagem inclinada do Panther com a espessura e imponência do Tiger original. Armado com o devastador canhão longo de 88 mm, ele é capaz de destruir praticamente qualquer adversário no War Thunder mesmo a distâncias extremas.
+                    O Panzerkampfwagen VI Ausf. B, internacionalmente temido como o "Königstiger" (Tigre-Rei),
+                    representou o ápice irrestrito do design de tanques pesados da Alemanha Nazista. Aprendendo as
+                    amargas lições com a blindagem plana do Tiger I, a Henschel fundiu a espessura extrema do chassi
+                    original com a blindagem altamente inclinada inspirada no Panther. Pesando incríveis 68 toneladas, a
+                    placa frontal do chassi do Tiger II era de 150 mm angulada a 50 graus, tornando-a invulnerável a
+                    qualquer canhão montado em tanques aliados ou soviéticos durante toda a Segunda Guerra Mundial.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Mantenha o combate a longas distâncias, onde você atua como um "sniper pesado" intocável. Evite o combate a curta distância devido à baixa mobilidade das suas 68 toneladas, e proteja sempre a sua placa inferior frontal (lower glacis), que é o seu principal ponto fraco.
+                    A coroa dessa máquina era a sua arma. Diferente do canhão antiaéreo encurtado do Tiger I, o Tiger II
+                    foi equipado com o colossal KwK43 L/71 de 88 mm. O cano era tão extenso que a velocidade de saída do
+                    projétil o transformava quase em um raio laser mecânico. Na vida real, tripulações alemãs relataram
+                    abates confirmados de tanques T-34 a distâncias superiores a 3.500 metros. A variante de produção
+                    tardia ("V2" no jogo) abandonou a arredondada e falha torre projetada pela Porsche (que criava
+                    perigosas armadilhas de tiro) e adotou o massivo design quadrado da Henschel, com uma frente
+                    impenetrável de 185 mm.
                 </p>
+                <p class="lore-text">
+                    Dentro da impiedosa balística do War Thunder, o Tiger II (H) dita a lei do longo alcance no Nível
+                    IV. Sua chapa superior do chassi continua imune a quase tudo, forçando jogadores inimigos
+                    desesperados a atirarem nas "bochechas" de 185 mm da sua torre ou na pequena placa inferior do
+                    chassi (lower glacis). Como seu motor é idêntico ao do Panther, a aceleração das 68 toneladas é
+                    penosa. O Tiger II é a personificação do <em>Sniper Pesado</em>: uma máquina construída para
+                    bloquear avenidas principais inteiras e pulverizar inimigos que tentem avançar sob a mira do seu
+                    letal canhão de 88 mm.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Sniper Incontestável:</strong> Mantenha a distância. Em
+                        combates acima de 800 metros, a pequena espessura plana de 185 mm da sua torre torna-se um alvo
+                        quase impossível de acertar para os inimigos, enquanto a altíssima velocidade do seu projétil
+                        KwK43 permite perfurá-los com facilidade. Lutas de perto em cidades anulam a sua principal
+                        vantagem balística.</li>
+                    <li style="margin-bottom: 10px;"><strong>O Falso Diamante:</strong> Ao contrário do Tiger I,
+                        <strong>não angule muito o seu chassi!</strong> A blindagem lateral sob as esteiras continua
+                        sendo relativamente fina (80 mm). Se você virar demais em "formato de losango", oponentes
+                        furarão o lado do seu tanque. Mantenha-se quase que totalmente de frente, contando com os 150 mm
+                        inclinados do seu peito.</li>
+                    <li><strong>A Dança da Torre:</strong> Jogadores americanos (com T34s) e soviéticos (com IS-2s)
+                        memorizaram que a frente plana da sua torre (bochechas) é a chave para destruí-lo. Assim que
+                        você disparar e entrar no processo de recarregamento, vire imediatamente a torre de 15 a 20
+                        graus para a esquerda ou direita (Turret Wiggling). Isso vai angular a placa de 185 mm, fazendo
+                        os tiros inimigos ricochetearem, antes de você virar de frente e atirar novamente.</li>
+                </ul>
             </div>
-            
+
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('tiger2-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1;
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
+
 </html>

@@ -4,58 +4,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - M4A3E2 Jumbo</title>
+    <title>M4A3E2 Jumbo - Ficha Técnica</title>
+
     <!-- Roteamento atualizado para a nova pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
+
+    <meta name="description" content="Ficha técnica detalhada do M4A3E2 Sherman Jumbo, tanque pesado americano de nível III no War Thunder. Inclui especificações, histórico e táticas de combate.">
 </head>
 
 <body>
     <!-- Roteamento atualizado para a nova pasta js e carregamento autônomo -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
-        <!-- NAVEGAÇÃO -->
-        <a href="../../usa.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE AMERICANA</a>
+        <!-- Botão Voltar -->
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../usa.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE AMERICANA</a>
+        </div>
 
-        <!-- FICHA TÉCNICA -->
+        <!-- A FICHA DO TANQUE -->
         <article class="tank-sheet">
 
-            <!-- Título e Classificação -->
+            <!-- Cabeçalho -->
             <header class="sheet-header">
                 <h2 class="sheet-title">M4A3E2 Sherman Jumbo</h2>
-                <span class="sheet-badge">Tanque Pesado (Assalto) | Nível III</span>
+               <span class="sheet-badge" style="background-color: #1A3668; color: #fff;">Tanque Pesado (Assalto) | Nível III</span>
             </header>
 
-            <!-- Divisão de Colunas (Visual + Tabela) -->
+            <!-- Layout Flex (Carrossel + Tabela) -->
             <div class="sheet-content">
 
-                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
-                        <!-- Imagem 1: Foto Padrão -->
-                        <img src="../../../../WT - Artes/USA/USA Tanks/JUMBO/JUMBO foto.webp" 
-                             alt="Visão Padrão M4A3E2 Jumbo" 
-                             class="slide-item sheet-silhouette">
+                <!-- CARROSSSEL DE IMAGENS -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
 
-                        <!-- Imagem 2: Foto Padrão Alternativa -->
-                        <img src="../../../../WT - Artes/USA/USA Tanks/JUMBO/JUMBO foto2.webp" 
-                             alt="Visão Padrão M4A3E2 Jumbo" 
-                             class="slide-item sheet-silhouette">
-                        
-                        <!-- Imagem 3: Visão Raio-X ou Silhueta -->
-                        <img src="../../../../WT - Artes/USA/USA Tanks/JUMBO/JUMBO foto3.webp" 
-                             alt="Visão Raio-X M4A3E2 Jumbo" 
-                             class="slide-item sheet-silhouette">
+                    <div class="carousel-track" id="jumbo-track">
+                        <!-- Imagens do Jumbo -->
+                        <img src="../../../../WT - Artes/USA/USA Tanks/JUMBO/JUMBO foto.webp"
+                            alt="Visão Padrão M4A3E2 Jumbo" class="slide-item">
+                        <img src="../../../../WT - Artes/USA/USA Tanks/JUMBO/JUMBO foto2.webp"
+                            alt="M4A3E2 Jumbo em combate" class="slide-item">
+                        <img src="../../../../WT - Artes/USA/USA Tanks/JUMBO/JUMBO foto3.webp"
+                            alt="Visão Raio-X M4A3E2 Jumbo" class="slide-item">
                     </div>
+
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev"
+                        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
-                <!-- Coluna 2: Dados -->
+                <!-- Especificações -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
-
-                    <!-- Tabela de Atributos -->
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     <table class="data-table">
                         <tbody>
                             <tr>
@@ -63,12 +70,12 @@
                                 <td>Canhão M3 de 75 mm</td>
                             </tr>
                             <tr>
-                                <th>Blindagem Frontal (Torre)</th>
-                                <td>152 mm (Mantelete Reforçado)</td>
+                                <th>Munição Padrão</th>
+                                <td>APCBC (Carga Explosiva) / APCR</td>
                             </tr>
                             <tr>
-                                <th>Blindagem Frontal (Chassi)</th>
-                                <td>101 mm (Fortemente Inclinada)</td>
+                                <th>Blindagem Frontal</th>
+                                <td>101 mm (Chassi) / 152 mm (Torre)</td>
                             </tr>
                             <tr>
                                 <th>Tripulação</th>
@@ -80,38 +87,97 @@
                             </tr>
                         </tbody>
                     </table>
-
-                    <!-- Botão Administrativo -->
-                    <div class="admin-controls">
-                        <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
-                    </div>
-
                 </div>
+
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Projetado como um tanque de assalto para liderar avanços na Europa, o "Jumbo" recebeu placas extras
-                    de blindagem soldadas diretamente sobre o chassi padrão do Sherman e uma torre inteiramente nova e
-                    massiva. No War Thunder, ele é o pesadelo dos canhões alemães de 75 mm e soviéticos de 85 mm, sendo
-                    capaz de absorver disparos frontais de quase tudo que enfrenta em seu nível. Em contrapartida, seu
-                    canhão de 75 mm tem baixa penetração, exigindo que o jogador saiba exatamente onde mirar nos pontos
-                    fracos dos oponentes.
+                    Nascido da necessidade iminente de romper as pesadas defesas alemãs durante a campanha na Europa em
+                    1944, o M4A3E2 — carinhosamente apelidado de "Jumbo" — foi a resposta de emergência dos engenheiros
+                    americanos para um tanque de assalto pesado. Sabendo que o chassi do Sherman era confiável, o
+                    Departamento de Artilharia soldou placas adicionais de 38 mm diretamente sobre a blindagem frontal
+                    inclinada e as laterais do veículo. Coroando a modificação, uma torre massiva totalmente nova foi
+                    fundida em aço, ostentando espantosos 152 mm de proteção no mantelete do canhão, projetada
+                    especificamente para rir na cara dos temidos canhões antitanque de 75 mm e 88 mm alemães.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Diferente do KV-1 e do Tiger, <strong>nunca angule o chassi do Jumbo
-                        excessivamente!</strong> Embora a blindagem frontal seja praticamente impenetrável, a blindagem
-                    lateral inferior (logo atrás das esteiras) é incrivelmente fina (apenas 38 mm). Se você virar demais
-                    o chassi, qualquer projétil inimigo passará direto por ali. Mantenha a frente sempre apontada para o
-                    perigo, esconda a porta da metralhadora do chassi (seu principal ponto fraco frontal) e utilize seu
-                    estabilizador de baixa velocidade para atirar com precisão em movimento, destruindo os canhões e
-                    esteiras inimigas antes de buscar as laterais.
+                    Historicamente, a decisão de manter o canhão M3 de 75 mm ao invés do mais perfurante 76 mm foi
+                    puramente tática: a prioridade do Jumbo era a infantaria e os bunkers, e o obus de 75 mm disparava
+                    uma carga altamente explosiva (HE) muito superior. Esse peso extra de 14 toneladas castigava a
+                    suspensão e forçava o motor Ford GAA ao seu limite extremo. Contudo, as tripulações americanas
+                    idolatravam o Jumbo. Ele liderava as colunas blindadas, absorvia o fogo inimigo inicial e protegia
+                    os Shermans mais leves e Hellcats que vinham logo atrás, desempenhando um papel crucial no cerco a
+                    Bastogne.
                 </p>
+                <p class="lore-text">
+                    Dentro do War Thunder, essa herança real se traduz em um verdadeiro "bully" de combates a curta
+                    distância. Em seu Battle Rating (BR), a frente do Jumbo é praticamente impenetrável se você proteger
+                    a odiada porta da metralhadora do chassi. Porém, a recriação precisa do jogo significa que você
+                    carrega a fraqueza do canhão de 75 mm. Você não conseguirá perfurar um Tiger I ou um Panther
+                    frontalmente com facilidade. O estilo de jogo exige que você avance destemidamente, atraia os
+                    disparos para o seu manto impenetrável e utilize seu estabilizador de baixa velocidade para
+                    incapacitar o inimigo (quebrando seus canhões ou lagartas) antes de flanquear para o abate
+                    definitivo.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>A Fortaleza Frontal:</strong> O Jumbo foi feito para atrair
+                        o fogo inimigo. Sua frente é impenetrável para a maioria dos adversários. No entanto, lembre-se
+                        de esconder ou proteger a porta da metralhadora do chassi (seu principal e mais famoso ponto
+                        fraco frontal).</li>
+                    <li style="margin-bottom: 10px;"><strong>O Perigo do Ângulo:</strong> Diferente do KV-1 e do Tiger,
+                        <strong>nunca angule o chassi excessivamente!</strong> A blindagem lateral inferior (logo atrás
+                        das esteiras) tem apenas 38 mm de espessura. Se você virar demais o tanque, qualquer projétil
+                        passará direto por ali. Mantenha o nariz apontado para o perigo.</li>
+                    <li><strong>Tiro em Movimento (Estabilizador):</strong> Como o canhão de 75 mm tem baixa penetração
+                        para esse nível (Tier), o combate frontal direto é difícil. Utilize o seu estabilizador de baixa
+                        velocidade (STAB) para atirar com precisão sem precisar parar. Mire nas esteiras e nos canos dos
+                        canhões inimigos (Track & Barrel Torture) para desarmá-los antes de buscar o flanco para o
+                        abate.</li>
+                </ul>
             </div>
 
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('jumbo-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1;
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 
 </html>

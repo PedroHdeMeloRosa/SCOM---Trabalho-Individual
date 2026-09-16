@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ficha técnica, armamento e doutrinas de combate do obuseiro móvel BT-42 finlandês (Árvore Sueca) no War Thunder.">
     <title>BT-42 - Ficha Técnica</title>
     
     <!-- Ajuste as rotas "../" conforme a localização do seu arquivo -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento do Menu Superior -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento do Menu Superior com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- Botão Voltar -->
@@ -27,7 +33,7 @@
             <!-- Cabeçalho -->
             <header class="sheet-header">
                 <h2 class="sheet-title">BT-42</h2>
-                <span class="sheet-badge" style="background-color: var(--metal-cinza-claro); color: var(--metal-chumbo);">Tanque de Assalto (Finlândia)</span>
+                <span class="sheet-badge" style="background-color: #005293; color: #fff;">Tanque de Assalto Rápido (Derp Gun) | Nível I</span>
             </header>
 
             <!-- Layout Flex (Carrossel + Tabela) -->
@@ -53,13 +59,34 @@
                     <h3 class="data-title">Especificações Técnicas</h3>
                     <table class="data-table">
                         <tbody>
-                            <tr><th>Armamento Principal</th><td>Obuseiro 114 mm (114 Psv.H/18)</td></tr>
-                            <tr><th>Munição Padrão</th><td>HEAT (Alta Penetração) / HE</td></tr>
-                            <tr><th>Blindagem Frontal</th><td>20 mm (Chassi) / 16 mm (Torre)</td></tr>
-                            <tr><th>Tripulação</th><td>3 Membros</td></tr>
-                            <tr><th>Velocidade Máxima</th><td>53 km/h</td></tr>
+                            <tr>
+                                <th>Armamento Principal</th>
+                                <td>Obuseiro 114 mm (114 Psv.H/18)</td>
+                            </tr>
+                            <tr>
+                                <th>Munição Padrão</th>
+                                <td>HEAT (Alta Penetração) / HE</td>
+                            </tr>
+                            <tr>
+                                <th>Blindagem Frontal</th>
+                                <td>20 mm (Chassi) / 16 mm (Torre)</td>
+                            </tr>
+                            <tr>
+                                <th>Tripulação</th>
+                                <td>3 Membros</td>
+                            </tr>
+                            <tr>
+                                <th>Velocidade Máxima</th>
+                                <td>53 km/h</td>
+                            </tr>
                         </tbody>
                     </table>
+
+                    <!-- Botão Administrativo -->
+                    <div class="admin-controls">
+                        <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
+                    </div>
+
                 </div>
                 
             </div>
@@ -68,14 +95,20 @@
             <div class="sheet-lore">
                 <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    O <strong>BT-42</strong> é um dos maiores Frankenstein da Segunda Guerra Mundial e motivo de muito orgulho para os finlandeses. Durante a Guerra de Continuação, o exército da Finlândia capturou vários tanques leves soviéticos BT-7. Desesperados por apoio de fogo móvel, os engenheiros finlandeses removeram a torre original e instalaram uma enorme torre improvisada abrigando um obuseiro britânico de 4.5 polegadas (114 mm) da Primeira Guerra Mundial, doado pelo Reino Unido. O resultado foi um veículo absurdamente veloz, de perfil desproporcional e dono de um canhão que exigia um verdadeiro mestre para ser domado.
+                    O <strong>BT-42</strong> é um dos maiores e mais bizarros "Frankensteins" da Segunda Guerra Mundial, e motivo de grande folclore militar para os finlandeses. Durante a Guerra de Continuação, o exército da Finlândia capturou dezenas de tanques leves soviéticos BT-7, famosos por sua altíssima velocidade. Desesperados por apoio de fogo móvel pesado que pudesse destruir bunkers e fortificações, os engenheiros finlandeses tiveram a audaciosa ideia de arrancar a torre original e substituí-la por uma casamata quadrada e gigantesca.
+                </p>
+                <p class="lore-text">
+                    A parte mais cômica e genial da engenharia foi o armamento: dentro dessa nova torre desproporcional, eles instalaram um obuseiro britânico QF de 4.5 polegadas (114 mm), datado da Primeira Guerra Mundial, que o Reino Unido havia doado durante a Guerra de Inverno. O resultado foi um veículo absurdamente veloz, mas terrivelmente desbalanceado na vida real. A enorme torre tornou o chassi muito pesado no topo (top-heavy), causando constantes falhas na famosa suspensão Christie e dificultando a condução, além do canhão apresentar péssima performance contra a blindagem inclinada dos T-34 soviéticos que acabaram enfrentando.
+                </p>
+                <p class="lore-text">
+                    No War Thunder, entretanto, as falhas mecânicas não existem e a lenda ganha vida. O BT-42 é a personificação do "Derp Gun" na árvore sueca de Nível I. Ele carrega uma munição HEAT com poder de penetração suficiente para derreter qualquer veículo inimigo da partida, ativando frequentemente a mecânica de <em>Overpressure</em> (sobrepressão). Contudo, a velocidade do projétil é tão baixa que atirar a longas distâncias exige calcular um arco parabólico tremendo. É um tanque feito para causar o caos absoluto a curtas distâncias antes de sumir do mapa.
                 </p>
 
                 <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
                 <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>O Demônio da Velocidade:</strong> O chassi do BT-7 herdou a suspensão Christie e uma impressionante relação peso-potência. Use isso para iniciar a partida acelerando até posições inesperadas de flanco ou para capturar pontos neutros antes de qualquer outra unidade pesada pisar no terreno.</li>
-                    <li style="margin-bottom: 10px;"><strong>Balística de "Catapulta":</strong> O obuseiro de 114 mm tem uma velocidade de saída de projétil péssima. Acertar alvos em movimento a mais de 400 metros exige calcular uma grande parábola. Prefira combates urbanos e de curta distância onde sua munição HEAT ignora a blindagem da maioria dos adversários.</li>
-                    <li><strong>Sobrevivência Pelo Caos:</strong> Sua blindagem tem míseros 20 mm, e a torre enorme é um imã de tiros. Nunca troque tiros parado. Atire, use sua impressionante manobrabilidade em ré (e para frente) para sumir atrás de coberturas, e ataque de um ângulo diferente.</li>
+                    <li style="margin-bottom: 10px;"><strong>O Demônio da Velocidade:</strong> O chassi do antigo BT-7 herdou a suspensão Christie e uma impressionante relação peso-potência. Use isso para iniciar a partida acelerando até posições inesperadas de flanco ou para capturar pontos neutros antes de qualquer outra unidade pesada conseguir sequer sair da base inimiga.</li>
+                    <li style="margin-bottom: 10px;"><strong>Balística de "Catapulta":</strong> O obuseiro de 114 mm tem uma velocidade de saída de projétil péssima. Acertar alvos velozes em movimento a mais de 400 metros exige liderar o tiro de forma drástica e calcular uma grande parábola. Prefira combates urbanos, vielas e curtas distâncias onde sua munição HEAT funciona como uma marreta inevitável.</li>
+                    <li><strong>Sobrevivência Pelo Caos:</strong> Sua blindagem tem míseros 20 mm, e a torre enorme é um ímã de tiros visível a quilômetros de distância. Nunca troque tiros parado e evite campos abertos. Atire, use a impressionante manobrabilidade da sua máquina para recuar para trás de coberturas ou vielas, e ataque de um ângulo totalmente diferente antes que o inimigo consiga mirar em você.</li>
                 </ul>
             </div>
 

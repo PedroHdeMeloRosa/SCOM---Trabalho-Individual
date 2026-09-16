@@ -5,7 +5,7 @@ function iniciarScrollSuave(caminhoBase) {
     // 1. Injeta apenas a estrutura HTML do botão
     const scrollBtnHTML = `
         <button id="btnVoltarTopo" title="Voltar ao Topo">
-            <img src="${caminhoBase}WT - Artes/UI-UX icons/Seta_cima-icon.png" alt="Voltar ao Topo" class="icone-topo">
+            <img src="${caminhoBase}WT - Artes/UI-UX icons/Seta_cima-icon.webp" alt="Voltar ao Topo" class="icone-topo">
             <span class="texto-topo">VOLTAR AO TOPO</span>
         </button>
     `;

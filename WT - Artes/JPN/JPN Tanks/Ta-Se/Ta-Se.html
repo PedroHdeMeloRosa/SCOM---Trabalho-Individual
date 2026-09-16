@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ficha técnica, armamento e doutrinas de combate da antiaérea móvel japonesa Ta-Se no War Thunder.">
     <title>Ta-Se - Ficha Técnica</title>
     
     <!-- Ajuste as rotas "../" conforme a localização do seu arquivo -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento do Menu Superior -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento do Menu Superior com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- Botão Voltar -->
@@ -27,7 +33,7 @@
             <!-- Cabeçalho -->
             <header class="sheet-header">
                 <h2 class="sheet-title">Ta-Se</h2>
-                <span class="sheet-badge" style="background-color: var(--usa-branco); color: #fff;">Antiaérea (SPAA)</span>
+                <span class="sheet-badge" style="background-color: #C00000; color: #fff;">Antiaérea Autopropulsada (SPAA) | Nível I</span>
             </header>
 
             <!-- Layout Flex (Carrossel + Tabela) -->
@@ -53,13 +59,34 @@
                     <h3 class="data-title">Especificações Técnicas</h3>
                     <table class="data-table">
                         <tbody>
-                            <tr><th>Armamento Principal</th><td>Canhão Automático 20 mm Type 98</td></tr>
-                            <tr><th>Cadência de Tiro</th><td>~300 disparos por minuto</td></tr>
-                            <tr><th>Blindagem Frontal</th><td>12 mm (Chassi) / Escudo Frontal Exposto</td></tr>
-                            <tr><th>Tripulação</th><td>3 Membros</td></tr>
-                            <tr><th>Velocidade Máxima</th><td>45 km/h</td></tr>
+                            <tr>
+                                <th>Armamento Principal</th>
+                                <td>Canhão Automático 20 mm Type 98</td>
+                            </tr>
+                            <tr>
+                                <th>Cadência de Tiro</th>
+                                <td>~300 disparos por minuto</td>
+                            </tr>
+                            <tr>
+                                <th>Blindagem Frontal</th>
+                                <td>12 mm (Chassi) / Escudo Frontal Exposto</td>
+                            </tr>
+                            <tr>
+                                <th>Tripulação</th>
+                                <td>3 Membros</td>
+                            </tr>
+                            <tr>
+                                <th>Velocidade Máxima</th>
+                                <td>45 km/h</td>
+                            </tr>
                         </tbody>
                     </table>
+
+                    <!-- Botão Administrativo -->
+                    <div class="admin-controls">
+                        <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
+                    </div>
+
                 </div>
                 
             </div>
@@ -68,14 +95,20 @@
             <div class="sheet-lore">
                 <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    O <strong>Ta-Se</strong> é um protótipo experimental japonês construído em novembro de 1941. Utilizando o ágil chassi do tanque leve Type 98 Ke-Ni, os engenheiros removeram a torre original e instalaram um canhão antiaéreo de 20 mm Type 98 com uma pequena blindagem de escudo. O projeto tinha como objetivo criar uma defesa antiaérea móvel para acompanhar os comboios blindados. Embora não tenha entrado em produção em massa, sua aparência peculiar e seu tamanho cômico o tornaram um veículo inesquecível tanto na história militar experimental quanto nos campos de batalha virtuais.
+                    O <strong>Ta-Se</strong> é um curioso protótipo experimental desenvolvido pelo Japão Imperial em novembro de 1941, no exato início de sua campanha de expansão militar na Segunda Guerra Mundial. Comandantes japoneses perceberam rapidamente a necessidade de defesas antiaéreas que pudessem acompanhar a velocidade das colunas blindadas. Para suprir essa demanda de forma rápida e barata, os engenheiros pegaram o chassi ágil do tanque leve Type 98 Ke-Ni, removeram sua torre fechada e a substituíram por um canhão antiaéreo rápido de 20 mm Type 98 protegido apenas por um pequeno escudo balístico aberto.
+                </p>
+                <p class="lore-text">
+                    Infelizmente para as tripulações japonesas do mundo real, a plataforma aberta deixou os artilheiros incrivelmente vulneráveis não apenas ao fogo inimigo, mas aos detritos atirados pelas próprias esteiras e pela lama da selva. Além disso, o chassi era tão apertado que a cadência de fogo do canhão deixava a cabine insuportavelmente enfumaçada, e o veículo balançava severamente a cada disparo, o que forçou o cancelamento da produção em massa. Contudo, no War Thunder, esses detalhes logísticos não existem, permitindo que a pequena máquina brilhe como uma "motocicleta com canhão" mortal.
+                </p>
+                <p class="lore-text">
+                    Dentro das mecânicas agressivas do Nível I (Rank I), o Ta-Se atua de forma dupla e insidiosa. Devido à sua velocidade máxima de 45 km/h e ao seu perfil baixíssimo, ele é excelente para limpar os céus de biplanos e monoplanos lentos. Entretanto, a verdadeira força dele no jogo está em atuar como um "predador de blindados leves". Equipado com o cinto de munição Perfurante (AP), o canhão de 20 mm vira uma motosserra capaz de rasgar facilmente o chassi de Stuarts americanos, BT-5s soviéticos e os infames L3/33 italianos.
                 </p>
 
                 <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
                 <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>O Terror dos Flancos:</strong> Não se limite a olhar para o céu! A munição perfurante (AP) do seu 20 mm consegue rasgar facilmente a lateral da maioria dos tanques leves e médios do seu tier. Use seus 45 km/h para flanquear e surpreender os inimigos.</li>
-                    <li style="margin-bottom: 10px;"><strong>Alvo de Papelão:</strong> Com meros 12 mm de blindagem máxima e a tripulação do canhão parcialmente exposta, até metralhadoras pesadas coaxiais são uma ameaça de morte. A furtividade e o tamanho diminuto são a sua única verdadeira blindagem.</li>
-                    <li><strong>Fogo de Supressão:</strong> Quando atuar no papel antiaéreo, evite atirar muito cedo para não revelar sua posição. Espere o avião inimigo iniciar um mergulho (strafing) ou passar rasante, e então descarregue uma rajada contínua no motor ou nas asas.</li>
+                    <li style="margin-bottom: 10px;"><strong>O Terror dos Flancos:</strong> Não se limite a olhar para o céu! A munição perfurante (AP) do seu 20 mm consegue perfurar até 33 mm de aço. Use a sua altíssima mobilidade para cruzar as bordas do mapa, pegar tanques inimigos pela lateral e descarregar uma rajada de 20 tiros diretamente nos motores e nas tripulações deles.</li>
+                    <li style="margin-bottom: 10px;"><strong>Alvo de Papelão:</strong> A sua maior vantagem é também a sua condenação. Com apenas 12 mm de blindagem (e a tripulação do canhão parcialmente exposta ao vento), até fuzis e metralhadoras 7.62mm coaxiais o destruirão em segundos. Nunca trave lutas diretas, e não fique parado no meio da rua; a furtividade e a velocidade são suas únicas armaduras.</li>
+                    <li><strong>Fogo de Supressão Antiaérea:</strong> Quando atuar no seu papel real de SPAA contra a aviação, não segure o gatilho sem mirar; o pente de 20 balas acaba muito rápido e a recarga o deixará indefeso. Espere o caça inimigo apontar o nariz na sua direção ou realizar um mergulho (strafing), mire levemente à frente da hélice dele e dispare rajadas curtas e letais no motor do piloto.</li>
                 </ul>
             </div>
 

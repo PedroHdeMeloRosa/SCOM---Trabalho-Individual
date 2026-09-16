@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - Object 279</title>
+    <meta name="description" content="Ficha técnica, blindagem anti-nuclear e doutrinas de combate do tanque pesado soviético Object 279 no War Thunder.">
+    <title>Object 279 - Ficha Técnica</title>
+    
     <!-- Roteamento atualizado -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO (Orquestrador) -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- CABEÇALHO FIXO com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../russia.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../russia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -24,42 +33,46 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">Object 279</h2>
-                <span class="sheet-badge">Tanque Pesado | Nível VI</span>
+               <span class="sheet-badge" style="background-color: #A32020; color: #fff;">Tanque Pesado Nuclear (Experimental) | Nível VI</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
                 <!-- Coluna 1: Imagem (Carrossel) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
-                        <!-- Imagem 1: Foto Padrão (AVIF suportado) -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="obj-track">
+                        <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/OBJ-279/OBJ-279 foto.webp" 
                              alt="Visão Padrão Object 279" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/OBJ-279/OBJ-279 foto2.webp" 
                              alt="Visão Alternativa Object 279" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/OBJ-279/OBJ-279 foto3.webp" 
                              alt="Visão Raio-X Object 279" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
                         <tbody>
                             <tr>
                                 <th>Armamento Principal</th>
-                                <td>Canhão M-65 de 130 mm</td>
+                                <td>Canhão Estabilizado M-65 de 130 mm</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Torre)</th>
@@ -88,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Desenvolvido no auge da Guerra Fria (1959), o Object 279 parece ter saído de um filme de ficção científica. Seu bizarro chassi em forma de "disco voador" e o conjunto absurdo de quatro esteiras não eram apenas escolhas estéticas: eles foram projetados com o objetivo extremo de evitar que o tanque capotasse com a onda de choque de uma explosão nuclear. No War Thunder, ele é um dos veículos mais temidos, combinando ângulos de ricochete inacreditáveis com o devastador canhão M-65 de 130 mm, que oblitera quase tudo que toca.
+                    Desenvolvido no auge da paranoia da Guerra Fria em 1959, o projeto liderado pelo engenheiro L. Troyanov resultou em um veículo que parece ter saído de um filme de ficção científica. O Object 279 não recebeu seu formato elíptico bizarro por acaso: a engenharia soviética desenhou a blindagem externa como um casco de navio para dissipar a força brutal de uma onda de choque termonuclear, impedindo que o tanque de 60 toneladas capotasse após uma explosão atômica. Para sustentar esse peso absurdo sobre os terrenos devastados da Sibéria ou em planícies pós-nucleares sem atolar, ele foi montado sobre quatro conjuntos independentes de esteiras hidro-pneumáticas.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Confie na sua geometria! O formato arredondado do Object 279 faz com que munições cinéticas convencionais (APHE e APCBC) simplesmente deslizem e ricocheteiem da sua lataria de quase qualquer ângulo. <strong>Não angule demais o chassi</strong>; se você virar o tanque de lado, as bordas elípticas podem oferecer um ângulo plano para o inimigo atirar. Mantenha a frente apontada para a ameaça e tome extremo cuidado apenas com veículos que disparam modernos mísseis (ATGMs) ou munições químicas (HEAT-FS e APFSDS), pois estes não dependem de ricochete.
+                    Apesar da proteção quase imortal, a verdadeira ameaça do Object 279 era seu poder ofensivo. A monstruosa torre hemisférica de 305 mm de espessura não apenas defletia projéteis, mas abrigava o gigantesco canhão naval raiado M-65 de 130 mm. No mundo real, a munição era tão pesada (passando dos 30 kg) que o tanque requeria um complexo sistema de recarga semiautomático, aliado a um pioneiro sistema de estabilização óptica em dois eixos, permitindo disparos em movimento em velocidades altíssimas — um luxo para os tanques da época. O projeto acabou cancelado por Nikita Khrushchev, que preferia investir em mísseis balísticos em vez de tanques superpesados ineficientes para logística.
                 </p>
+                <p class="lore-text">
+                    Dentro do rigoroso sistema de batalhas do War Thunder, o Object 279 é o "Chefe Final" de quem ainda joga com munições AP (Armor Piercing) sólidas ou com carga explosiva. O design de "disco voador" fundido garante que não haja um único pedaço de blindagem reta no chassi inteiro. Se o oponente usar APHE, a bala invariavelmente irá derrapar pela couraça elíptica do chassi. Combinado com seu incrível canhão de 130 mm (com uma absurda carga de filler que explode oponentes num piscar de olhos) e alta mobilidade, o Object 279 dita as regras do combate a curtas e médias distâncias.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>A Geometria de Ricochete:</strong> Confie cegamente na sua blindagem apenas contra munições cinéticas padrão (APC e APHE). <strong>Não angule demais o chassi!</strong> Se você virar o seu "disco voador" de lado, você exporá a curva lateral para o inimigo, que pode, nesse pequeno ângulo, acertar uma superfície temporariamente reta e penetrar o centro da sua munição. Fique de frente e deixe as bordas elípticas fazerem a "mágica russa" de defletir tiros.</li>
+                    <li style="margin-bottom: 10px;"><strong>O Cão que Corre (Brawler de Movimento):</strong> Graças ao impressionante estabilizador do seu canhão de 130 mm e à alta velocidade de 55 km/h, você é incrivelmente letal atirando em movimento. Avance agressivamente, dispare sem parar para mirar e force o inimigo a reagir rápido. Eles invariavelmente atirarão de qualquer jeito contra sua blindagem curva e errarão, dando a você o controle total do combate.</li>
+                    <li><strong>A Ameaça Química (ATGM e HEAT-FS):</strong> Cuidado extremo com os veículos Leves e MBTs modernos. No <em>Battle Rating</em> do Object 279, você enfrentará mísseis teleguiados (ATGMs) e munições HEAT-FS e APFSDS. Esses projéteis simplesmente derretem a blindagem ou voam a velocidades subsônicas, ignorando seus ângulos perfeitos de ricochete. Se vir veículos como o Leopard 1 ou Bradleys, use fumaça e busque abrigo imediato.</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('obj-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

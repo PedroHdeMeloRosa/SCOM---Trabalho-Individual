@@ -4,20 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - T95 Doom Turtle</title>
-    <!-- Roteamento atualizado para a nova pasta css -->
+    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do T95 Doom Turtle americano no War Thunder.">
+    <title>T95 Doom Turtle - Ficha Técnica</title>
+    
+    <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento atualizado para a nova pasta js -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../usa.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE AMERICANA</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../usa.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE AMERICANA</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -25,35 +33,39 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">T95 (Doom Turtle)</h2>
-                <span class="sheet-badge">Caça-Tanques Superpesado | Nível V</span>
+               <span class="sheet-badge" style="background-color: #1A3668; color: #fff;">Caça-Tanques Superpesado (Bunker Móvel) | Nível V</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="t95-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/USA/USA Tanks/T95/T95 foto.webp" 
                              alt="Visão Padrão T95 Doom Turtle" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/USA/USA Tanks/T95/t95 foto 2.webp" 
                              alt="Visão Alternativa T95 Doom Turtle" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/USA/USA Tanks/T95/T95 foto 3.webp" 
                              alt="Visão Raio-X T95 Doom Turtle" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
@@ -89,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Projetado originalmente para romper as fortificações da Linha Siegfried durante a Segunda Guerra Mundial, o T95 (também designado como T28) é literalmente um bunker sobre quatro conjuntos de esteiras. Com insanos 305 mm de blindagem frontal de aço puro e um canhão de 105 mm capaz de obliterar qualquer coisa em seu caminho, ele ganhou o carinhoso apelido de "Doom Turtle" na comunidade por ser uma força imparável, porém incrivelmente lenta.
+                    Projetado originalmente em 1943 para romper as massivas fortificações da Linha Siegfried na Alemanha (e posteriormente planejado para a invasão do Japão), o T95 (também designado como T28) é literalmente um bunker sobre quatro conjuntos de esteiras. Para suportar impressionantes 305 mm (12 polegadas) de blindagem frontal de aço fundido maciço e o massivo canhão de 105 mm sem utilizar uma torre, o veículo atingiu o peso colossal de 86 toneladas. O peso era tão extremo que a engenharia americana precisou instalar esteiras duplas de cada lado apenas para impedir que o blindado afundasse na terra.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Você dita o ritmo (ou a falta dele) na batalha. Sua velocidade máxima de 13 km/h significa que você deve escolher sua rota no início da partida e segui-la até o fim, pois não haverá tempo para recuar. <strong>Mantenha os inimigos sempre à sua frente.</strong> Sua blindagem frontal é impenetrável para a vasta maioria dos canhões do seu nível. No entanto, jogadores experientes tentarão atirar nas duas pequenas cúpulas no topo do seu tanque (seus únicos pontos fracos frontais). Para evitar isso, movimente o chassi de um lado para o outro enquanto recarrega, dificultando a mira do inimigo. E lembre-se: sem torre e sendo gigantesco, você é o alvo número um de ataques aéreos (CAS).
+                    A maior ironia da engenharia do T95 era o seu coração. Para empurrar todo esse aço, o Departamento de Guerra utilizou o motor Ford GAF V8 de 500 cavalos — exatamente o mesmo motor utilizado no M26 Pershing, que pesava 40 toneladas a menos. O resultado foi um monstro terrivelmente submotorizado, capaz de atingir uma velocidade máxima agonizante de apenas 13 km/h (8 mph) em estradas pavimentadas. O projeto foi cancelado em 1947 após o fim da guerra, pois o conceito de superpesados havia se tornado obsoleto frente às novas tecnologias de mísseis e mobilidade.
                 </p>
+                <p class="lore-text">
+                    No entanto, dentro dos campos de batalha virtuais do War Thunder, a "Doom Turtle" reina como a arma psicológica suprema. Encontrar um T95 de frente em um corredor de cidade ou desfiladeiro significa que o avanço inimigo acabou. Sua blindagem frontal é imune a praticamente qualquer projétil AP do seu nível (Battle Rating), forçando esquadrões inteiros a recuarem ou tentarem manobras desesperadas de flanqueamento. Jogar com ele exige comprometimento absoluto: uma vez que você escolhe uma rota de ataque, não há velocidade para recuar ou consertar um erro de posicionamento.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Rolo Compressor Lento:</strong> Você dita o ritmo (ou a falta dele) na batalha. Sua velocidade máxima de 13 km/h significa que você deve escolher sua rota no início da partida e segui-la até o fim. <strong>Mantenha os inimigos sempre à sua frente</strong>, utilizando sua blindagem de 305 mm para absorver os tiros da equipe adversária enquanto seus aliados aproveitam a distração.</li>
+                    <li style="margin-bottom: 10px;"><strong>A Dança da Tartaruga (Wiggle):</strong> Jogadores experientes sabem que o seu chassi é indestrutível frontalmente e tentarão atirar nas duas cúpulas do comandante no topo do veículo (seus únicos pontos fracos). Para evitar isso, faça a famosa "dança": movimente o chassi erraticamente para a esquerda e para a direita enquanto recarrega, tornando as cúpulas alvos quase impossíveis de acertar.</li>
+                    <li><strong>Alvo Aéreo Prioritário:</strong> Por ser gigantesco, não ter torre para se defender rapidamente de flanqueadores e se mover na velocidade de um pedestre, você é o alvo número um de suporte aéreo aproximado (CAS). Nunca ande no meio de campos abertos; sempre que possível, avance próximo a construções altas, desfiladeiros montanhosos ou certifique-se de ter um veículo antiaéreo aliado (SPAA) por perto.</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('t95-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

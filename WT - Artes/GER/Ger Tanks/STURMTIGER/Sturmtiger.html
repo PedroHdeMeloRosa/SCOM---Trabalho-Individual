@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - Sturmtiger</title>
+    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do 38 cm Sturmmörser (Sturmtiger) alemão no War Thunder.">
+    <title>Sturmtiger - Ficha Técnica</title>
+    
     <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento atualizado para a pasta js -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../alemanha.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../alemanha.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -24,35 +33,39 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">38 cm Sturmmörser (Sturmtiger)</h2>
-                <span class="sheet-badge">Canhão de Assalto | Nível IV</span>
+                <span class="sheet-badge" style="background-color: #3b3b3b; color: #fff;">Canhão de Assalto Pesado (Cerco Urbano) | Nível IV</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="sturmtiger-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/GER/Ger Tanks/STURMTIGER/Sturmtiger-foto.webp" 
                              alt="Visão Padrão Sturmtiger" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/GER/Ger Tanks/STURMTIGER/Sturmtiger-foto2.webp" 
                              alt="Visão Alternativa Sturmtiger" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/GER/Ger Tanks/STURMTIGER/Sturmtiger-foto3.webp" 
                              alt="Visão Raio-X Sturmtiger" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
@@ -88,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Construído sobre o chassi do Tiger I, o Sturmtiger foi desenhado especificamente para combate urbano, com o objetivo de demolir edifícios inteiros com um único disparo de seu foguete de 380 mm. No War Thunder, ele é o "rei do dano em área", capaz de vaporizar qualquer veículo do jogo, muitas vezes destruindo múltiplos alvos próximos com o impacto de um único foguete.
+                    Nascido das ruínas e das amargas lições de combate urbano em Stalingrado, o Sturmtiger foi a solução radical da Alemanha Nazista para demolir quarteirões e bunkers fortificados com um único disparo. A engenharia por trás do projeto era insana: os alemães utilizaram o robusto chassi de tanques Tiger I danificados que retornavam do front, removeram a torre, e ergueram uma espessa casamata inclinada de 150 mm. O verdadeiro absurdo, no entanto, era a arma. O canhão escolhido foi o RW61 de 380 mm, um lançador de foguetes navais inicialmente desenvolvido pela Kriegsmarine para disparar cargas de profundidade contra submarinos aliados.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Com um tempo de recarga absurdamente longo (que pode passar de 40 segundos), você nunca deve andar sozinho. Dispare de coberturas e recue imediatamente enquanto recarrega, contando com aliados para protegê-lo. <strong>Cuidado redobrado:</strong> atirar no foguete carregado no cano do Sturmtiger fará com que o seu próprio tanque exploda.
+                    Dentro do ecossistema do War Thunder, essa aberração bélica (da qual apenas 18 unidades reais foram montadas) conquistou rapidamente o status de lenda absoluta. O Sturmtiger possui o maior calibre e a maior carga explosiva de todo o jogo. Disparar um foguete de quase 400 kg ativa a mecânica de <em>Overpressure</em> (sobrepressão) no seu limite mais extremo: o impacto raramente precisa ser um acerto direto. Atingir o solo próximo ou a lateral de um tanque pesado oponente já é o suficiente para enviar uma onda de choque avassaladora através da blindagem e derreter a tripulação, sendo extremamente comum evaporar dois ou três tanques inimigos agrupados de uma só vez.
                 </p>
+                <p class="lore-text">
+                    Ser o deus do "dano em área", contudo, cobra o seu preço em performance tática. A balística do foguete é tenebrosa, assemelhando-se à física de arremessar uma geladeira pesada através do mapa. O projétil possui uma queda parabólica severa e é tão lento que inimigos rápidos podem literalmente vê-lo chegando e tentar desviar. Além disso, recarregar a munição colossal demanda o esforço máximo dos dois municiadores, demorando mais de 40 dolorosos segundos. Jogar com o Sturmtiger é um exercício de disciplina e genialidade de posicionamento.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Custo do Poder (Recarga):</strong> Após cada disparo, você se torna inofensivo por quase um minuto. <strong>Nunca ande sozinho.</strong> Sua sobrevivência depende de atirar a partir de gargalos de ruas ou de coberturas seguras, recuando instantaneamente para trás de aliados sólidos que possam defendê-lo enquanto você recarrega.</li>
+                    <li style="margin-bottom: 10px;"><strong>Balística Indireta (Lobbing):</strong> O que parece ser o maior defeito do foguete é, na verdade, a sua melhor carta na manga. Por ter uma parábola enorme, você pode estacionar totalmente coberto atrás de uma montanha, medir a distância com o binóculo, elevar a arma e fazer a munição "chover" por cima do morro direto na cabeça dos inimigos, tudo isso sem expor um único centímetro do seu chassi.</li>
+                    <li><strong>O Ponto Fraco do Cano:</strong> Ao contrário de 99% dos tanques do jogo, quando o Sturmtiger está municiado, a ogiva do foguete fica claramente visível instalada na ponta do cano. Jogadores experientes não tentarão furar sua grossa blindagem de 150 mm; eles atirarão <em>diretamente no seu cano</em>. Se atingirem a ogiva, ela explodirá dentro do seu próprio tanque. Enquanto espera o inimigo apontar a cara, mantenha o cano levemente escondido ou virado para a parede!</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('sturmtiger-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

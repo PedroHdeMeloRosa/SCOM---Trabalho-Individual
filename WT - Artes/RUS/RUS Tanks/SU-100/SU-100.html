@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - SU-100</title>
-    <!-- Roteamento atualizado para a nova pasta css -->
+    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do caça-tanques soviético SU-100 no War Thunder.">
+    <title>SU-100 - Ficha Técnica</title>
+    
+    <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- CABEÇALHO FIXO com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../russia.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../russia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -24,42 +33,46 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">SU-100</h2>
-                <span class="sheet-badge">Caça-Tanques | Nível IV</span>
+               <span class="sheet-badge" style="background-color: #A32020; color: #fff;">Caça-Tanques (Emboscada / Atirador) | Nível IV</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
                 <!-- Coluna 1: Imagem (Carrossel) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="su100-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/SU-100/SU-100 foto.webp" 
                              alt="Visão Padrão SU-100" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/SU-100/SU-100 foto2.webp" 
                              alt="Visão Alternativa SU-100" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/SU-100/SU-100 foto3.webp" 
                              alt="Visão Raio-X SU-100" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
                         <tbody>
                             <tr>
                                 <th>Armamento Principal</th>
-                                <td>Canhão D-10S de 100 mm</td>
+                                <td>Canhão Naval D-10S de 100 mm</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Casamata)</th>
@@ -67,7 +80,7 @@
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Chassi)</th>
-                                <td>45 mm</td>
+                                <td>45 mm (Inclinada)</td>
                             </tr>
                             <tr>
                                 <th>Tripulação</th>
@@ -88,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Construído sobre o chassi ágil do T-34, o SU-100 foi desenvolvido nos estágios finais da Segunda Guerra Mundial com um único propósito: caçar os pesados "gatos" alemães (Panthers e Tigers). Para isso, os engenheiros soviéticos removeram a torre giratória tradicional e instalaram uma casamata fixa abrigando o monstruoso canhão naval D-10S de 100 mm. O resultado foi um veículo de perfil incrivelmente baixo, letal em emboscadas.
+                    Durante os violentos choques da Frente Oriental em 1944, a União Soviética percebeu que o antigo caça-tanques SU-85, armado com o canhão de 85 mm, já não era capaz de penetrar confiantemente a blindagem frontal dos novos tanques Panther e Tiger alemães a longas distâncias. O alto comando ordenou a criação de um "matador de felinos" definitivo. A solução mais rápida e letal foi adaptar o novíssimo e ágil chassi do T-34-85 e fundir a ele uma casamata redesenhada, feita para abrigar o gigantesco canhão naval D-10S de 100 mm.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Jogue como um verdadeiro atirador de elite (sniper) ou em emboscadas (ambush). O SU-100 não possui torre rotativa; para mirar em alvos nas laterais, você precisará girar o chassi inteiro, o que o torna extremamente vulnerável se for flanqueado ou se tiver as esteiras destruídas. Tire proveito da sua silhueta baixa para se esconder atrás de escombros e folhagens, e deixe seu canhão de 100 mm fazer o trabalho pesado, pois ele é capaz de obliterar praticamente qualquer alvo à distância.
+                    A engenharia da casamata sem torre permitiu que um tanque médio carregasse um canhão de tamanho e poder de fogo absurdos sem a necessidade de anéis de torre complexos. No mundo real, a espessa placa frontal de 75 mm inclinada a 50 graus garantia que o SU-100 fosse altamente resistente a tiros de retorno enquanto eliminava as ameaças blindadas a mais de 2.000 metros de distância com a sua lendária munição APHEBC (Armor-Piercing High Explosive Ballistic Capped).
                 </p>
+                <p class="lore-text">
+                    No ecossistema do War Thunder, essa filosofia letal se traduz em um perfil extremamente baixo e perigoso. O SU-100 é praticamente o tamanho de um arbusto grande, tornando-o o mestre absoluto das emboscadas e do estilo de jogo <em>Sniper</em>. Seu tiro de 100 mm quase sempre garante um "One-Shot" catastrófico ao penetrar o alvo. Contudo, essa força descomunal cobra seu preço em flexibilidade: sem uma torre giratória e com pouca depressão de cano, você não tem capacidade de resposta rápida em brigas de rua ou combates curtos, dependendo totalmente do elemento surpresa.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Pesadelo Oculto:</strong> Aproveite-se da sua silhueta incrivelmente baixa. Evite cidades e ruas estreitas a todo custo. Posicione-se atrás de pequenos montes, escombros ou folhagens densas nos flancos do mapa. Você deve enxergar o inimigo antes dele; se ele olhar na sua direção, você já deverá ter disparado.</li>
+                    <li style="margin-bottom: 10px;"><strong>A Fraqueza de não ter Torre:</strong> Para mirar em qualquer coisa fora de um pequeno cone frontal, você precisa mover as esteiras e virar o chassi inteiro do tanque. Isso o torna a vítima perfeita de tanques leves que tentam "circular" você. Se a sua esteira ou o seu motor forem quebrados, você será transformado em um casamata inútil que não consegue apontar a arma. Se um inimigo chegar perto demais, peça ajuda à equipe imediatamente.</li>
+                    <li><strong>Munição Nuclear Soviética:</strong> A munição BR-412D é sua melhor amiga. Devido à mecânica de normalização no War Thunder, essa cápsula ignora os ângulos inclinados da blindagem alemã e americana, penetrando e detonando internamente com tanta violência que raramente um inimigo sobrevive ao primeiro disparo.</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('su100-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

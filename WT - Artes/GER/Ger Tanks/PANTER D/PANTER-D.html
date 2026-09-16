@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - Panther D</title>
+    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do Pz.Kpfw. V Panther Ausf. D alemão no War Thunder.">
+    <title>Panther D - Ficha Técnica</title>
+    
     <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento atualizado para a pasta js -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../alemanha.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../alemanha.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE ALEMÃ</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -24,50 +33,54 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">Pz.Kpfw. V Panther Ausf. D</h2>
-                <span class="sheet-badge">Tanque Médio | Nível III</span>
+               <span class="sheet-badge" style="background-color: #3b3b3b; color: #fff;">Tanque Médio (Franco-Atirador) | Nível III</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="panther-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER-D-foto2.webp" 
                              alt="Visão Padrão Panther D" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER-D-Picture-3.webp" 
-                             alt="Visão Alternativa Panther D" 
-                             class="slide-item sheet-silhouette">
+                             alt="Visão Alternativa Panther D em Combate" 
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/GER/Ger Tanks/PANTER D/PANTER-D-Picture.webp" 
                              alt="Visão Raio-X Panther D" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
                         <tbody>
                             <tr>
                                 <th>Armamento Principal</th>
-                                <td>Canhão KwK42 de 75 mm</td>
+                                <td>Canhão KwK42 L/70 de 75 mm</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Torre)</th>
-                                <td>100 mm</td>
+                                <td>100 mm (Mantelete Cilíndrico)</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Chassi)</th>
-                                <td>80 mm (Inclinada)</td>
+                                <td>80 mm (Fortemente Inclinada)</td>
                             </tr>
                             <tr>
                                 <th>Tripulação</th>
@@ -88,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Desenvolvido como uma resposta direta ao T-34 soviético, o Panther combinava excelente poder de fogo, mobilidade e blindagem frontal inclinada. Em War Thunder, ele brilha em combates de longo alcance (sniper), onde o canhão KwK42 de 75 mm revela sua verdadeira precisão.
+                    Nascido de um "choque de realidade" no Front Oriental durante o outono de 1941, o projeto do Panther foi a resposta direta e urgente da Alemanha Nazista aos avançados T-34 soviéticos. Abandonando o design tradicional das blindagens retas que caracterizavam os Panzer III e IV, a fabricante MAN adotou a revolucionária blindagem inclinada, maximizando a espessura efetiva do aço. O modelo Ausf. D foi a primeira variante de produção, estreando de forma precipitada e desastrosa na Batalha de Kursk em 1943, onde a maioria dos veículos foi perdida para incêndios no motor e falhas de transmissão, e não para o fogo inimigo.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Evite expor as laterais finas do chassi. Mantenha o veículo angulado frontalmente em relação à ameaça e utilize o relevo para ocultar a parte inferior da blindagem (tática de Hull Down).
+                    Apesar dos problemas mecânicos quase cômicos na vida real, a engenharia do armamento era irretocável. O Panther D foi equipado com o canhão KwK42 L/70 de 75 mm, uma arma com um cano tão longo e velocidade de saída tão alta que sua capacidade de penetração a longas distâncias superava até mesmo a temida arma de 88 mm do Tiger I contemporâneo. A sua espessa placa frontal de 80 mm (angulada a 55 graus) tornava o chassi invulnerável frontalmente para quase qualquer canhão aliado ou soviético da época.
                 </p>
+                <p class="lore-text">
+                    No War Thunder, você não precisa se preocupar com a transmissão pegando fogo do nada. O jogo extrai o que há de melhor no Panther D: sua balística lendária e sobrevivência frontal extrema. Contudo, essa variante cobra um preço severo em combates aproximados. Para não atrasar a produção na vida real, o motor hidráulico da torre não estava pronto a tempo, obrigando a tripulação do Ausf. D a rotacionar a torre pesada através de uma manivela lenta. No jogo, isso se traduz em uma das rotações de torre mais agonizantes do nível, forçando o jogador a atuar como um verdadeiro franco-atirador e punindo severamente quem tenta lutar em vielas de cidades.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Franco-Atirador Perfeito:</strong> O Panther D não é um tanque de assalto (brawler) urbano. A balística plana do canhão de 75 mm permite mirar no centro de veículos inimigos a mais de 1.000 metros de distância com precisão letal. Procure colinas, controle linhas de visão longas e deixe que os inimigos cometam o erro de cruzar a sua mira.</li>
+                    <li style="margin-bottom: 10px;"><strong>Contorne a Torre Lenta:</strong> Sua torre é tão lenta que tentar acompanhar um alvo cruzando a tela será impossível. <strong>Você precisa usar as esteiras!</strong> Sempre que precisar mirar rapidamente para a esquerda ou direita, engate a marcha e vire o chassi do tanque inteiro na direção da ameaça, somando a rotação do corpo do tanque com a rotação da torre.</li>
+                    <li><strong>Não Brinque de Tiger (Não Angule):</strong> Jogadores recém-chegados tentam angular o Panther D (posição de diamante) para aumentar a espessura virtual da blindagem, assim como fazem no Tiger I. <strong>Isso é um erro fatal.</strong> A blindagem lateral do Panther é fina (apenas 40 mm). Se você virar o chassi, qualquer inimigo perfurará sua lateral acima das esteiras, causando uma explosão cataclísmica na sua munição. Fique perfeitamente de frente para o perigo.</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('panther-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

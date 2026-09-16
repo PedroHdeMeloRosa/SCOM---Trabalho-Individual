@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - IS-3</title>
+    <meta name="description" content="Ficha técnica, blindagem em bico de lança e doutrinas de combate do tanque pesado soviético IS-3 no War Thunder.">
+    <title>IS-3 - Ficha Técnica</title>
+    
+    <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- CABEÇALHO FIXO com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../russia.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../russia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -23,35 +33,39 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">IS-3 (Iosif Stalin 3)</h2>
-                <span class="sheet-badge">Tanque Pesado | Nível IV</span>
+                <span class="sheet-badge" style="background-color: #A32020; color: #fff;">Tanque Pesado (Ruptura Frontal) | Nível V</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
-                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="is3-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/IS-3/IS3-foto.webp" 
                              alt="Visão Padrão IS-3" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/IS-3/IS3-foto2.webp" 
-                             alt="Visão Alternativa IS-3" 
-                             class="slide-item sheet-silhouette">
+                             alt="Visão Alternativa IS-3 em combate" 
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/IS-3/IS3-foto3.webp" 
                              alt="Visão Raio-X IS-3" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
@@ -62,11 +76,11 @@
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Torre)</th>
-                                <td>250 mm (Arredondada)</td>
+                                <td>250 mm (Geometria Hemisférica)</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Chassi)</th>
-                                <td>110 mm (Bico de Lança)</td>
+                                <td>110 mm (Bico de Lança Altamente Inclinado)</td>
                             </tr>
                             <tr>
                                 <th>Tripulação</th>
@@ -87,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    Apresentado no desfile da vitória em Berlim (1945), o IS-3 chocou o mundo ocidental com seu design revolucionário. Sua torre hemisférica quase impenetrável e o característico chassi em "bico de lança" foram projetados para maximizar a proteção frontal. No jogo, seu devastador canhão de 122 mm oblitera praticamente qualquer alvo em que penetra, mas sofre com um tempo de recarga extremamente longo e baixa depressão de canhão.
+                    Apresentado subitamente durante o desfile da vitória dos Aliados em Berlim em setembro de 1945, o Iosif Stalin 3 (IS-3) enviou uma onda de choque e pânico através dos serviços de inteligência ocidentais. Desenhado por Nikolai Dukhov em resposta aos temíveis Tiger e Panther alemães, o IS-3 ignorou a blindagem plana tradicional. Ele apresentou ao mundo duas revoluções de engenharia: uma torre hemisférica arredondada (apelidada de "frigideira" pelas tripulações) que fazia ricochetear quase qualquer disparo, e o infame chassi frontal em forma de "bico de lança" (Pike Nose), que forçava um ângulo extremo no aço maciço não importando de onde o inimigo mirasse.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> Diferente do Tiger H1, <strong>NÃO angule o chassi</strong> do IS-3! O formato em bico de lança já vem pré-angulado de fábrica. Se você tentar angular o tanque inteiro em relação ao inimigo, você anulará a inclinação de uma das placas e a deixará plana, virando um alvo fácil. Sempre aponte a frente do chassi diretamente para o oponente durante as trocas de tiro.
+                    Apesar da aparência alienígena e futurista do seu chassi que ditou a estética dos blindados soviéticos na Guerra Fria, ele manteve o mesmo brutal armamento do seu antecessor (IS-2): o massivo canhão D-25T de 122 mm. Na vida real, a munição era tão pesada que a tripulação precisava carregar a ogiva e o propelente separadamente em um compartimento extremamente apertado, o que limitava a cadência de fogo do tanque a agonizantes 2 a 3 disparos por minuto, além de impedir que a arma abaixasse adequadamente devido ao formato achatado da torre.
                 </p>
+                <p class="lore-text">
+                    No War Thunder, essas limitações históricas são replicadas perfeitamente. Em seu <em>Battle Rating</em>, a munição soviética APHEBC de 122 mm com sua "tecnologia de normalização" é famosa por ignorar os ângulos das blindagens adversárias, obliterando e matando toda a tripulação do alvo instantaneamente ao penetrar. No entanto, o seu tempo de recarga que beira os 25 segundos é o seu calcanhar de Aquiles. Errar um disparo ou atirar precipitadamente em uma esteira significa ficar mais de meio minuto totalmente indefeso. Você é um gigante resistente, mas precisa do apoio do seu esquadrão para não ser invadido (rushed) durante as recargas.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Paradoxo do Bico de Lança:</strong> Diferente do Tiger H1 ou de qualquer tanque americano, <strong>NÃO angule (vire) o chassi</strong> do IS-3 de propósito para a lateral. O formato em bico de lança já vem pré-angulado pela própria solda da fábrica. Se você virar o tanque em relação à ameaça, uma das placas frontais deixará de ficar em ângulo e ficará totalmente plana (a 90 graus) em relação ao atirador inimigo, perdendo toda a eficiência e virando papel. <strong>Aponte a frente (o meio do V) diretamente para o canhão inimigo!</strong></li>
+                    <li style="margin-bottom: 10px;"><strong>O Problema da Depressão (Elevação):</strong> Com uma depressão de canhão de apenas -3 graus, as táticas ocidentais de "Hull Down" atrás de colinas são fisicamente impossíveis no IS-3. Se você subir em um pequeno declive, o seu canhão apontará para os pássaros e você mostrará a frágil placa inferior do chassi para o inimigo. Lute preferencialmente em cidades planas ou bases niveladas.</li>
+                    <li><strong>A Armadilha de Tiro (Shot Trap):</strong> Jogadores experientes conhecem o segredo da sua torre hemisférica redonda. Se eles atirarem logo abaixo do manto do canhão, a curva da sua torre ricocheteará a bala de 122 mm diretamente para baixo, penetrando o teto super fino do chassi do motorista. Enquanto estiver esperando os intermináveis 25 segundos do seu recarregamento, balance a sua torre erraticamente para cima e para baixo para dificultar essa mira mortal.</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('is3-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

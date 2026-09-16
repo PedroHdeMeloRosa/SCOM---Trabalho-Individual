@@ -4,20 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - M1A2 Abrams</title>
+    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do M1A2 Abrams americano no War Thunder.">
+    <title>M1A2 Abrams - Ficha Técnica</title>
+    
     <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento atualizado para a pasta js -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../usa.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE AMERICANA</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../usa.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE AMERICANA</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -25,35 +33,39 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">M1A2 Abrams</h2>
-                <span class="sheet-badge">Tanque Principal de Batalha (MBT) | Nível VIII</span>
+               <span class="sheet-badge" style="background-color: #1A3668; color: #fff;">Tanque Principal de Batalha (MBT) | Nível VIII</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
 
-                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <!-- Coluna 1: Imagem (Carrossel) -->
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="abrams-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/USA/USA Tanks/M1A2-ABRAMS/M1A2-Abrams foto.webp" 
                              alt="Visão Padrão M1A2 Abrams" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/USA/USA Tanks/M1A2-ABRAMS/M1A2-Abrams foto2.webp" 
                              alt="Visão Alternativa M1A2 Abrams" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/USA/USA Tanks/M1A2-ABRAMS/M1A2-Abrams foto3.webp" 
                              alt="Visão Raio-X M1A2 Abrams" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
 
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
@@ -89,27 +101,64 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
-                <p class="lore-text">
-                    O M1A2 Abrams representa o ápice da engenharia bélica americana no jogo. Equipado com a icônica
-                    blindagem composta Chobham contendo malhas de urânio empobrecido, eletrônica de ponta e um motor de
-                    turbina a gás que lhe confere uma aceleração brutal, este MBT (Main Battle Tank) foi desenhado para
-                    dominar o campo de batalha moderno.
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
+              <p class="lore-text">
+                    O M1A2 Abrams representa o ápice evolutivo da blindagem ocidental pós-Guerra Fria. Introduzido no início dos anos 1990 como uma atualização tecnológica maciça sobre o M1A1, seu foco mudou da força bruta para a dominação digital. A verdadeira revolução do A2 não estava no chassi, mas nos sistemas internos: a introdução do CITV (Visor Termal Independente do Comandante) permitiu capacidades de "Hunter-Killer", onde o comandante pode rastrear alvos em 360º de forma independente e transferi-los imediatamente para a mira do atirador, cortando o tempo de reação pela metade. Fiel ao design americano, o tanque incorpora painéis de alívio de pressão na traseira da torre, garantindo que a tripulação sobreviva caso a munição exploda.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> No Top Tier, a blindagem não garante sobrevivência absoluta contra os
-                    modernos dardos cinéticos (APFSDS). A sua maior força é a <strong>consciência situacional e a
-                        mobilidade</strong>. Use a incrível velocidade de ré do Abrams para a tática de "atirar e
-                    esconder" (shoot and scoot). A frente da sua torre é imensamente resistente, então o "Hull Down"
-                    continua sendo a sua estratégia principal: aproveite a excelente depressão do canhão e a câmera
-                    termal de alta resolução para localizar e eliminar alvos a quilômetros de distância, sempre
-                    protegendo o anel da torre e a placa inferior do chassi, que são seus maiores pontos fracos.
+                    Mecanicamente e estruturalmente, o M1A2 herda a colossal turbina a gás Honeywell AGT1500, capaz de rodar com quase qualquer tipo de combustível líquido. Apesar de ser um devorador logístico insaciável na vida real, esse motor entrega uma aceleração assustadora para uma máquina que beira as 62 toneladas. Em termos de proteção, a série M1A2 recebeu matrizes de blindagem compostas de segunda geração reforçadas com malhas de Urânio Empobrecido (DU) nas bochechas da torre, tornando-a imune a quase qualquer munição perfurante contemporânea existente nos inventários soviéticos da época.
                 </p>
+                <p class="lore-text">
+                    Dentro do rigoroso ecossistema do War Thunder, jogar de Abrams no "Top Tier" é jogar no limite da eficiência. Suas bochechas da torre são quase intransponíveis, mas o anel da torre e a grande placa inferior frontal são ímãs para os letais dardos cinéticos (APFSDS) de tanques como o T-80BVM ou o Leopard 2A6. Como o jogo não pune os jogadores com o consumo de combustível absurdo da vida real, você é livre para explorar a excepcional taxa de aceleração e a mobilidade fluida deste MBT. O recarregamento rápido (especialmente com uma tripulação experiente) e a sobrevivência fornecida pela estrutura espaçosa tornam o Abrams um dos tanques mais responsivos, punitivos e táticos de toda a árvore americana.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>Mobilidade é Vida:</strong> No Top Tier, a blindagem não garante sobrevivência absoluta contra os modernos dardos cinéticos (APFSDS). A sua maior força é a consciência situacional e a mobilidade.</li>
+                    <li style="margin-bottom: 10px;"><strong>Shoot and Scoot:</strong> Use a incrível velocidade de ré do Abrams para a tática de "atirar e esconder". Encontre uma posição, faça o disparo letal e recue imediatamente antes da retaliação.</li>
+                    <li><strong>Mestre do Hull Down:</strong> A frente da sua torre é imensamente resistente. Aproveite a excelente depressão do canhão e a câmera termal de alta resolução para localizar e eliminar alvos a quilômetros de distância, sempre protegendo o anel da torre e a placa inferior do chassi, que são seus maiores pontos fracos.</li>
+                </ul>
             </div>
 
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('abrams-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 
 </html>

@@ -29,7 +29,7 @@ function iniciarLogin(caminhoBase) {
     // ==========================================
     // FUNÇÕES AUXILIARES
     // ==========================================
-    const mostrarBanner = (mensagem, iconeSrc = 'WT - Artes/UI-UX icons/Soldier-salute.png') => {
+    const mostrarBanner = (mensagem, iconeSrc = 'WT - Artes/UI-UX icons/Soldier-salute.webp') => {
         const banner = document.getElementById('customBanner');
         if (!banner) return;
 
@@ -78,7 +78,7 @@ function iniciarLogin(caminhoBase) {
                 localStorage.removeItem('isAuth');
                 localStorage.removeItem('userRole');
                 if (navLoginText) navLoginText.textContent = "ENTRAR";
-                mostrarBanner("DESCONECTADO.", "WT - Artes/UI-UX icons/Logout-icon.png");
+                mostrarBanner("DESCONECTADO.", "WT - Artes/UI-UX icons/Logout-icon.webp");
                 aplicarPermissoes('visitante');
             } else {
                 modal.classList.add('ativo');
@@ -99,7 +99,7 @@ function iniciarLogin(caminhoBase) {
                 isScrambling = true;
                 const realPassword = inputSenha.value;
                 inputSenha.type = 'text';
-                radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ver.png`; 
+                radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ver.webp`; 
                 inputSenha.disabled = true; 
 
                 let iterations = 0;
@@ -118,7 +118,7 @@ function iniciarLogin(caminhoBase) {
                 }, 40);
             } else {
                 inputSenha.type = 'password';
-                radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.png`;
+                radarIcon.src = `${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.webp`;
             }
         });
     }
@@ -135,7 +135,7 @@ function iniciarLogin(caminhoBase) {
         const senhaDigitada = inputSenha.value;
 
         btnSubmit.disabled = true;
-        btnSubmit.innerHTML = `<img src="${caminhoBase}WT - Artes/UI-UX icons/Loading-icon.png" style="width: 24px; height: auto; animation: spin 1s linear infinite;"> AUTENTICANDO...`;
+        btnSubmit.innerHTML = `<img src="${caminhoBase}WT - Artes/UI-UX icons/Loading-icon.webp" style="width: 24px; height: auto; animation: spin 1s linear infinite;"> AUTENTICANDO...`;
         btnSubmit.style.backgroundColor = "#F2B400"; 
 
         setTimeout(() => {

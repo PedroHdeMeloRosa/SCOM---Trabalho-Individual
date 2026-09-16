@@ -7,13 +7,15 @@ function injetarInterface(caminhoBase) {
         <div class="nav-left">
             <a href="${caminhoBase}https://wiki.warthunder.com/ground" class="logo-container-nav">
                 <div class="logo-plate-nav">
-                    <img src="${caminhoBase}WT - Artes/War-Thunder-logo.png" alt="Logo do War Thunder",width="120" height="60" class="navbar-logo-img">
+                    <!-- Dimensões exatas (100x50) cravadas com base no Lighthouse -->
+                    <img src="${caminhoBase}WT - Artes/War-Thunder-logo.webp" alt="Logo do War Thunder" width="100" height="50" class="navbar-logo-img">
                 </div>
             </a>
             
             <!-- CAIXA DE PESQUISA -->
             <div class="search-container">
-                <img src="${caminhoBase}WT - Artes/UI-UX icons/Search_icon.png" class="search-icon" alt="Lupa">
+                <!-- Dimensões exatas (23x23) para o ícone de pesquisa -->
+                <img src="${caminhoBase}WT - Artes/UI-UX icons/Search_icon.webp" class="search-icon" alt="Lupa" width="23" height="23">
                 <input type="text" id="searchInput" placeholder="Buscar blindado..." autocomplete="off">
                 <ul class="search-suggestions" id="searchSuggestions"></ul>
             </div>
@@ -29,19 +31,19 @@ function injetarInterface(caminhoBase) {
         
         <div class="nav-right">
             <a href="${caminhoBase}index.html" class="nav-item">
-                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/HOME_icon.png" alt="Início" class="nav-icon-img"></div>
+                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/HOME_icon.webp" alt="Início" class="nav-icon-img" width="24" height="24"></div>
                 <div class="text-box">INÍCIO</div>
             </a>
             <a href="#" class="nav-item">
-                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/Config_icon.jpg" alt="Configurações" class="nav-icon-img"></div>
+                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/Config_icon.webp" alt="Configurações" class="nav-icon-img" width="24" height="24"></div>
                 <div class="text-box">CONFIG.</div>
             </a>
             <a href="#" class="nav-item">
-                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/Register_icon.jpg" alt="Registro" class="nav-icon-img"></div>
+                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/Register_icon.webp" alt="Registro" class="nav-icon-img" width="24" height="24"></div>
                 <div class="text-box">REGISTRO</div>
             </a>
             <a href="#" class="nav-item btn-login">
-                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/LOGIN-icon.jpg" alt="Login" class="nav-icon-img"></div>
+                <div class="icon-box"><img src="${caminhoBase}WT - Artes/UI-UX icons/LOGIN-icon.webp" alt="Login" class="nav-icon-img" width="24" height="24"></div>
                 <div class="text-box" id="navLoginText">ENTRAR</div>
             </a>
         </div>
@@ -63,7 +65,8 @@ function injetarInterface(caminhoBase) {
                     <div class="password-wrapper">
                         <input type="password" id="userPassword" placeholder="Insira a chave exata" required>
                         <button type="button" id="btnRadar" class="radar-toggle" title="Alternar Senha">
-                            <img src="${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.png" alt="Ícone de Radar para alterar visibilidade da senha",width="120" height="60" id="radarIcon" style="width: 24px; height: auto;">
+                            <!-- Dimensões cravadas para manter o aspect ratio do ícone de radar (30x42) -->
+                            <img src="${caminhoBase}WT - Artes/UI-UX icons/Radar-ocultar.webp" alt="Ícone de Radar para alterar visibilidade da senha" id="radarIcon" width="30" height="42" style="width: 24px; height: auto;">
                         </button>
                     </div>
                 </div>
@@ -81,19 +84,6 @@ function injetarInterface(caminhoBase) {
 
     document.body.insertAdjacentHTML('afterbegin', menuHTML);
 }
-
-document.addEventListener('click', (e) => {
-    const trigger = document.getElementById('navToggleBtn');
-    const navbar = document.querySelector('.top-navbar');
-
-    if (trigger && navbar) {
-        if (trigger.contains(e.target)) {
-            navbar.classList.toggle('expanded');
-        } else if (!navbar.contains(e.target)) {
-            navbar.classList.remove('expanded'); // Fecha se clicar fora
-        }
-    }
-});
 
 // ==========================================
 // FUNÇÃO DO BOTÃO DE MODO DE EXIBIÇÃO
@@ -117,19 +107,19 @@ function iniciarToggleVisualizacao() {
     });
 }
 
+// ==========================================
+// ORQUESTRADOR DE EVENTOS GLOBAIS
+// ==========================================
 document.addEventListener('DOMContentLoaded', () => {
-    // Adiciona o evento de clique em todo o documento para fechar ao clicar fora
+    // Gerenciamento do clique fora ou no botão do menu Mobile
     document.addEventListener('click', (e) => {
         const toggleBtn = document.getElementById('navToggleBtn');
         const navbar = document.querySelector('.top-navbar');
         
-        // Verifica se a barra e o botão existem na tela
         if (toggleBtn && navbar) {
-            // Se o usuário clicou no botão de menu
             if (toggleBtn.contains(e.target)) {
                 navbar.classList.toggle('expanded');
             } 
-            // Se a barra estiver aberta e o usuário clicar fora dela, ela fecha
             else if (!navbar.contains(e.target) && navbar.classList.contains('expanded')) {
                 navbar.classList.remove('expanded');
             }

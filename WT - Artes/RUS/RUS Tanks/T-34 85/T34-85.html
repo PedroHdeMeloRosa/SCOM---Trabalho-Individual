@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ficha Técnica - T-34-85</title>
-    <!-- Roteamento atualizado para a nova pasta css -->
+    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do tanque médio soviético T-34-85 no War Thunder.">
+    <title>T-34-85 - Ficha Técnica</title>
+    
+    <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- CABEÇALHO FIXO com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
-        <a href="../../russia.html" class="back-button">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
+            <a href="../../russia.html" class="back-button" style="margin: 0;">&#9664; VOLTAR PARA A ÁRVORE SOVIÉTICA</a>
+        </div>
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
@@ -24,35 +33,39 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">T-34-85</h2>
-                <span class="sheet-badge">Tanque Médio | Nível III</span>
+                <span class="sheet-badge" style="background-color: #A32020; color: #fff;">Tanque Médio (Flanqueador Agressivo) | Nível IV</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
                 
                 <!-- Coluna 1: Imagem (Carrossel) -->
-                <div class="sheet-visual carousel-wrapper">
-                    <div class="carousel-track auto-slide">
+                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                    <div class="carousel-track" id="t3485-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/T-34 85/T-34 85 foto.webp" 
                              alt="Visão Padrão T-34-85" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/T-34 85/T-34 85 foto2.webp" 
                              alt="Visão Alternativa T-34-85" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT - Artes/RUS/Rus Tanks/T-34 85/T-34 85 foto3.webp" 
                              alt="Visão Raio-X T-34-85" 
-                             class="slide-item sheet-silhouette">
+                             class="slide-item">
                     </div>
+                    
+                    <!-- Botões Táticos do Carrossel -->
+                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
-                    <h3 class="data-title">ESPECIFICAÇÕES DE COMBATE</h3>
+                    <h3 class="data-title">Especificações Técnicas</h3>
                     
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
@@ -63,11 +76,11 @@
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Torre)</th>
-                                <td>90 mm (Arredondada)</td>
+                                <td>90 mm (Fundida Arredondada)</td>
                             </tr>
                             <tr>
                                 <th>Blindagem Frontal (Chassi)</th>
-                                <td>45 mm (Fortemente Inclinada)</td>
+                                <td>45 mm (Fortemente Inclinada a 60º)</td>
                             </tr>
                             <tr>
                                 <th>Tripulação</th>
@@ -88,17 +101,63 @@
                 </div>
             </div>
 
+            <!-- Lore / Histórico e Dicas -->
             <div class="sheet-lore">
-                <h3 class="lore-title">HISTÓRICO E DOUTRINA DE USO</h3>
+                <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    O T-34-85 foi a resposta desesperada (e extremamente bem-sucedida) da União Soviética ao surgimento dos pesados alemães Tiger e Panther. Ao equipar o chassi confiável e móvel do T-34 com uma torre ampliada e um letal canhão antiaéreo adaptado de 85 mm, o Exército Vermelho ganhou a espinha dorsal de suas forças blindadas até o fim da guerra.
+                    O ano de 1943 trouxe um amargo choque de realidade para as forças blindadas soviéticas. Durante a Batalha de Kursk, os lendários T-34 armados com canhões de 76 mm descobriram que eram incapazes de perfurar frontalmente os novos tanques Panther e Tiger alemães, mesmo a queima-roupa. A resposta do Alto Comando foi rápida e implacável: o chassi confiável do T-34 foi mantido, mas recebeu uma torre fundida maciça, projetada para acomodar três homens (liberando o comandante da terrível tarefa de recarregar a arma) e abrigar o formidável canhão antiaéreo adaptado de 85 mm (D-5T e, posteriormente, o ZiS-S-53). Nascia assim o T-34-85, a espinha dorsal que marcharia até Berlim.
                 </p>
                 <p class="lore-text">
-                    <strong>Dica Tática:</strong> A mobilidade é a sua maior armadura. Os 45 mm do chassi não vão parar canhões de nível alto, então evite trocas de tiro frontais prolongadas. Use sua velocidade para <strong>flanquear os inimigos</strong> e buscar disparos nas laterais. Além disso, a munição APHE soviética de 85 mm tem uma carga explosiva massiva — um único tiro penetrante no centro de massa geralmente é o suficiente para mandar a tripulação inimiga inteira de volta para o hangar.
+                    Dentro do ecossistema do War Thunder, a magia do T-34-85 reside quase inteiramente no seu poder de fogo pós-penetração. A sua munição principal (BR-365A APHEBC) possui uma balística que parece desafiar a física. Graças à mecânica de "normalização" do jogo e ao formato rombudo da cápsula, esse projétil morde e penetra ângulos oblíquos que fariam munições ocidentais ricochetearem imediatamente. Ao entrar no compartimento inimigo, sua massiva carga explosiva de 164 gramas de TNT garante a aniquilação completa da tripulação. É o famoso "One-Shot, One-Kill".
                 </p>
+                <p class="lore-text">
+                    Entretanto, o chassi cobra um preço pela letalidade. Embora a frente arredondada e as ópticas volumétricas da torre consigam forçar alguns ricochetes milagrosos, o chassi do T-34-85 é exatamente o mesmo do modelo de 1940: 45 mm de aço inclinado. Nesse Battle Rating, 45 mm é papel contra os canhões alemães de 75 mm longos e 88 mm. A sobrevivência depende estritamente do lendário motor V-2-34 a diesel, que proporciona aceleração e velocidade de rotação excepcionais, permitindo que os comandantes controlem o ritmo do engajamento ditando quando e onde lutar.
+                </p>
+
+                <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
+                <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
+                    <li style="margin-bottom: 10px;"><strong>O Predador de Flancos:</strong> A mobilidade é a sua maior (e única) verdadeira armadura. Evite trocar tiros frontais em avenidas longas e retas contra Panthers e Tigers. Utilize sua aceleração para dominar pontos de captura logo no início da partida e reposicione-se pelas bordas do mapa para pegar os pesados alemães e americanos pela lateral.</li>
+                    <li style="margin-bottom: 10px;"><strong>O Milagre da Torre:</strong> Se for forçado a lutar de frente em uma cidade, esconda o seu chassi frágil e mostre apenas a torre. O manto do canhão do T-34-85 possui placas sobrepostas que adoram engolir e ricochetear tiros por conta da mecânica de blindagem volumétrica. Mexa a torre entre os disparos para frustrar a mira inimiga.</li>
+                    <li><strong>A Ângulação Mortal:</strong> Você pode (e deve) angular levemente o seu chassi ao virar esquinas, mas cuidado: se virar demais, os inimigos atirarão na sua placa lateral (atrás da esteira). Como a munição do T-34-85 fica espalhada por todo o assoalho do tanque, um tiro lateral que penetre resultará em uma explosão imediata (Ammorack).</li>
+                </ul>
             </div>
             
         </article>
     </main>
+
+    <!-- Lógica Autônoma do Carrossel de Combate -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('t3485-track');
+            const slides = Array.from(track.children);
+            const btnNext = document.getElementById('btnNext');
+            const btnPrev = document.getElementById('btnPrev');
+            
+            let currentIndex = 0;
+
+            function updateCarousel() {
+                const amountToMove = currentIndex * 100;
+                track.style.transform = `translateX(-${amountToMove}%)`;
+            }
+
+            btnNext.addEventListener('click', () => {
+                if (currentIndex < slides.length - 1) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0; 
+                }
+                updateCarousel();
+            });
+
+            btnPrev.addEventListener('click', () => {
+                if (currentIndex > 0) {
+                    currentIndex--;
+                } else {
+                    currentIndex = slides.length - 1; 
+                }
+                updateCarousel();
+            });
+        });
+    </script>
 </body>
 </html>

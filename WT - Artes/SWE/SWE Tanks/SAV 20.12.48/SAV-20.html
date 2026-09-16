@@ -1,19 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Ficha técnica, autoloader e doutrinas de combate do caça-tanques experimental sueco SAV 20.12.48 no War Thunder.">
     <title>SAV 20.12.48 - Ficha Técnica</title>
     
     <!-- Ajuste as rotas "../" conforme a localização do seu arquivo -->
     <link rel="stylesheet" href="../../../../css/style.css">
-    <link rel="icon" href="../../../../WT - Artes/WT-ICO.ico" type="image/png">
+    <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
 </head>
 
 <body>
-    <!-- Roteamento do Menu Superior -->
-    <script src="../../../../js/menu.js"></script>
-    <script>injetarMenu('../../../../');</script>
+    <!-- Roteamento do Menu Superior com defer -->
+    <script src="../../../../js/menu.js" defer></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
+        });
+    </script>
 
     <main class="ui-container">
         <!-- Botão Voltar -->
@@ -27,7 +33,7 @@
             <!-- Cabeçalho -->
             <header class="sheet-header">
                 <h2 class="sheet-title">SAV 20.12.48</h2>
-                <span class="sheet-badge" style="background-color: #005293; color: #fff;">Caça-Tanques Experimental</span>
+                <span class="sheet-badge" style="background-color: #005293; color: #fff;">Caça-Tanques Experimental (Emboscada Rápida) | Nível II</span>
             </header>
 
             <!-- Layout Flex (Carrossel + Tabela) -->
@@ -53,13 +59,34 @@
                     <h3 class="data-title">Especificações Técnicas</h3>
                     <table class="data-table">
                         <tbody>
-                            <tr><th>Armamento Principal</th><td>Canhão 120 mm akan m/89</td></tr>
-                            <tr><th>Cadência de Tiro</th><td>1.2 Segundos (Autoloader de 6 tiros)</td></tr>
-                            <tr><th>Blindagem Frontal</th><td>30 mm</td></tr>
-                            <tr><th>Tripulação</th><td>3 Membros</td></tr>
-                            <tr><th>Velocidade Máxima</th><td>45 km/h</td></tr>
+                            <tr>
+                                <th>Armamento Principal</th>
+                                <td>Canhão 120 mm akan m/89</td>
+                            </tr>
+                            <tr>
+                                <th>Cadência de Tiro</th>
+                                <td>1.2 Segundos (Autoloader de 6 tiros)</td>
+                            </tr>
+                            <tr>
+                                <th>Blindagem Frontal</th>
+                                <td>30 mm (Levemente Inclinada)</td>
+                            </tr>
+                            <tr>
+                                <th>Tripulação</th>
+                                <td>3 Membros</td>
+                            </tr>
+                            <tr>
+                                <th>Velocidade Máxima</th>
+                                <td>45 km/h</td>
+                            </tr>
                         </tbody>
                     </table>
+
+                    <!-- Botão Administrativo -->
+                    <div class="admin-controls">
+                        <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
+                    </div>
+
                 </div>
                 
             </div>
@@ -68,14 +95,20 @@
             <div class="sheet-lore">
                 <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    O <strong>Stormartillerivagn 20.12.48</strong> (SAV 20.12.48) foi um projeto sueco experimental radical desenhado logo após a Segunda Guerra Mundial. A doutrina militar sueca buscava um veículo ágil e de perfil baixo, capaz de realizar táticas de "bater e correr" (hit-and-run) contra forças blindadas superiores. Para isso, os engenheiros montaram um massivo canhão de 120 mm em um chassi leve, mas o seu verdadeiro diferencial era o mecanismo de alimentação automática impiedoso, permitindo uma rajada de tiros digna de armas de infantaria, mas com calibres anti-tanque.
+                    O <strong>Stormartillerivagn 20.12.48</strong> (SAV 20.12.48) nasceu do constante pavor da Suécia de uma possível invasão terrestre maciça logo após a Segunda Guerra Mundial e o início da Guerra Fria. Para garantir que seu pequeno exército pudesse segurar exércitos numericamente superiores em florestas fechadas, a doutrina exigia um veículo ágil, de perfil baixo e capaz de táticas puras de "Bater e Correr" (Hit and Run). A Bofors, empresa lendária de armamentos suecos, abraçou o desafio desenvolvendo uma arma monstruosa.
+                </p>
+                <p class="lore-text">
+                    Eles montaram um canhão de artilharia naval de 120 mm em um chassi leve. No entanto, o verdadeiro terror de engenharia era o mecanismo de recarga. A Bofors desenvolveu um complexo carregador automático mecânico alimentado por gravidade que conseguia ciclar os tiros em meros 1.2 segundos. Na prática, o SAV 20.12.48 funcionava como uma "espingarda" tamanho gigante, disparando calibres antitanque com a cadência de uma metralhadora antes de fugir para as árvores. 
+                </p>
+                <p class="lore-text">
+                    No caos das partidas do War Thunder, essa aberração sueca dita as regras do combate urbano e em desfiladeiros. Graças à munição HE (High Explosive) ou APHE (Armor-Piercing High Explosive), um jogador de SAV consegue cruzar uma esquina, imobilizar o primeiro tanque, evaporar o tanque de trás e destruir um terceiro adversário antes mesmo que o primeiro oponente consiga recarregar para revidar. É uma máquina punitiva que não perdoa agrupamentos inimigos, mas que pune o piloto brutalmente se ele esgotar seu pente no meio do fogo cruzado.
                 </p>
 
                 <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
                 <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>A Metralhadora de 120mm:</strong> Com 1.2 segundos de recarga entre os tiros no seu carregador de 6 projéteis, você não precisa se preocupar se o primeiro tiro errar o ponto fraco. Mire na esteira para imobilizar, e o segundo e terceiro tiros garantirão a eliminação (ou punirão múltiplos alvos empilhados).</li>
-                    <li style="margin-bottom: 10px;"><strong>Gestão de Cartuchos (Magazine):</strong> O seu poder absoluto dura exatos 7.2 segundos. Depois que o seu autoloader de 6 tiros esvaziar, a recarga do compartimento demorará bastante. Nunca gaste seu último tiro se não tiver uma rota de fuga garantida para trás de uma cobertura segura.</li>
-                    <li><strong>Predador de Curto Alcance:</strong> A munição e a balística do SAV não foram feitas para combates a 1.500 metros. Aproveite seus 45 km/h para se esgueirar por rotas urbanas, ruas estreitas ou colinas, atacando onde o inimigo não tem espaço para manobrar ou fugir da sua rajada.</li>
+                    <li style="margin-bottom: 10px;"><strong>A Metralhadora de 120mm:</strong> Com 1.2 segundos de recarga entre os tiros no seu carregador de 6 projéteis, você não precisa se preocupar em acertar o "Ponto Fraco" (Weakspot) logo no primeiro tiro. Atire instantaneamente no cano ou nas esteiras para imobilizar e desarmar o inimigo. Seu segundo e terceiro tiros garantirão a eliminação com tranquilidade.</li>
+                    <li style="margin-bottom: 10px;"><strong>Gestão de Cartuchos (Magazine):</strong> O seu poder absoluto dura exatamente 7.2 segundos. Depois que o seu autoloader de 6 tiros esvaziar (ou se o carregador primário for danificado), a recarga para inserir novas balas no tambor demorará uma eternidade. <strong>Nunca gaste seu último tiro</strong> se não tiver uma rota de fuga garantida para trás de uma cobertura ou de aliados pesados.</li>
+                    <li><strong>Predador de Curto Alcance (CQB):</strong> A munição de 120 mm do SAV possui uma velocidade de saída péssima e uma balística curva (lobbing) que não foi feita para combates a 1.500 metros. Aproveite seus 45 km/h para se esgueirar por rotas de cidades, ruas estreitas e relevos montanhosos, emboscando oponentes em gargalos onde não há espaço para fugirem da sua rajada.</li>
                 </ul>
             </div>
 
