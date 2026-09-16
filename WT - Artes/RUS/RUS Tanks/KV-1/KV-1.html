@@ -11,13 +11,9 @@
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO com defer -->
-    <script src="../../../../js/menu.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
-        });
-    </script>
+  <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.min.js"></script>
+    <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->

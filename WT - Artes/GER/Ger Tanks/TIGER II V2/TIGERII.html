@@ -14,14 +14,10 @@
 </head>
 
 <body>
-    <!-- CABEÇALHO FIXO com defer -->
-    <script src="../../../../js/menu.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if (typeof injetarMenu === 'function') injetarMenu('../../../../');
-        });
-    </script>
-
+    <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.min.js"></script>
+    <script>injetarMenu('../../../../');</script>
+    
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
         <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">
@@ -34,7 +30,8 @@
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">Pz.Kpfw. VI Ausf. B (Tiger II)</h2>
-                <span class="sheet-badge" style="background-color: #3b3b3b; color: #fff;">Tanque Pesado (Sniper Pesado) | Nível IV</span>
+                <span class="sheet-badge" style="background-color: #3b3b3b; color: #fff;">Tanque Pesado (Sniper Pesado)
+                    | Nível IV</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
@@ -142,7 +139,8 @@
                         <strong>não angule muito o seu chassi!</strong> A blindagem lateral sob as esteiras continua
                         sendo relativamente fina (80 mm). Se você virar demais em "formato de losango", oponentes
                         furarão o lado do seu tanque. Mantenha-se quase que totalmente de frente, contando com os 150 mm
-                        inclinados do seu peito.</li>
+                        inclinados do seu peito.
+                    </li>
                     <li><strong>A Dança da Torre:</strong> Jogadores americanos (com T34s) e soviéticos (com IS-2s)
                         memorizaram que a frente plana da sua torre (bochechas) é a chave para destruí-lo. Assim que
                         você disparar e entrar no processo de recarregamento, vire imediatamente a torre de 15 a 20

@@ -13,14 +13,9 @@
 </head>
 
 <body>
-    <!-- Roteamento do Menu Superior com defer -->
-    <script src="../../../../js/menu.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
-        });
-    </script>
-
+  <!-- Roteamento atualizado para a pasta js com defer -->
+    <script src="../../../../js/menu.min.js"></script>
+    <script>injetarMenu('../../../../');</script>
     <main class="ui-container">
         <!-- Botão Voltar -->
         <div style="width: 100%; max-width: 900px; margin: 0 auto 20px;">

@@ -4,9 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ficha técnica, blindagem e doutrinas de combate do T34 Heavy Tank americano no War Thunder.">
+    <meta name="description"
+        content="Ficha técnica, blindagem e doutrinas de combate do T34 Heavy Tank americano no War Thunder.">
     <title>T34 Heavy Tank - Ficha Técnica</title>
-    
+
     <!-- Roteamento atualizado para a pasta css -->
     <link rel="stylesheet" href="../../../../css/style.css">
     <link rel="icon" href="../../../../WT - Artes/WT-ICO2.ico" type="image/png">
@@ -14,12 +15,8 @@
 
 <body>
     <!-- Roteamento atualizado para a pasta js com defer -->
-    <script src="../../../../js/menu.js" defer></script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            if(typeof injetarMenu === 'function') injetarMenu('../../../../');
-        });
-    </script>
+    <script src="../../../../js/menu.min.js"></script>
+    <script>injetarMenu('../../../../');</script>
 
     <main class="ui-container">
         <!-- NAVEGAÇÃO -->
@@ -29,44 +26,44 @@
 
         <!-- FICHA TÉCNICA -->
         <article class="tank-sheet">
-            
+
             <!-- Título e Classificação -->
             <header class="sheet-header">
                 <h2 class="sheet-title">T34 Heavy Tank</h2>
-                <span class="sheet-badge" style="background-color: #1A3668; color: #fff;">Tanque Pesado (Apoio / Hull Down) | Nível IV</span>
+                <span class="sheet-badge" style="background-color: #1A3668; color: #fff;">Tanque Pesado (Apoio / Hull
+                    Down) | Nível IV</span>
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
             <div class="sheet-content">
-                
+
                 <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
                 <div class="sheet-visual carousel-wrapper" style="position: relative;">
                     <div class="carousel-track" id="t34-track">
                         <!-- Imagem 1: Foto Padrão -->
-                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto.webp" 
-                             alt="Visão Padrão T34 Heavy Tank" 
-                             class="slide-item">
+                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto.webp"
+                            alt="Visão Padrão T34 Heavy Tank" class="slide-item">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
-                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto2.webp" 
-                             alt="T34 Heavy Tank em combate" 
-                             class="slide-item">
-                        
+                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto2.webp"
+                            alt="T34 Heavy Tank em combate" class="slide-item">
+
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
-                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto3.webp" 
-                             alt="Visão Raio-X T34 Heavy Tank" 
-                             class="slide-item">
+                        <img src="../../../../WT - Artes/USA/USA Tanks/T34/T34 foto3.webp"
+                            alt="Visão Raio-X T34 Heavy Tank" class="slide-item">
                     </div>
 
                     <!-- Botões Táticos do Carrossel -->
-                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
-                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
+                    <button id="btnPrev"
+                        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
                 </div>
 
                 <!-- Coluna 2: Dados -->
                 <div class="sheet-data">
                     <h3 class="data-title">Especificações Técnicas</h3>
-                    
+
                     <!-- Tabela de Atributos -->
                     <table class="data-table">
                         <tbody>
@@ -105,23 +102,48 @@
             <div class="sheet-lore">
                 <h3 class="lore-title">Histórico de Desenvolvimento</h3>
                 <p class="lore-text">
-                    No final da Segunda Guerra Mundial, o surgimento de monstros blindados alemães como o Tiger II e o Jagdtiger fez o comando americano perceber que seus Sherman e Pershings enfrentariam problemas formidáveis. A resposta inicial foi o projeto T29, armado com um canhão de 105 mm. No entanto, buscando poder de fogo absoluto, a Artilharia Americana deu um passo além com o protótipo T34. Eles pegaram o chassi estendido do T29 e decidiram montar um massivo canhão antiaéreo M1 de 120 mm modificado (renomeado como T53) na torre.
+                    No final da Segunda Guerra Mundial, o surgimento de monstros blindados alemães como o Tiger II e o
+                    Jagdtiger fez o comando americano perceber que seus Sherman e Pershings enfrentariam problemas
+                    formidáveis. A resposta inicial foi o projeto T29, armado com um canhão de 105 mm. No entanto,
+                    buscando poder de fogo absoluto, a Artilharia Americana deu um passo além com o protótipo T34. Eles
+                    pegaram o chassi estendido do T29 e decidiram montar um massivo canhão antiaéreo M1 de 120 mm
+                    modificado (renomeado como T53) na torre.
                 </p>
                 <p class="lore-text">
-                    A engenharia por trás do T34 era extrema. O peso colossal do canhão de 120 mm obrigou os projetistas a soldarem uma blindagem adicional de 101 mm na parte de trás da torre apenas para servir de contrapeso para a arma gigante, elevando o peso total do veículo para cerca de 65 toneladas. Para acomodar as enormes balas de duas partes (projétil separado da carga de pólvora), a tripulação foi expandida para seis homens, incluindo dois municiadores trabalhando freneticamente no aperto da torre. Embora a guerra tenha acabado antes de entrar em produção, as lições estruturais do T34 moldaram o futuro tanque pesado M103.
+                    A engenharia por trás do T34 era extrema. O peso colossal do canhão de 120 mm obrigou os projetistas
+                    a soldarem uma blindagem adicional de 101 mm na parte de trás da torre apenas para servir de
+                    contrapeso para a arma gigante, elevando o peso total do veículo para cerca de 65 toneladas. Para
+                    acomodar as enormes balas de duas partes (projétil separado da carga de pólvora), a tripulação foi
+                    expandida para seis homens, incluindo dois municiadores trabalhando freneticamente no aperto da
+                    torre. Embora a guerra tenha acabado antes de entrar em produção, as lições estruturais do T34
+                    moldaram o futuro tanque pesado M103.
                 </p>
                 <p class="lore-text">
-                    No War Thunder, o T34 é o "Rei da Colina". Seu poder de penetração bruto é quase inigualável no seu Battle Rating, disparando uma munição AP sólida (Armor Piercing) de 120 mm que, embora não possua explosivo interno, gera uma onda destrutiva de estilhaços massivos ao perfurar o alvo. Em contrapartida, você está jogando com uma máquina letárgica. O chassi é um gigantesco ponto fraco cheio de munição armazenada incorretamente (ammorack), a manobrabilidade é péssima em terrenos lamacentos e cada disparo precisa ser cirurgicamente calculado devido ao doloroso tempo de recarga.
+                    No War Thunder, o T34 é o "Rei da Colina". Seu poder de penetração bruto é quase inigualável no seu
+                    Battle Rating, disparando uma munição AP sólida (Armor Piercing) de 120 mm que, embora não possua
+                    explosivo interno, gera uma onda destrutiva de estilhaços massivos ao perfurar o alvo. Em
+                    contrapartida, você está jogando com uma máquina letárgica. O chassi é um gigantesco ponto fraco
+                    cheio de munição armazenada incorretamente (ammorack), a manobrabilidade é péssima em terrenos
+                    lamacentos e cada disparo precisa ser cirurgicamente calculado devido ao doloroso tempo de recarga.
                 </p>
 
                 <h3 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h3>
                 <ul class="lore-text" style="list-style-type: square; margin-left: 20px;">
-                    <li style="margin-bottom: 10px;"><strong>A Doutrina do Hull Down:</strong> Esconda o seu chassi a qualquer custo. O mantelete da sua torre de 279 mm é uma das blindagens mais espessas do jogo, perfeitamente complementada pelos excepcionais -10 graus de depressão do canhão americano. Posicione-se atrás de colinas, mostre apenas a torre, atire e recue.</li>
-                    <li style="margin-bottom: 10px;"><strong>Gerenciamento de Recarga:</strong> Com dois municiadores em uma torre apertada, a recarga é letárgica. Um erro de disparo pode ser fatal, pois inimigos ágeis vão avançar na sua direção no momento em que virem o clarão do seu canhão. Tenha sempre cobertura sólida próxima para recuar durante os longos segundos de carregamento.</li>
-                    <li><strong>Alerta de Cúpula:</strong> Mesmo em "Hull Down", jogadores veteranos não vão atirar no seu mantelete, mas tentarão atingir a enorme cúpula do comandante ou as aberturas óticas na frente da torre. Enquanto recarrega atrás da colina, balance o canhão ou ande ligeiramente para a frente e para trás para dificultar a mira do inimigo nos seus pontos fracos.</li>
+                    <li style="margin-bottom: 10px;"><strong>A Doutrina do Hull Down:</strong> Esconda o seu chassi a
+                        qualquer custo. O mantelete da sua torre de 279 mm é uma das blindagens mais espessas do jogo,
+                        perfeitamente complementada pelos excepcionais -10 graus de depressão do canhão americano.
+                        Posicione-se atrás de colinas, mostre apenas a torre, atire e recue.</li>
+                    <li style="margin-bottom: 10px;"><strong>Gerenciamento de Recarga:</strong> Com dois municiadores em
+                        uma torre apertada, a recarga é letárgica. Um erro de disparo pode ser fatal, pois inimigos
+                        ágeis vão avançar na sua direção no momento em que virem o clarão do seu canhão. Tenha sempre
+                        cobertura sólida próxima para recuar durante os longos segundos de carregamento.</li>
+                    <li><strong>Alerta de Cúpula:</strong> Mesmo em "Hull Down", jogadores veteranos não vão atirar no
+                        seu mantelete, mas tentarão atingir a enorme cúpula do comandante ou as aberturas óticas na
+                        frente da torre. Enquanto recarrega atrás da colina, balance o canhão ou ande ligeiramente para
+                        a frente e para trás para dificultar a mira do inimigo nos seus pontos fracos.</li>
                 </ul>
             </div>
-            
+
         </article>
     </main>
 
@@ -132,7 +154,7 @@
             const slides = Array.from(track.children);
             const btnNext = document.getElementById('btnNext');
             const btnPrev = document.getElementById('btnPrev');
-            
+
             let currentIndex = 0;
 
             function updateCarousel() {
@@ -144,7 +166,7 @@
                 if (currentIndex < slides.length - 1) {
                     currentIndex++;
                 } else {
-                    currentIndex = 0; 
+                    currentIndex = 0;
                 }
                 updateCarousel();
             });
@@ -153,11 +175,12 @@
                 if (currentIndex > 0) {
                     currentIndex--;
                 } else {
-                    currentIndex = slides.length - 1; 
+                    currentIndex = slides.length - 1;
                 }
                 updateCarousel();
             });
         });
     </script>
 </body>
+
 </html>
