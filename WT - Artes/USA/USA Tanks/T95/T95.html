@@ -35,33 +35,39 @@
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
-            <div class="sheet-content">
+            <section class="sheet-content">
 
-                <!-- Coluna 1: Imagem (Carrossel) -->
-                <div class="sheet-visual carousel-wrapper" style="position: relative;">
-                    <div class="carousel-track" id="t95-track">
+                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
+                <figure class="sheet-visual carousel-wrapper" style="position: relative; margin: 0; overflow: hidden;">
+                    
+                    <div class="carousel-track" id="tank-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT%20-%20Artes/USA/USA%20Tanks/T95/T95%20foto.webp"
-                            alt="Visão Padrão T95 Doom Turtle" class="slide-item">
+                            alt="Visão Padrão T95 Doom Turtle" class="slide-item" loading="lazy">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT%20-%20Artes/USA/USA%20Tanks/T95/t95%20foto%202.webp"
-                            alt="Visão Alternativa T95 Doom Turtle" class="slide-item">
+                            alt="Visão Alternativa T95 Doom Turtle" class="slide-item" loading="lazy">
 
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT%20-%20Artes/USA/USA%20Tanks/T95/T95%20foto%203.webp"
-                            alt="Visão Raio-X T95 Doom Turtle" class="slide-item">
+                            alt="Visão Raio-X T95 Doom Turtle" class="slide-item" loading="lazy">
                     </div>
 
                     <!-- Botões Táticos do Carrossel -->
-                    <button id="btnPrev"
+                    <button id="btnPrev" aria-label="Imagem Anterior"
                         style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
-                    <button id="btnNext"
+                    <button id="btnNext" aria-label="Próxima Imagem"
                         style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
-                </div>
+                    
+                    <!-- Legenda Dinâmica Sobreposta -->
+                    <figcaption id="tank-caption" aria-live="polite"
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; color: var(--texto-branco); font-size: 13px; font-weight: bold; letter-spacing: 1px; background: rgba(0, 0, 0, 0.75); padding: 8px 0; border-top: 1px solid var(--metal-cinza-claro); pointer-events: none;">
+                    </figcaption>
+                </figure>
 
                 <!-- Coluna 2: Dados -->
-                <div class="sheet-data">
+                <aside class="sheet-data">
                     <h2 class="data-title">Especificações Técnicas</h2>
 
                     <!-- Tabela de Atributos -->
@@ -94,12 +100,11 @@
                     <div class="admin-controls">
                         <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
                     </div>
-
-                </div>
-            </div>
+                </aside>
+            </section>
 
             <!-- Lore / Histórico e Dicas -->
-            <div class="sheet-lore">
+            <section class="sheet-lore">
                 <h2 class="lore-title">Histórico de Desenvolvimento</h2>
                 <p class="lore-text">
                     Projetado originalmente em 1943 para romper as massivas fortificações da Linha Siegfried na Alemanha
@@ -145,45 +150,11 @@
                         avance próximo a construções altas, desfiladeiros montanhosos ou certifique-se de ter um veículo
                         antiaéreo aliado (SPAA) por perto.</li>
                 </ul>
-            </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- Lógica Autônoma do Carrossel de Combate -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const track = document.getElementById('t95-track');
-            const slides = Array.from(track.children);
-            const btnNext = document.getElementById('btnNext');
-            const btnPrev = document.getElementById('btnPrev');
-
-            let currentIndex = 0;
-
-            function updateCarousel() {
-                const amountToMove = currentIndex * 100;
-                track.style.transform = `translateX(-${amountToMove}%)`;
-            }
-
-            btnNext.addEventListener('click', () => {
-                if (currentIndex < slides.length - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
-                }
-                updateCarousel();
-            });
-
-            btnPrev.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = slides.length - 1;
-                }
-                updateCarousel();
-            });
-        });
-    </script>
 </body>
 
 </html>

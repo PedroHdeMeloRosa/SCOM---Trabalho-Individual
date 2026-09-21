@@ -32,26 +32,31 @@
                 <span class="sheet-badge" style="background-color: #005293; color: #fff;">Tanque de Assalto Rápido (Derp Gun) | Nível I</span>
             </header>
 
-            <!-- Layout Flex (Carrossel + Tabela) -->
-            <div class="sheet-content">
+            <!-- Divisão de Colunas (Visual + Tabela) -->
+            <section class="sheet-content">
                 
                 <!-- CARROSSSEL DE IMAGENS -->
-                <div class="sheet-visual carousel-wrapper" style="position: relative;">
+                <figure class="sheet-visual carousel-wrapper" style="position: relative; margin: 0; overflow: hidden;">
                     
-                    <div class="carousel-track" id="bt42-track">
+                    <div class="carousel-track" id="tank-track">
                         <!-- Substitua os 'src' pelas suas imagens do BT-42 -->
-                        <img src="BT-42%20foto%201.webp" alt="BT-42 no hangar" class="slide-item">
-                        <img src="BT-42%20foto%202.webp" alt="Perfil lateral mostrando a torre gigantesca" class="slide-item">
-                        <img src="BT-42%20foto%203.webp" alt="BT-42 flanqueando em alta velocidade" class="slide-item">
+                        <img src="BT-42%20foto%201.webp" alt="BT-42 no hangar" class="slide-item" loading="lazy">
+                        <img src="BT-42%20foto%202.webp" alt="Perfil lateral mostrando a torre gigantesca" class="slide-item" loading="lazy">
+                        <img src="BT-42%20foto%203.webp" alt="BT-42 flanqueando em alta velocidade" class="slide-item" loading="lazy">
                     </div>
 
                     <!-- Botões Táticos do Carrossel -->
-                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
-                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
-                </div>
+                    <button id="btnPrev" aria-label="Imagem Anterior" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" aria-label="Próxima Imagem" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
+                    
+                    <!-- Legenda Dinâmica Sobreposta -->
+                    <figcaption id="tank-caption" aria-live="polite"
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; color: var(--texto-branco); font-size: 13px; font-weight: bold; letter-spacing: 1px; background: rgba(0, 0, 0, 0.75); padding: 8px 0; border-top: 1px solid var(--metal-cinza-claro); pointer-events: none;">
+                    </figcaption>
+                </figure>
 
                 <!-- Especificações -->
-                <div class="sheet-data">
+                <aside class="sheet-data">
                     <h2 class="data-title">Especificações Técnicas</h2>
                     <table class="data-table">
                         <tbody>
@@ -83,12 +88,12 @@
                         <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
                     </div>
 
-                </div>
+                </aside>
                 
-            </div>
+            </section>
 
             <!-- Lore / Histórico e Dicas -->
-            <div class="sheet-lore">
+            <section class="sheet-lore">
                 <h2 class="lore-title">Histórico de Desenvolvimento</h2>
                 <p class="lore-text">
                     O <strong>BT-42</strong> é um dos maiores e mais bizarros "Frankensteins" da Segunda Guerra Mundial, e motivo de grande folclore militar para os finlandeses. Durante a Guerra de Continuação, o exército da Finlândia capturou dezenas de tanques leves soviéticos BT-7, famosos por sua altíssima velocidade. Desesperados por apoio de fogo móvel pesado que pudesse destruir bunkers e fortificações, os engenheiros finlandeses tiveram a audaciosa ideia de arrancar a torre original e substituí-la por uma casamata quadrada e gigantesca.
@@ -106,44 +111,10 @@
                     <li style="margin-bottom: 10px;"><strong>Balística de "Catapulta":</strong> O obuseiro de 114 mm tem uma velocidade de saída de projétil péssima. Acertar alvos velozes em movimento a mais de 400 metros exige liderar o tiro de forma drástica e calcular uma grande parábola. Prefira combates urbanos, vielas e curtas distâncias onde sua munição HEAT funciona como uma marreta inevitável.</li>
                     <li><strong>Sobrevivência Pelo Caos:</strong> Sua blindagem tem míseros 20 mm, e a torre enorme é um ímã de tiros visível a quilômetros de distância. Nunca troque tiros parado e evite campos abertos. Atire, use a impressionante manobrabilidade da sua máquina para recuar para trás de coberturas ou vielas, e ataque de um ângulo totalmente diferente antes que o inimigo consiga mirar em você.</li>
                 </ul>
-            </div>
+            </section>
 
         </article>
     </main>
 
-    <!-- Lógica Autônoma do Carrossel de Combate -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const track = document.getElementById('bt42-track');
-            const slides = Array.from(track.children);
-            const btnNext = document.getElementById('btnNext');
-            const btnPrev = document.getElementById('btnPrev');
-            
-            let currentIndex = 0;
-
-            function updateCarousel() {
-                const amountToMove = currentIndex * 100;
-                track.style.transform = `translateX(-${amountToMove}%)`;
-            }
-
-            btnNext.addEventListener('click', () => {
-                if (currentIndex < slides.length - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0; 
-                }
-                updateCarousel();
-            });
-
-            btnPrev.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = slides.length - 1; 
-                }
-                updateCarousel();
-            });
-        });
-    </script>
 </body>
 </html>

@@ -33,34 +33,39 @@
             </header>
 
             <!-- Divisão de Colunas (Visual + Tabela) -->
-            <div class="sheet-content">
+            <section class="sheet-content">
                 
-                <!-- Coluna 1: Imagem (Carrossel) -->
-                <div class="sheet-visual carousel-wrapper" style="position: relative;">
-                    <div class="carousel-track" id="su100-track">
+                <!-- Coluna 1: Imagem (Carrossel atuando como a própria coluna visual) -->
+                <figure class="sheet-visual carousel-wrapper" style="position: relative; margin: 0; overflow: hidden;">
+                    <div class="carousel-track" id="tank-track">
                         <!-- Imagem 1: Foto Padrão -->
                         <img src="../../../../WT%20-%20Artes/RUS/Rus%20Tanks/SU-100/SU-100%20foto.webp" 
                              alt="Visão Padrão SU-100" 
-                             class="slide-item">
+                             class="slide-item" loading="lazy">
 
                         <!-- Imagem 2: Foto Padrão Alternativa -->
                         <img src="../../../../WT%20-%20Artes/RUS/Rus%20Tanks/SU-100/SU-100%20foto2.webp" 
                              alt="Visão Alternativa SU-100" 
-                             class="slide-item">
+                             class="slide-item" loading="lazy">
                         
                         <!-- Imagem 3: Visão Raio-X ou Silhueta -->
                         <img src="../../../../WT%20-%20Artes/RUS/Rus%20Tanks/SU-100/SU-100%20foto3.webp" 
                              alt="Visão Raio-X SU-100" 
-                             class="slide-item">
+                             class="slide-item" loading="lazy">
                     </div>
                     
                     <!-- Botões Táticos do Carrossel -->
-                    <button id="btnPrev" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
-                    <button id="btnNext" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
-                </div>
+                    <button id="btnPrev" aria-label="Imagem Anterior" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9664;</button>
+                    <button id="btnNext" aria-label="Próxima Imagem" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: var(--dourado-titulos); border: 1px solid var(--dourado-titulos); padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold;">&#9654;</button>
+
+                    <!-- Legenda Dinâmica Sobreposta -->
+                    <figcaption id="tank-caption" aria-live="polite"
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; color: var(--texto-branco); font-size: 13px; font-weight: bold; letter-spacing: 1px; background: rgba(0, 0, 0, 0.75); padding: 8px 0; border-top: 1px solid var(--metal-cinza-claro); pointer-events: none;">
+                    </figcaption>
+                </figure>
 
                 <!-- Coluna 2: Dados -->
-                <div class="sheet-data">
+                <aside class="sheet-data">
                     <h2 class="data-title">Especificações Técnicas</h2>
                     
                     <!-- Tabela de Atributos -->
@@ -94,11 +99,11 @@
                         <button class="btn-edit">&#9998; EDITAR VEÍCULO (Admin)</button>
                     </div>
 
-                </div>
-            </div>
+                </aside>
+            </section>
 
             <!-- Lore / Histórico e Dicas -->
-            <div class="sheet-lore">
+            <section class="sheet-lore">
                 <h2 class="lore-title">Histórico de Desenvolvimento</h2>
                 <p class="lore-text">
                     Durante os violentos choques da Frente Oriental em 1944, a União Soviética percebeu que o antigo caça-tanques SU-85, armado com o canhão de 85 mm, já não era capaz de penetrar confiantemente a blindagem frontal dos novos tanques Panther e Tiger alemães a longas distâncias. O alto comando ordenou a criação de um "matador de felinos" definitivo. A solução mais rápida e letal foi adaptar o novíssimo e ágil chassi do T-34-85 e fundir a ele uma casamata redesenhada, feita para abrigar o gigantesco canhão naval D-10S de 100 mm.
@@ -116,44 +121,10 @@
                     <li style="margin-bottom: 10px;"><strong>A Fraqueza de não ter Torre:</strong> Para mirar em qualquer coisa fora de um pequeno cone frontal, você precisa mover as esteiras e virar o chassi inteiro do tanque. Isso o torna a vítima perfeita de tanques leves que tentam "circular" você. Se a sua esteira ou o seu motor forem quebrados, você será transformado em um casamata inútil que não consegue apontar a arma. Se um inimigo chegar perto demais, peça ajuda à equipe imediatamente.</li>
                     <li><strong>Munição Nuclear Soviética:</strong> A munição BR-412D é sua melhor amiga. Devido à mecânica de normalização no War Thunder, essa cápsula ignora os ângulos inclinados da blindagem alemã e americana, penetrando e detonando internamente com tanta violência que raramente um inimigo sobrevive ao primeiro disparo.</li>
                 </ul>
-            </div>
+            </section>
             
         </article>
     </main>
 
-    <!-- Lógica Autônoma do Carrossel de Combate -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const track = document.getElementById('su100-track');
-            const slides = Array.from(track.children);
-            const btnNext = document.getElementById('btnNext');
-            const btnPrev = document.getElementById('btnPrev');
-            
-            let currentIndex = 0;
-
-            function updateCarousel() {
-                const amountToMove = currentIndex * 100;
-                track.style.transform = `translateX(-${amountToMove}%)`;
-            }
-
-            btnNext.addEventListener('click', () => {
-                if (currentIndex < slides.length - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0; 
-                }
-                updateCarousel();
-            });
-
-            btnPrev.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = slides.length - 1; 
-                }
-                updateCarousel();
-            });
-        });
-    </script>
 </body>
 </html>
