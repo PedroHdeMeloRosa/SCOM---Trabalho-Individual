@@ -1,0 +1,1308 @@
+/**
+ * ============================================================================
+ * WAR THUNDER - FOLHA DE ESTILOS PRINCIPAL (CSS)
+ * ============================================================================
+ * Este arquivo controla todo o visual, layout, cores, animações e a 
+ * responsividade do site.
+ * Versão Documentada / Desminificada
+ * ============================================================================
+ */
+
+/* ============================================================================
+   1. RESETS E CONFIGURAÇÕES GERAIS
+   Remove margens/paddings padrão dos navegadores e define o modelo de caixa.
+   ============================================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    /* Faz com que bordas e paddings não aumentem o tamanho total do elemento */
+    box-sizing: border-box; 
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* Espaçamento superior grande para não ficar escondido atrás da Navbar fixa */
+    padding: 100px 20px 50px; 
+    
+    /* Fundo Global da Página */
+    background-image: url("../WT - Artes/WT - BG/WT_bg_victory_day.webp");
+    background-color: #111;
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; /* Deixa o fundo estático enquanto a página rola */
+}
+
+/* Remove sublinhado de links e botões comuns */
+.back-button, .logo-container-nav, .nation-card, .nav-item, .suggestion-link, .tank-card {
+    text-decoration: none;
+}
+
+/* ============================================================================
+   2. VARIÁVEIS DO SISTEMA (PALETA DE CORES E ÍCONES)
+   Facilita a troca de cores em todo o site usando var(--nome-da-variavel).
+   ============================================================================ */
+:root {
+    --fundo-base: #28358B74;
+    --fundo-base-marrom: #514029;
+    --verde-caqui-escuro: #6D735D;
+    --fundo-base-bege: #cfa66c;
+    
+    --metal-chumbo: #1E2021;
+    --metal-cinza-escuro: #2A2D2E;
+    --metal-cinza-claro: #8a8d8f;
+    --sombra-intensa: rgba(0, 0, 0, 0.7);
+    
+    --texto-branco: #F0F2F5;
+    --dourado-titulos: #C5A866;
+    --dourado-titulos-claro: #DBC386;
+    --ouro-inativo: #8E7A4A;
+    
+    /* Cores das Nações */
+    --usa-azul: #010726;
+    --usa-vermelho: #660214;
+    --usa-branco: #5c6673;
+    
+    --rus-vermelho: #6E1111;
+    --rus-azul: #01194D;
+    --rus-branco: #736b6b;
+    
+    --ger-preto: #000000;
+    --ger-vermelho: #6E1111;
+    --ger-amarelo: #665200;
+    
+    --swe-dourado: #cd9105;
+    --swe-azul: #28358B;
+    
+    --jpn-vermelho: #C00000;
+    --jpn-branco: #f0f2f538;
+}
+
+/* ============================================================================
+   3. CONTAINERS PRINCIPAIS
+   ============================================================================ */
+.ui-container {
+    background-color: rgba(18, 20, 22, 0.88); /* Fundo semi-transparente escuro */
+    border: 2px solid var(--metal-cinza-claro);
+    border-radius: 12px;
+    padding: 40px;
+    width: 90%;
+    max-width: 1200px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-panel {
+    padding: 20px 40px;
+    width: 100%;
+    max-width: 950px;
+    margin: 0 auto;
+    color: var(--texto-branco);
+}
+
+.main-bg { background: var(--metal-chumbo); }
+.nation-bg { background: var(--metal-cinza-escuro); }
+
+/* ============================================================================
+   4. NAVBAR (BARRA DE NAVEGAÇÃO SUPERIOR)
+   ============================================================================ */
+.top-navbar {
+    position: fixed; /* Fixa no topo da tela */
+    top: 0; left: 0;
+    width: 100%;
+    min-height: 90px;
+    height: auto;
+    background-color: var(--metal-chumbo);
+    border-bottom: 2px solid var(--metal-cinza-claro);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 10px 40px;
+    z-index: 10000; /* Garante que fique acima de tudo */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
+    gap: 15px;
+}
+
+.nav-left, .nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.nav-right {
+    justify-content: space-between;
+    gap: 50px;
+}
+
+/* Container do Logo na Navbar */
+.logo-plate-nav {
+    background-color: var(--dourado-titulos);
+    border: 2px solid var(--metal-cinza-claro);
+    padding: 5px 15px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: border-color 0.3s;
+    height: 100%;
+    max-height: 120px;
+}
+
+.logo-plate-nav:hover { border-color: var(--texto-branco); }
+.navbar-logo-img { height: 90px; width: auto; }
+
+/* Itens da Navbar (Botões Início, Config, Registro, etc) */
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #a0a0a0;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: 0.2s ease-in-out;
+}
+
+.nav-item:hover {
+    color: #fff;
+    transform: translateY(-3px); /* Efeito de levitar no hover */
+}
+
+.icon-box {
+    margin-bottom: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+}
+
+.nav-icon-img {
+    width: auto;
+    height: 50px;
+    object-fit: contain;
+    transition: filter 0.2s;
+    padding-bottom: 10px;
+}
+
+/* Brilho no ícone ao passar o mouse */
+.nav-item:hover .nav-icon-img {
+    filter: brightness(1.3) drop-shadow(0 0 5px rgba(255, 255, 255, 0.3));
+}
+
+.btn-login {
+    padding: 8px 15px;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+/* ============================================================================
+   5. RELÓGIO DE GUERRA
+   ============================================================================ */
+.nav-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Courier New', Courier, monospace;
+    text-align: center;
+    color: #f2b400;
+    text-shadow: 0 0 5px rgba(242, 180, 0, 0.7);
+    max-width: 100%;
+    white-space: nowrap;
+}
+
+.clock-time {
+    color: #fafad2;
+    font-size: 16px;
+    font-weight: 700;
+    text-shadow: 0 0 8px rgba(63, 211, 47, 0.6); /* Brilho esverdeado/tático */
+}
+
+.clock-date {
+    color: #daa520;
+    font-size: 10px;
+    letter-spacing: 1px;
+    margin-top: 0;
+}
+
+.flip-digit {
+    display: inline-block;
+    min-width: 18px;
+}
+
+/* ============================================================================
+   6. BARRA DE PESQUISA (SEARCH INPUT)
+   ============================================================================ */
+.search-container {
+    position: relative;
+    margin-left: 20px;
+    display: flex;
+    align-items: center;
+}
+
+#searchInput {
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--metal-cinza-claro);
+    color: #fff;
+    font-family: monospace;
+    padding: 8px 12px 8px 35px; /* Espaço na esquerda para o ícone da lupa */
+    border-radius: 4px;
+    width: 200px;
+    transition: border-color 0.3s, width 0.3s;
+}
+
+/* A barra expande quando o usuário clica para digitar */
+#searchInput:focus {
+    border-color: var(--dourado-titulos);
+    width: 250px;
+    outline: 0;
+}
+
+.search-icon {
+    position: absolute;
+    left: 8px;
+    width: 18px;
+    height: 18px;
+    object-fit: contain;
+    pointer-events: none; /* Para não bloquear o clique no input */
+    opacity: 0.7;
+}
+
+/* Caixa suspensa de resultados de busca */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: var(--metal-chumbo);
+    border: 1px solid var(--metal-cinza-claro);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    list-style: none;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.8);
+    z-index: 25000;
+}
+
+.search-suggestions li {
+    padding: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+.suggestion-link {
+    font-family: Arial, sans-serif;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    color: #a0a0a0;
+    font-size: 12px;
+    font-weight: 700;
+    width: 100%;
+}
+
+.suggestion-icon {
+    width: 24px;
+    height: auto;
+    object-fit: contain;
+}
+
+/* Quando passa o mouse ou seleciona com teclado */
+.search-suggestions li.ativo .suggestion-link,
+.search-suggestions li:hover .suggestion-link {
+    background-color: var(--rus-vermelho);
+    color: #fff;
+}
+
+/* ============================================================================
+   7. MODAIS (LOGIN E CONFIGURAÇÕES)
+   ============================================================================ */
+/* A camada escura que cobre a tela inteira */
+.modal-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 20000;
+    
+    /* Escondido por padrão, com transição suave */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.3s, visibility 0.3s;
+}
+
+.modal-overlay.ativo {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+}
+
+/* A caixa do modal em si */
+.modal-box {
+    background-color: var(--metal-chumbo);
+    border: 2px solid var(--rus-vermelho);
+    padding: 40px;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 0 30px rgba(110, 17, 17, 0.4);
+    
+    /* Efeito de "zoom in" ao abrir */
+    transform: scale(0.9);
+    transition: transform 0.3s;
+}
+
+.modal-overlay.ativo .modal-box {
+    transform: scale(1);
+}
+
+/* Botão X para fechar */
+.fechar-modal {
+    position: absolute;
+    top: 15px; right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--metal-cinza-claro);
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.fechar-modal:hover { color: #fff; }
+
+.modal-title {
+    color: var(--dourado-titulos);
+    text-align: center;
+    font-size: 24px;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+}
+
+.modal-subtitle {
+    color: #a0a0a0;
+    text-align: center;
+    font-size: 12px;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+/* ============================================================================
+   8. FORMULÁRIOS (INPUTS, TOGGLES, SWITCHES)
+   ============================================================================ */
+.input-group { margin-bottom: 20px; }
+
+.input-group label {
+    display: block;
+    color: var(--metal-cinza-claro);
+    font-size: 11px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.input-group input {
+    width: 100%;
+    padding: 12px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: 1px solid var(--metal-cinza-claro);
+    color: #fff;
+    font-family: monospace;
+    border-radius: 4px;
+    outline: 0;
+}
+
+.input-group input:focus { border-color: var(--dourado-titulos); }
+
+.password-wrapper { position: relative; }
+
+/* Botão do Olhinho/Radar na senha */
+.radar-toggle {
+    position: absolute;
+    top: 50%; right: 10px;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    color: var(--metal-cinza-claro);
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Botões padrões de ação militar (Ex: Autenticar, Purgar) */
+.btn-submit-militar {
+    width: 100%;
+    padding: 15px;
+    margin-top: 10px;
+    background-color: var(--metal-cinza-escuro);
+    border: 1px solid var(--metal-cinza-claro);
+    color: #555;
+    font-weight: 700;
+    letter-spacing: 2px;
+    border-radius: 4px;
+    cursor: not-allowed;
+    transition: 0.3s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Quando o formulário for preenchido corretamente, ele ganha a classe valido */
+.btn-submit-militar.valido {
+    background-color: var(--rus-vermelho);
+    color: #fff;
+    cursor: pointer;
+    border-color: #ff4d4d;
+    box-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
+}
+
+.admin-controls {
+    display: none; /* Escondido para quem não for admin */
+    margin-top: 30px;
+    text-align: right;
+}
+
+/* Switch (Botão liga/desliga para configurações de desempenho) */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+}
+
+.switch input { opacity: 0; width: 0; height: 0; }
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: var(--metal-cinza-escuro);
+    border-radius: 20px;
+    border: 1px solid var(--metal-cinza-claro);
+    transition: 0.4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 14px; width: 14px;
+    left: 2px; bottom: 2px;
+    background-color: var(--metal-cinza-claro);
+    border-radius: 50%;
+    transition: 0.4s;
+}
+
+input:checked + .slider {
+    background-color: var(--rus-vermelho);
+    border-color: var(--rus-vermelho);
+}
+input:checked + .slider:before {
+    transform: translateX(20px);
+    background-color: #fff;
+}
+
+/* Linha de configuração dentro do Modal */
+.config-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding: 12px 15px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.config-item label {
+    color: var(--texto-branco);
+    font-size: 13px;
+    font-weight: 700;
+    flex: 1;
+    letter-spacing: 1px;
+}
+
+.config-item select {
+    background: var(--metal-cinza-escuro);
+    color: var(--texto-branco);
+    border: 1px solid var(--metal-cinza-claro);
+    padding: 6px;
+    border-radius: 4px;
+    font-family: monospace;
+    cursor: pointer;
+    outline: 0;
+}
+
+/* ============================================================================
+   9. ANIMAÇÕES E BANNERS (ALERTAS)
+   ============================================================================ */
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* Banner de Notificação (Ex: "Bem-vindo", "Idioma salvo") */
+#customBanner.tactical-banner {
+    position: fixed;
+    top: -100px; /* Fica escondido para cima da tela */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #1a1a1a;
+    border: 2px solid var(--dourado-titulos);
+    color: var(--dourado-titulos);
+    padding: 15px 30px;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 5px 25px rgba(0, 0, 0, 0.9);
+    z-index: 30000; /* Z-index muito alto para aparecer sobre tudo */
+    font-family: monospace;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    
+    /* Efeito de mola ao descer */
+    transition: top 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+#customBanner.tactical-banner.show { top: 0; }
+
+/* ============================================================================
+   10. SEÇÕES DE TEXTO E LORE (WIKI)
+   ============================================================================ */
+.presentation-section { margin-bottom: 40px; }
+
+.section-subtitle {
+    color: var(--dourado-titulos-claro);
+    font-size: 25px;
+    margin-bottom: 15px;
+}
+
+.paragraph, .lore-text {
+    color: var(--texto-branco);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+    text-align: justify;
+    text-indent: 30px;
+}
+
+/* Seção de estatísticas rápidas */
+.wiki-quick-stats {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.stat-badge {
+    background-color: var(--metal-cinza-escuro);
+    border: 1px solid var(--metal-cinza-claro);
+    padding: 8px 20px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 2px 2px 5px rgba(0,0,0,0.5);
+    transition: transform 0.3s, border-color 0.3s;
+}
+
+.stat-badge:hover {
+    transform: translateY(-3px);
+    border-color: var(--dourado-titulos);
+}
+
+.stat-icon {
+    font-size: 18px;
+    filter: grayscale(100%) brightness(1.5);
+}
+
+.stat-text {
+    color: var(--dourado-titulos);
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.wiki-features-grid {
+    display: flex;
+    gap: 20px;
+    margin: 30px 0;
+}
+
+.feature-box {
+    flex: 1;
+    background-color: rgba(30, 32, 33, 0.7);
+    border-left: 3px solid var(--rus-vermelho);
+    padding: 15px 20px;
+    border-radius: 0 4px 4px 0;
+}
+
+.feature-title {
+    color: var(--texto-branco);
+    font-size: 15px;
+    margin-bottom: 8px;
+    letter-spacing: 1px;
+}
+
+.feature-desc {
+    color: var(--metal-cinza-claro);
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* ============================================================================
+   11. COMPONENTES VISUAIS (BANNERS, GIFS, BOTÕES)
+   ============================================================================ */
+/* Botão "Voltar" (Ex: voltar para a página de nações) */
+.back-button {
+    display: inline-block;
+    font-size: 14px;
+    letter-spacing: 1px;
+    padding: 8px 16px;
+    background-color: var(--metal-cinza-escuro);
+    border: 1px solid var(--metal-cinza-claro);
+    border-radius: 4px;
+    box-shadow: 2px 2px 5px var(--sombra-intensa);
+    transition: 0.3s;
+    align-self: flex-start;
+    margin-left: 5%;
+    margin-bottom: 20px;
+    color: var(--dourado-titulos);
+    font-weight: 700;
+}
+
+.back-button:hover, .back-button:focus {
+    color: var(--dourado-titulos-claro);
+    border-color: var(--dourado-titulos-claro);
+    background-color: var(--metal-chumbo);
+    transform: translateX(-5px); /* Move levemente para a esquerda */
+    outline: 0;
+}
+
+/* Frame do GIF principal (Hero) */
+.hero-gif-frame {
+    position: relative;
+    width: 100%;
+    height: 420px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 2px solid var(--metal-cinza-claro);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    margin-bottom: 40px;
+}
+
+.hero-gif-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: filter 0.5s;
+}
+
+.hero-gif-frame:hover .hero-gif-img { filter: brightness(0.9) contrast(1.1); }
+
+/* Degradê escuro sobre o GIF para destacar o texto */
+.hero-gif-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    display: flex;
+    justify-content: left;
+    align-items: flex-start;
+    padding-top: 20px;
+    padding-left: 20px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8) 0, transparent 100%);
+}
+
+.hero-gif-title {
+    font-size: 26px;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 5px #000;
+    margin: 0;
+    color: var(--dourado-titulos);
+    font-weight: 700;
+}
+
+/* ============================================================================
+   12. PÁGINA INICIAL - ESTEIRA DE NAÇÕES
+   O menu horizontal onde você escolhe os países.
+   ============================================================================ */
+.esteira-nacoes {
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 2px solid silver;
+    border-radius: 12px;
+    padding: 25px;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 10px 20px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    overflow-x: auto; /* Permite rolar horizontalmente se os cartões vazarem */
+    margin-top: 30px;
+}
+
+/* Customização da barra de rolagem da esteira */
+.esteira-nacoes::-webkit-scrollbar { height: 10px; }
+.esteira-nacoes::-webkit-scrollbar-track { background: #1e2021; border-radius: 8px; }
+.esteira-nacoes::-webkit-scrollbar-thumb { background: #8a8d8f; border-radius: 8px; }
+.esteira-nacoes::-webkit-scrollbar-thumb:hover { background: var(--dourado-titulos); }
+
+.cards-container {
+    display: flex;
+    gap: 25px;
+    width: max-content; /* Container estica para acomodar os filhos na horizontal */
+    padding-bottom: 10px;
+}
+
+/* O cartão (card) de cada país */
+.nation-card {
+    flex: 0 0 300px; /* Largura fixa de 300px */
+    border: 3px solid var(--metal-cinza-claro);
+    border-radius: 8px;
+    padding: 15px;
+    min-height: 280px;
+    box-shadow: 4px 4px 10px var(--sombra-intensa);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    aspect-ratio: 3/4; /* Proporção de altura maior que largura */
+    
+    /* Mix de fundo para fundir a cor com a imagem da bandeira */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-blend-mode: multiply;
+    background-color: #9e9e9e;
+}
+
+.nation-title {
+    font-size: 22px;
+    color: var(--dourado-titulos);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 4px var(--metal-chumbo);
+    margin-bottom: auto;
+    margin-top: 10px;
+}
+
+/* Imagens de Fundo dos Cards de Nações */
+.card-usa { background-image: url("../WT - Artes/USA/USA Flags/WT USA Flag.jpg"); }
+.card-ger { background-image: url("../WT - Artes/GER/Ger Flags/WT GER Flag.jpg"); }
+.card-rus { background-image: url("../WT - Artes/RUS/RUS Flags/WT RUS Flag.jpg"); }
+.card-jpn { background-image: url("../WT - Artes/JPN/JPN Flags/JPN Flag.jpg"); }
+.card-swe { background-image: url("../WT - Artes/SWE/SWE Flags/SWE Flag.jpg"); }
+
+.tank-silhueta {
+    width: 90%;
+    max-width: 200px;
+    height: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+    /* Deixa a imagem totalmente preta com uma aura branca */
+    filter: brightness(0) drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+    object-fit: contain;
+}
+
+.card-info-box {
+    background-color: var(--metal-chumbo);
+    border: 2px solid var(--metal-cinza-claro);
+    border-radius: 4px;
+    padding: 10px;
+    width: 100%;
+    margin-top: auto;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+.card-info-box p {
+    color: var(--texto-branco);
+    font-size: 11px;
+    line-height: 1.4;
+    text-indent: 30px;
+    text-align: justify;
+}
+
+/* Efeito de Foco na Esteira:
+   Quando o mouse está SOBRE O CONTAINER, escurece todos os cartões.
+   Mas quando o mouse está SOBRE UM CARTÃO ESPECÍFICO, ilumina e levanta apenas ele. */
+.cards-container:hover .nation-card,
+.cards-container:focus-within .nation-card {
+    filter: grayscale(100%) brightness(0.6);
+}
+
+.cards-container .nation-card:hover,
+.cards-container .nation-card:focus {
+    filter: grayscale(0%) brightness(1.1);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.9);
+    outline: 0;
+}
+
+/* Bordas coloridas no hover específicas para cada nação */
+.card-usa:hover, .card-usa:focus { border-color: #1a3668; }
+.card-ger:hover, .card-ger:focus { border-color: #f0f2f5; }
+.card-rus:hover, .card-rus:focus { border-color: #a32020; }
+.card-jpn:hover, .card-jpn:focus { border-color: #c00000; }
+.card-swe:hover, .card-swe:focus { border-color: #005293; }
+
+/* ============================================================================
+   13. LISTA DE TANQUES E TOGGLE (MODO CAIXAS / MODO LISTA)
+   A página que mostra todos os blindados de uma nação.
+   ============================================================================ */
+.nation-banner {
+    width: 100%; height: auto; min-height: 120px;
+    margin-bottom: 30px;
+    display: flex; align-items: center;
+    padding: 20px 40px;
+    border-radius: 8px;
+    background-color: var(--metal-cinza-escuro);
+    box-shadow: 5px 5px 15px var(--sombra-intensa);
+    
+    /* Fundo duplo: Um gradiente degradê para escurecer a esquerda, e a bandeira na direita */
+    background-image: linear-gradient(to right, var(--sombra-intensa) 50%, transparent 100%), var(--flag-bg);
+    background-position: left center, right center;
+    background-size: cover, auto 100%;
+    background-repeat: no-repeat;
+}
+
+.nation-title-large {
+    font-size: clamp(18px, 3vw, 36px); /* Tamanho de fonte responsivo */
+    color: var(--dourado-titulos);
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 5px #000;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+/* Botão Toggle (Caixas <-> Lista) */
+.btn-toggle-view {
+    display: flex; align-items: center; gap: 8px;
+    cursor: pointer;
+    background-color: var(--metal-cinza-escuro);
+    color: var(--dourado-titulos);
+    border: 1px solid var(--dourado-titulos);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.btn-toggle-view:hover {
+    background-color: var(--dourado-titulos);
+    color: #000;
+}
+
+/* O Container flex que vai abrigar a lista (Por padrão: Grade/Caixas) */
+.nation-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    width: 90%;
+    max-width: 1200px;
+    transition: 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.tank-list {
+    display: flex;
+    flex-wrap: wrap; /* Permite pular para a próxima linha */
+    justify-content: flex-start;
+    align-content: flex-start;
+    gap: 20px;
+    width: 95%;
+    max-height: 950px;
+    padding: 15px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: 0.6s;
+}
+
+.tank-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: calc(20% - 16px); /* 5 cartões por linha, subtraindo o gap */
+    padding: 20px 10px;
+    min-height: 120px;
+    border-radius: 8px;
+    border: 2px solid var(--metal-cinza-claro);
+    transition: 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    overflow: hidden;
+    transform-origin: center center;
+}
+
+/* Cores de borda dos tanques por país */
+.border-rus { border: 2px solid #a32020; }
+.border-ger { border: 2px solid var(--dourado-titulos); }
+.border-usa { border: 2px solid #1a3668; }
+.border-jpn { border: 2px solid #c00000; }
+.border-swe { border: 2px solid #005293; }
+
+.list-silhouette {
+    width: 90px;
+    margin-bottom: 15px;
+    filter: brightness(0) drop-shadow(0 0 1px rgba(254, 255, 255, 0.978)); /* Silhueta branca */
+    transition: 0.4s;
+}
+
+.tank-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.tank-name {
+    color: var(--dourado-titulos);
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.tank-desc {
+    font-size: 11px;
+    color: var(--texto-branco);
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* ============================================================================
+   13.1 MODO LISTA (ATIVADO VIA JAVASCRIPT)
+   Quando a classe .list-view entra, o layout muda de caixas para lista.
+   ============================================================================ */
+.nation-content.list-view {
+    flex-direction: row; /* Coloca a aba da esquerda e a lista lado a lado */
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.nation-content.list-view .nation-info {
+    width: 30%;
+    position: sticky; /* A aba da nação acompanha a rolagem */
+    top: 130px;
+}
+
+.nation-content.list-view .tank-list {
+    width: 68%;
+    flex-direction: column;
+    flex-wrap: nowrap; /* Impede pular linha */
+    max-height: 1200px;
+    padding-right: 15px;
+}
+
+.nation-content.list-view .tank-card {
+    width: 100%;
+    flex-direction: row; /* Imagem e texto ficam na horizontal */
+    text-align: left;
+    align-items: center;
+    padding: 20px 25px;
+    min-height: 130px;
+}
+
+.nation-content.list-view .tank-name { font-size: 22px; }
+.nation-content.list-view .tank-desc { font-size: 14px; }
+
+.nation-content.list-view .list-silhouette {
+    width: 110px;
+    margin-bottom: 0;
+    margin-right: 30px;
+}
+
+/* Efeitos Hover no Modo Lista */
+@media (hover: hover) {
+    /* Efeito de escurecer as cartas que NÃO estão em foco, similar à esteira */
+    .tank-list:hover .tank-card:not(:hover):not(.selecionado) {
+        filter: grayscale(100%) brightness(0.6);
+    }
+    
+    .tank-list .tank-card:hover, .tank-list .tank-card:focus {
+        filter: grayscale(0%) brightness(1.2);
+        box-shadow: inset 0 0 15px rgba(197, 168, 102, 0.15);
+        border-color: var(--dourado-titulos-claro);
+        transform: scale(1.08); /* Aumenta a carta no modo Grade */
+        outline: 0;
+        z-index: 2;
+    }
+    
+    .tank-list .tank-card:hover .list-silhouette {
+        width: 110px;
+        filter: drop-shadow(0 10px 10px #000) brightness(1); /* Tira a silhueta da escuridão (fica a cor real do png) */
+    }
+    
+    .nation-content.list-view .tank-card:hover {
+        transform: translateX(15px); /* No modo lista, ele desliza para a direita, ao invés de crescer */
+    }
+    .nation-content.list-view .tank-card:hover .list-silhouette { width: 120px; }
+}
+
+/* ============================================================================
+   14. PÁGINA DO TANQUE ESPECÍFICO (Ficha Tática / Tank Sheet)
+   ============================================================================ */
+.tank-sheet {
+    background-color: var(--metal-chumbo);
+    border: 2px solid var(--metal-cinza-claro);
+    border-radius: 8px;
+    box-shadow: 10px 10px 25px var(--sombra-intensa);
+    width: 100%; max-width: 900px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.sheet-header {
+    background: linear-gradient(90deg, var(--metal-cinza-escuro), var(--metal-chumbo));
+    padding: 20px 40px;
+    border-bottom: 2px solid var(--dourado-titulos);
+    display: flex; justify-content: space-between; align-items: center;
+}
+
+.sheet-title { color: var(--dourado-titulos); font-size: 28px; letter-spacing: 2px; }
+
+/* Tag Classe (Ex: Tanque Pesado) */
+.sheet-badge {
+    background-color: var(--metal-cinza-claro);
+    color: var(--metal-chumbo);
+    padding: 5px 15px; border-radius: 20px;
+    font-size: 14px; font-weight: 700;
+}
+
+.sheet-content { display: flex; padding: 40px; gap: 40px; }
+
+/* Quadro com a imagem do tanque e o slider */
+.sheet-visual {
+    flex: 1;
+    display: flex; align-items: center; justify-content: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    border: 1px dashed var(--metal-cinza-claro);
+    padding: 20px;
+}
+
+.sheet-visual.carousel-wrapper {
+    flex: 1 1 50%; max-width: 50%;
+    margin: 0; align-self: flex-start;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.sheet-silhouette { width: 100%; max-width: 400px; filter: drop-shadow(0 10px 10px #000); }
+
+/* Tabela de especificações */
+.data-title, .lore-title {
+    border-bottom: 1px solid var(--metal-cinza-claro);
+    color: var(--dourado-titulos);
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+}
+
+.data-table {
+    width: 100%; border-collapse: collapse;
+    color: var(--texto-branco); font-size: 15px;
+}
+.data-table th, .data-table td {
+    padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.data-table th { text-align: left; color: var(--metal-cinza-claro); font-weight: 400; width: 50%; }
+.data-table td { text-align: right; font-weight: 700; }
+
+.sheet-lore { padding: 0 40px 40px; }
+
+/* O Carrossel interno do tanque */
+.carousel-wrapper {
+    width: 100%; margin: 0 auto; overflow: hidden; position: relative;
+    border-radius: 8px; border: 2px dashed var(--metal-cinza-claro); padding: 4px;
+}
+.carousel-track {
+    display: flex; width: 100%;
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+}
+.slide-item {
+    min-width: 100%; width: 100%; aspect-ratio: 4/3; object-fit: cover;
+    border: none !important; outline: 0 !important; display: block; border-radius: 4px;
+}
+
+/* ============================================================================
+   15. BOTÃO VOLTAR AO TOPO
+   ============================================================================ */
+#btnVoltarTopo {
+    position: fixed;
+    bottom: -80px; /* Começa escondido pra baixo */
+    right: 20px;
+    background-color: var(--rus-vermelho);
+    color: #fff;
+    border: 1px solid var(--metal-cinza-claro);
+    border-radius: 50px;
+    padding: 8px 16px;
+    display: flex; align-items: center; gap: 8px; justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    z-index: 15000;
+    transition: bottom 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55), transform 0.2s, background-color 0.2s;
+}
+
+/* O script adiciona a classe visível quando o scroll passa de 300px */
+#btnVoltarTopo.visivel { bottom: 20px; }
+#btnVoltarTopo:hover { background-color: #ff4d4d; transform: scale(1.05); }
+
+.icone-topo { width: 16px; height: auto; object-fit: contain; }
+.texto-topo { font-family: Arial, sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 1px; white-space: nowrap; }
+
+/* ============================================================================
+   16. SISTEMAS DE TEMAS (Trocados via Javascript/LocalStorage)
+   ============================================================================ */
+/* --- DESEMPENHO EXTREMO (MODO LOW PERF) --- */
+body.low-perf :not(.slider):not(.slider:before) {
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important; /* Corta o scroll suave */
+}
+
+/* --- TEMA DESERTO (CLARO/BEGE) --- */
+body.theme-desert {
+    --metal-chumbo: #F5F2EB;
+    --metal-cinza-escuro: #EBE6DA;
+    --texto-branco: #181A1B;
+    --dourado-titulos: #8A5A19;
+    --dourado-titulos-claro: #A66810;
+    --metal-cinza-claro: #6D685C;
+    --rus-vermelho: #8C1C13;
+    
+    background-image: url("../WT - Artes/WT - BG/WT_bg_victory_day.webp");
+    background-color: #dcd7c9;
+}
+body.theme-desert .ui-container, body.theme-desert .modal-box {
+    background-color: rgba(220, 215, 201, 0.95);
+    border-color: var(--metal-cinza-claro);
+}
+body.theme-desert .top-navbar {
+    background-color: #1a1d20 !important;
+    border-bottom: 2px solid var(--dourado-titulos);
+}
+body.theme-desert .nav-item .text-box { color: #ebe6da; }
+body.theme-desert .tank-silhueta, body.theme-desert .list-silhouette {
+    /* No tema deserto as silhuetas geram sombra preta (já que o fundo é claro) */
+    filter: brightness(0) drop-shadow(0 0 3px rgba(0, 0, 0, 0.2)) !important;
+}
+
+/* --- TEMA NOTURNO (VISÃO TÉRMICA VERDE) --- */
+body.theme-night {
+    --metal-chumbo: #051405;
+    --metal-cinza-escuro: #020a02;
+    --texto-branco: #4dff4d;
+    --dourado-titulos: #80ff80;
+    --metal-cinza-claro: #1a661a;
+    --rus-vermelho: #009900;
+    background-color: #000;
+    background-image: url("../WT - Artes/WT - BG/night_vision.webp");
+}
+body.theme-night .ui-container, body.theme-night .modal-box {
+    background-color: rgba(5, 20, 5, 0.95);
+    border-color: #1a661a;
+}
+body.theme-night .tank-silhueta, body.theme-night .list-silhouette {
+    /* Efeito matrix/radiação: Inverte cores, aplica tom esverdeado e satura */
+    filter: brightness(0) invert(50%) sepia(100%) hue-rotate(85deg) saturate(500%) drop-shadow(0 0 8px #4dff4d) !important;
+}
+
+/* ============================================================================
+   17. ACESSIBILIDADE E OUTLINE
+   Para quem navega pelo teclado (Tab)
+   ============================================================================ */
+.config-item select:focus-visible,
+.fechar-modal:focus-visible,
+.switch input:focus-visible + .slider,
+#btnPurge:focus-visible {
+    outline: 2px solid var(--dourado-titulos) !important;
+    outline-offset: 3px;
+}
+
+/* ============================================================================
+   18. RESPONSIVIDADE (MEDIA QUERIES PARA CELULARES E TABLETS)
+   ============================================================================ */
+
+/* --- BOTÕES DO MENU MOBILE (Ocultos no PC) --- */
+.nav-toggle-btn, .nav-toggle-trigger {
+    display: none;
+    color: var(--dourado-titulos);
+    font-size: 14px; font-weight: 700;
+    background: var(--metal-cinza-escuro);
+    border: 1px solid var(--dourado-titulos);
+    padding: 8px 12px; border-radius: 4px;
+    cursor: pointer; transition: 0.3s;
+}
+.nav-toggle-btn:hover { background: var(--dourado-titulos); color: #000; }
+
+@keyframes slideDownNav {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* TABLETS E TELAS MÉDIAS (Até 1024px) */
+@media (max-width: 1024px) {
+    body { padding: 90px 15px 20px; }
+    
+    /* Configurações da Navbar para Tablet/Mobile */
+    .top-navbar {
+        padding: 10px 15px; min-height: 70px;
+        justify-content: space-between; align-items: center;
+    }
+    .logo-plate-nav { max-height: 50px; padding: 2px 8px; }
+    .navbar-logo-img { height: 40px; }
+    
+    /* Ativa o botão Hambúrguer */
+    .nav-toggle-btn, .nav-toggle-trigger { display: block; }
+    
+    /* Esconde o menu direito e o relógio por padrão (Menu fechado) */
+    .top-navbar .nav-center, .top-navbar .nav-right {
+        display: none !important;
+        width: 100%; flex-direction: column; align-items: center;
+        background-color: transparent; padding: 0; margin-top: 15px; gap: 15px;
+    }
+    
+    /* Ao clicar no botão de menu, o JS injeta a classe "expanded" */
+    .top-navbar.expanded { padding-bottom: 20px; }
+    .top-navbar.expanded .nav-center, .top-navbar.expanded .nav-right {
+        display: flex !important;
+        animation: slideDownNav 0.4s forwards;
+    }
+    
+    /* Ajusta a barra de pesquisa para preencher a tela */
+    .search-container { flex: 1; max-width: 220px; margin-left: 0; }
+    #searchInput, #searchInput:focus { width: 100% !important; }
+    
+    /* Empilha colunas nas telas das nações e da ficha do tanque */
+    .nation-content, .nation-content.list-view, .sheet-content {
+        flex-direction: column !important;
+        width: 100% !important; padding: 20px; gap: 20px;
+    }
+    
+    .ui-container { width: 100% !important; padding: 0 10px 15px !important; }
+    .main-panel, .tank-list, .tank-card, .tank-sheet { width: 100% !important; position: static !important; }
+    
+    .sheet-visual.carousel-wrapper { max-width: 100% !important; width: 100% !important; }
+}
+
+/* SMARTPHONES (Até 768px) */
+@media (max-width: 768px) {
+    /* Empilha os quadros de features (ex: Armamento, Blindagem) */
+    .wiki-features-grid { flex-direction: column; }
+    
+    /* Diminui os blocos de estatísticas */
+    .wiki-quick-stats { gap: 10px; }
+    .stat-badge { flex: 1 1 calc(50% - 10px); justify-content: center; }
+    
+    /* Diminui o GIF principal */
+    .hero-gif-frame { height: 180px; margin-bottom: 25px; }
+    .hero-gif-title { font-size: 18px; }
+    
+    /* Ajusta os itens de configuração para celulares pequenos */
+    .config-item { flex-direction: column; align-items: stretch; gap: 12px; }
+    .config-item select { width: 100%; }
+    .config-item .switch { align-self: flex-start; }
+    
+    .modal-box { padding: 25px 20px; }
+}
