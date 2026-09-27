@@ -168,7 +168,7 @@ function iniciarLogin(basePath) {
                 localStorage.removeItem("isAuth");
                 localStorage.removeItem("userRole");
                 if (txtBotaoLogin) txtBotaoLogin.textContent = "ENTRAR";
-                mostrarBanner("DESCONECTADO.", "WT - Artes/UI-UX icons/Logout-icon.webp");
+                mostrarBanner("DESCONECTADO.", "WT - Artes/UI-UX icons/Soldier-salute.webp");
                 atualizarPermissoes("visitante");
             } else {
                 // Se não, abre o modal
