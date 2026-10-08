@@ -18,8 +18,48 @@ $log_file = '../../logs/app.log';
 $nome = filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_STRING);
 $sobrenome = filter_input(INPUT_POST, 'sobrenome', FILTER_SANITIZE_STRING);
 $nickname = filter_input(INPUT_POST, 'nickname', FILTER_SANITIZE_STRING);
+// 1. Sanitização e Validação Estrita de Formato
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
-// Extrai o domínio do e-mail (ex: gmail.com)
+
+if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Formato de e-mail inválido."]);
+    exit;
+}
+
+// 2. Extração do Domínio
+$partesEmail = explode('@', $email);
+$dominio = strtolower(end($partesEmail));
+
+// 3. Bloqueio de Contas Administrativas no Registro Público
+if ($dominio === 'wtwiki.com') {
+    http_response_code(403);
+    echo json_encode(["status" => "error", "message" => "O domínio @wtwiki.com é restrito ao Alto Comando."]);
+    exit;
+}
+
+// 4. Detecção de Erros Comuns de Digitação (Typos)
+$dominiosConhecidos = ['gmail.com', 'hotmail.com', 'outlook.com', 'yahoo.com', 'unesp.br'];
+$errosComuns = [
+    'gamil.com', 'gmaill.com', 'gmai.com', 'gmail.com.br', 'gmeil.com',
+    'hotmial.com', 'hotmai.com', 'hotmmail.com',
+    'outlok.com', 'outloock.com',
+    'yaho.com', 'yahooo.com'
+];
+
+if (in_array($dominio, $errosComuns)) {
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "Domínio suspeito de erro de digitação. Verifique se digitou corretamente."]);
+    exit;
+}
+
+// 5. Teste de Existência Real (DNS MX)
+if (!checkdnsrr($dominio, 'MX')) {
+    http_response_code(400);
+    echo json_encode(["status" => "error", "message" => "O provedor @" . $dominio . " não possui servidores de e-mail ativos."]);
+    exit;
+}
+
 $dominio = substr(strrchr($email, "@"), 1);
 
 // Regra 1: Bloqueia domínios internos (Apenas Admins podem criar via painel/SQL)
