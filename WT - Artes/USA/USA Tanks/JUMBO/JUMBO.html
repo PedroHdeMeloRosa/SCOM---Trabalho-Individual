@@ -156,40 +156,6 @@
         </article>
     </main>
 
-    <!-- Lógica Autônoma do Carrossel de Combate -->
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const track = document.getElementById('jumbo-track');
-            const slides = Array.from(track.children);
-            const btnNext = document.getElementById('btnNext');
-            const btnPrev = document.getElementById('btnPrev');
-
-            let currentIndex = 0;
-
-            function updateCarousel() {
-                const amountToMove = currentIndex * 100;
-                track.style.transform = `translateX(-${amountToMove}%)`;
-            }
-
-            btnNext.addEventListener('click', () => {
-                if (currentIndex < slides.length - 1) {
-                    currentIndex++;
-                } else {
-                    currentIndex = 0;
-                }
-                updateCarousel();
-            });
-
-            btnPrev.addEventListener('click', () => {
-                if (currentIndex > 0) {
-                    currentIndex--;
-                } else {
-                    currentIndex = slides.length - 1;
-                }
-                updateCarousel();
-            });
-        });
-    </script>
 </body>
 
 </html>

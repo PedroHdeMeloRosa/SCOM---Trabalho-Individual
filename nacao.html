@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Aliada - War Thunder</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="WT - Artes/WT-ICO2.ico" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    
+    <style>
+        #loadingOverlay {
+            position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: #111; z-index: 99; display: flex;
+            justify-content: center; align-items: center;
+            color: #F2B400; font-weight: bold; font-size: 1.2rem;
+        }
+        
+        /* Estilos para o Modal de Edição da Nação */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8); z-index: 1000; display: none;
+            justify-content: center; align-items: center;
+        }
+        .modal-overlay.ativo { display: flex; }
+        .modal-box {
+            background: #141414; border: 1px solid #444; border-radius: 6px;
+            padding: 20px; width: 90%; max-width: 800px; max-height: 90vh;
+            overflow-y: auto; position: relative; box-shadow: 0 4px 20px rgba(0,0,0,0.8);
+        }
+        .fechar-modal {
+            position: absolute; top: 15px; right: 15px; background: transparent;
+            color: #F2B400; border: none; font-size: 18px; font-weight: bold; cursor: pointer;
+        }
+        .modal-title { color: #F2B400; font-family: monospace; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px; }
+        .input-group label { display: block; color: #F2B400; font-size: 12px; font-family: monospace; margin-bottom: 5px; }
+        .input-group input, .input-group textarea {
+            width: 100%; padding: 8px; background: #111; color: #fff;
+            border: 1px solid #444; border-radius: 4px; font-family: monospace; box-sizing: border-box; margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="js/menu.min.js"></script>
+    <script>injetarMenu('');</script>
+
+    <main class="ui-container" style="position: relative; min-height: 500px;">
+        <div id="loadingOverlay">ESTABELECENDO CONTATO COM A MATRIZ...</div>
+
+        <!-- BARRA SUPERIOR -->
+        <div style="display: flex; justify-content: space-between; width: 90%; max-width: 1200px; margin: 0 auto 20px; align-items: center;">
+            <a href="index.html" class="back-button" style="margin: 0;">&#9664; VOLTAR À CENTRAL</a>
+            
+            <div style="display: flex; gap: 10px;">
+                <!-- Botão Editar Nação (Aparece apenas para Admin) -->
+                <button id="btnEditarNacao" class="btn-submit-militar" style="display: none; width: auto; margin: 0; padding: 10px 15px; background-color: #F2B400; color: #000; gap: 8px; font-weight: bold; align-items: center;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">edit</span> EDITAR NAÇÃO
+                </button>
+                <button class="btn-toggle-view" id="btnToggleView">&#9776; MODO LISTA</button>
+            </div>
+        </div>
+
+        <div class="nation-content" id="nacaoContainer" style="display: none;">
+
+            <!-- COLUNA ESQUERDA -->
+            <section class="main-panel nation-bg bg-filter nation-info">
+                <!-- BANNER DA BANDEIRA -->
+                <div class="nation-banner" id="bannerContainer" style="position: relative; overflow: hidden; border-bottom: 3px solid #fff;">
+                    <img id="dinBandeira" src="" alt="Bandeira da Nação" style="position: absolute; right: 0; top: 0; width: 100%; height: 100%; object-fit: cover; object-position: right; z-index: 1;">
+                    <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(0,0,0,0.9) 40%, transparent 100%); z-index: 2;"></div>
+                    <h1 class="nation-title-large" id="dinNomeNacao" style="position: relative; z-index: 3; margin: 0;">--</h1>
+                </div>
+
+                <div class="presentation-section">
+                    <h2 class="section-subtitle">TÁTICAS E ESTILO DE JOGO</h2>
+                    <div id="dinLoreNacao" style="color: var(--texto-branco); font-size: 16px; line-height: 1.6; text-align: justify;">
+                        --
+                    </div>
+                </div>
+            </section>
+
+            <!-- COLUNA DIREITA (CARDS) -->
+            <div style="display: flex; flex-direction: column; width: 100%;">
+                
+                <!-- Botão Adicionar Tanque (Aparece apenas para Admin) -->
+                <button id="btnNovoTanque" class="btn-submit-militar" style="display: none; width: 100%; margin-bottom: 15px; padding: 12px; background-color: #1A3668; color: #fff; font-weight: bold; border: 1px dashed #F2B400; align-items: center; justify-content: center; gap: 8px;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">add_circle</span> REQUISITAR NOVO BLINDADO À LINHA DE PRODUÇÃO
+                </button>
+
+                <div id="listaTanques" class="tank-list">
+                    <!-- Injetados via JS -->
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- MODAL DE EDIÇÃO DA NAÇÃO -->
+    <div class="modal-overlay" id="edicaoNacaoModal">
+        <div class="modal-box">
+            <button class="fechar-modal" id="closeNacaoModal">X</button>
+            <h2 class="modal-title">MODIFICAR DOUTRINA NACIONAL</h2>
+            
+            <div id="nacaoFeedback" class="tactical-feedback" style="display:none; padding:10px; margin-bottom:10px; font-size:12px; font-weight:bold;"></div>
+
+            <form id="formEdicaoNacao">
+                <input type="hidden" id="editNacaoId">
+                
+                <div class="input-group">
+                    <label>Nome Oficial da Nação</label>
+                    <input type="text" id="editNacaoNome" required>
+                </div>
+                
+                <div class="input-group">
+                    <label>Cor Tema (Ex: #FF0000 para vermelho, #1A3668 para azul)</label>
+                    <input type="text" id="editNacaoCor">
+                </div>
+
+                <div class="input-group">
+                    <label>Caminho da Bandeira (Desde a raiz do projeto)</label>
+                    <input type="text" id="editNacaoBandeira" placeholder="WT - Artes/.../Bandeira.jpg">
+                </div>
+
+                <div class="input-group">
+                    <label>Táticas e Estilo de Jogo (Suporta tags **negrito** e enter para parágrafos)</label>
+                    <textarea id="editNacaoLore" rows="8"></textarea>
+                </div>
+
+                <div style="text-align: right; margin-top: 15px;">
+                    <button type="submit" id="btnSalvarNacao" class="btn-submit-militar" style="width: auto; background: #4caf50; color: #fff; font-weight:bold; padding: 10px 20px;">ATUALIZAR REGISTROS NACIONAIS</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- CÉREBRO DA NAÇÃO -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const nacaoId = urlParams.get('id');
+
+            const overlay = document.getElementById("loadingOverlay");
+            const container = document.getElementById("nacaoContainer");
+            const listaTanques = document.getElementById("listaTanques");
+            
+            // Elementos de Admin
+            const btnEditarNacao = document.getElementById("btnEditarNacao");
+            const btnNovoTanque = document.getElementById("btnNovoTanque");
+            const modalNacao = document.getElementById("edicaoNacaoModal");
+            const perfilLocal = (localStorage.getItem("userRole") || "").toLowerCase();
+
+            if (!nacaoId) {
+                overlay.innerHTML = "<span style='color:red;'>Nação não identificada nos parâmetros.</span>";
+                return;
+            }
+
+            const formatarTextoTatico = (texto) => {
+                if (!texto) return "";
+                let formatado = texto.replace(/\*\*(.*?)\*\*/g, '<strong style="color: #F2B400;">\$1</strong>');
+                formatado = formatado.split('\n').filter(linha => linha.trim() !== "").map(linha => `<p class="paragraph">${linha}</p>`).join('');
+                return formatado;
+            };
+
+            // ==========================================
+            // CARREGAR DADOS
+            // ==========================================
+            try {
+                const resposta = await fetch(`php/api/listar_frota_nacao.php?nacao_id=${nacaoId}`);
+                const json = await resposta.json();
+
+                if (json.status === "success") {
+                    const nacao = json.nacao;
+                    const frota = json.tanques;
+
+                    document.title = `${nacao.nome.toUpperCase()} - War Thunder`;
+                    document.getElementById("dinNomeNacao").textContent = nacao.nome.toUpperCase();
+                    document.getElementById("dinBandeira").src = nacao.caminho_bandeira || "";
+                    document.getElementById("bannerContainer").style.borderBottomColor = nacao.cor_hex !== '#ffffff' ? nacao.cor_hex : '#444';
+                    document.getElementById("dinLoreNacao").innerHTML = nacao.lore_taticas ? formatarTextoTatico(nacao.lore_taticas) : "<p class='paragraph'>Doutrina militar confidencial.</p>";
+
+                    listaTanques.innerHTML = "";
+                    if (frota.length > 0) {
+                        frota.forEach((tanque, index) => {
+                            listaTanques.innerHTML += `
+                                <a href="ficha.html?id=${tanque.id}" class="tank-card nation-bg">
+                                    <img src="${tanque.caminho_imagem}" alt="Silhueta ${tanque.nome}" class="list-silhouette" onerror="this.src='WT - Artes/WT-ICO2.ico'">
+                                    <div class="tank-info">
+                                        <span class="tank-name">${index + 1}. ${tanque.nome}</span>
+                                        <span class="tank-desc">${tanque.descricao_breve ? tanque.descricao_breve + '...' : "Classificação Operacional Pendente."}</span>
+                                    </div>
+                                </a>
+                            `;
+                        });
+                    } else {
+                        listaTanques.innerHTML = `<div style="text-align: center; padding: 20px; color: #ff4d4d; font-family: monospace;">Nenhum veículo estacionado nesta base.</div>`;
+                    }
+
+                    overlay.style.display = "none";
+                    container.style.display = "flex";
+
+                    // ==========================================
+                    // ATIVAR CONTROLES ADMIN
+                    // ==========================================
+                    if (perfilLocal === "admin") {
+                        btnEditarNacao.style.display = "flex";
+                        btnNovoTanque.style.display = "flex";
+
+                        // Abrir Modal de Edição da Nação
+                        btnEditarNacao.addEventListener("click", () => {
+                            document.getElementById("editNacaoId").value = nacaoId;
+                            document.getElementById("editNacaoNome").value = nacao.nome;
+                            document.getElementById("editNacaoCor").value = nacao.cor_hex;
+                            document.getElementById("editNacaoBandeira").value = nacao.caminho_bandeira || "";
+                            document.getElementById("editNacaoLore").value = nacao.lore_taticas || "";
+                            modalNacao.classList.add("ativo");
+                        });
+
+                        // Lógica Criar Novo Tanque
+                        btnNovoTanque.addEventListener("click", async () => {
+                            if (confirm("Autorizar início de produção de um novo blindado nesta Nação?")) {
+                                btnNovoTanque.innerHTML = "SOLICITANDO ORÇAMENTO...";
+                                btnNovoTanque.disabled = true;
+
+                                try {
+                                    let fd = new FormData();
+                                    fd.append('acao', 'novo_tanque');
+                                    fd.append('nacao_id', nacaoId);
+
+                                    const res = await fetch("php/api/admin_nacao_api.php", { method: "POST", body: fd });
+                                    const retorno = await res.json();
+
+                                    if (res.ok && retorno.status === "success") {
+                                        // Redireciona direto para a ficha do tanque em branco para você preencher
+                                        window.location.href = `ficha.html?id=${retorno.novo_id}`;
+                                    } else {
+                                        alert("Falha na linha de produção: " + retorno.message);
+                                        btnNovoTanque.innerHTML = "TENTAR NOVAMENTE";
+                                        btnNovoTanque.disabled = false;
+                                    }
+                                } catch (err) {
+                                    alert("Falha de comunicação com os engenheiros.");
+                                    btnNovoTanque.disabled = false;
+                                }
+                            }
+                        });
+                    }
+
+                } else {
+                    overlay.innerHTML = `<span style='color:red;'>${json.message}</span>`;
+                }
+            } catch (err) {
+                overlay.innerHTML = "<span style='color:red;'>Falha de comunicação com o servidor.</span>";
+            }
+
+            // Fechar Modal
+            document.getElementById("closeNacaoModal").addEventListener("click", () => modalNacao.classList.remove("ativo"));
+
+            // Salvar Edição da Nação
+            document.getElementById("formEdicaoNacao").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const btnSalvar = document.getElementById("btnSalvarNacao");
+                const textoOriginal = btnSalvar.innerHTML;
+                const fb = document.getElementById("nacaoFeedback");
+                
+                btnSalvar.disabled = true;
+                btnSalvar.innerHTML = "ATUALIZANDO...";
+
+                try {
+                    let fd = new FormData();
+                    fd.append("acao", "editar_nacao");
+                    fd.append("id", document.getElementById("editNacaoId").value);
+                    fd.append("nome", document.getElementById("editNacaoNome").value);
+                    fd.append("cor", document.getElementById("editNacaoCor").value);
+                    fd.append("bandeira", document.getElementById("editNacaoBandeira").value);
+                    fd.append("lore", document.getElementById("editNacaoLore").value);
+
+                    const res = await fetch("php/api/admin_nacao_api.php", { method: "POST", body: fd });
+                    const json = await res.json();
+                    
+                    if (res.ok && json.status === "success") {
+                        fb.style.display = "block";
+                        fb.style.background = "#122a18"; fb.style.color = "#80ff9f"; fb.style.borderLeft = "4px solid #4caf50";
+                        fb.textContent = json.message;
+                        setTimeout(() => window.location.reload(), 1000);
+                    } else {
+                        fb.style.display = "block";
+                        fb.style.background = "#2a1212"; fb.style.color = "#ff8080"; fb.style.borderLeft = "4px solid var(--rus-vermelho)";
+                        fb.textContent = json.message || "Erro ao salvar.";
+                    }
+                } catch (err) {
+                    fb.style.display = "block";
+                    fb.textContent = "Falha crítica de comunicação com o servidor.";
+                } finally {
+                    btnSalvar.disabled = false;
+                    btnSalvar.innerHTML = textoOriginal;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

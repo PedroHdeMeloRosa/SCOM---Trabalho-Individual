@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base de Dados - Ficha Tática</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="icon" href="WT - Artes/WT-ICO2.ico" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+    <style>
+        .sheet-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* O Trilho das Imagens */
+        .carousel-track {
+            display: flex;
+            width: 100%;
+            transition: transform 0.4s ease-in-out;
+            /* Suaviza a troca de fotos */
+        }
+
+        .carousel-wrapper {
+            width: 100%;
+            max-width: 100%;
+            /* A MÁGICA ACONTECE AQUI */
+            max-height: 480px;
+            margin: 0 auto !important;
+            background-color: #0d0d0d;
+        }
+
+        /* E certifique-se de que a slide-item está assim (com cover e 100%) */
+        .slide-item {
+            flex: 0 0 100%;
+            width: 100%;
+            height: 100%;
+            max-height: 480px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sheet-data {
+            width: 100%;
+        }
+
+        .data-table {
+            margin: 0 auto;
+            width: 100%;
+            max-width: 800px;
+            border-collapse: collapse;
+        }
+
+        .data-table th,
+        .data-table td {
+            padding: 8px;
+            border-bottom: 1px solid #333;
+        }
+
+        #loadingOverlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #111;
+            z-index: 99;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #F2B400;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Estilos táticos para a lista de atributos editáveis com rolagem */
+        .caixa-rolagem-atributos {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 10px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            border: 1px solid #333;
+            background: #141414;
+            border-radius: 4px;
+        }
+
+        .attr-row {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background: #222;
+            padding: 8px;
+            border: 1px solid #444;
+            border-radius: 4px;
+        }
+
+        .attr-row input {
+            background: #111;
+            color: #fff;
+            border: 1px solid #555;
+            padding: 6px;
+            font-size: 11px;
+            border-radius: 3px;
+        }
+
+        .btn-move {
+            background: #333;
+            color: #F2B400;
+            border: 1px solid #555;
+            cursor: pointer;
+            padding: 4px 6px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        .btn-move:hover {
+            background: #555;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="js/menu.min.js"></script>
+    <script>injetarMenu('');</script>
+
+    <main class="ui-container" style="position: relative; min-height: 500px;">
+
+        <div id="loadingOverlay">CARREGANDO DOSSIÊ MILITAR...</div>
+
+        <!-- BARRA SUPERIOR -->
+        <div
+            style="width: 100%; max-width: 900px; margin: 0 auto 20px; display: flex; justify-content: space-between; align-items: center;">
+            <a href="javascript:history.back()" id="btnVoltarArvore" class="back-button" style="margin: 0;">&#9664;
+                VOLTAR À PÁGINA ANTERIOR</a>
+
+            <button id="btnAbrirEdicao" class="btn-submit-militar"
+                style="display: none; width: auto; margin: 0; padding: 10px 15px; background-color: #F2B400; color: #000; gap: 8px; font-weight: bold; align-items: center;">
+                <span class="material-symbols-outlined" style="font-size: 18px;">edit_document</span> EDITAR DOSSIÊ
+            </button>
+        </div>
+
+        <!-- A FICHA VISUAL -->
+        <article class="tank-sheet" id="fichaContainer" style="display: none;">
+            <header class="sheet-header">
+                <h1 class="sheet-title" id="dinNomeTanque">--</h1>
+                <span class="sheet-badge" id="dinTipoNivel" style="background-color: #1A3668; color: #fff;">--</span>
+            </header>
+
+            <section class="sheet-content">
+                <figure class="sheet-visual carousel-wrapper"
+                    style="position: relative; margin: 0; overflow: hidden; border-radius: 4px; border: 2px solid #333;">
+                    <div class="carousel-track" id="tank-track">
+                        <img id="dinImagemPrincipal" src="" alt="Visão do Tanque" class="slide-item" loading="lazy"
+                            width="800" height="450" style="object-fit: cover;">
+                    </div>
+
+                    <button id="btnPrev" aria-label="Imagem Anterior"
+                        style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: #F2B400; border: 1px solid #F2B400; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold; display: none;">&#9664;</button>
+                    <button id="btnNext" aria-label="Próxima Imagem"
+                        style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background: rgba(0,0,0,0.7); color: #F2B400; border: 1px solid #F2B400; padding: 5px 10px; cursor: pointer; border-radius: 4px; font-weight: bold; display: none;">&#9654;</button>
+
+                    <figcaption id="tank-caption" aria-live="polite"
+                        style="position: absolute; bottom: 0; left: 0; width: 100%; text-align: center; color: #fff; font-size: 13px; font-weight: bold; letter-spacing: 1px; background: rgba(0, 0, 0, 0.75); padding: 8px 0; border-top: 1px solid #aaa; pointer-events: none;">
+                        Visão Oficial em Combate
+                    </figcaption>
+                </figure>
+
+                <aside class="sheet-data">
+                    <h2 class="data-title">Especificações Técnicas</h2>
+                    <table class="data-table">
+                        <tbody id="tabelaEspecificacoesBody">
+                            <!-- A Tabela Inteira agora é preenchida dinamicamente pelo JS -->
+                        </tbody>
+                    </table>
+                </aside>
+            </section>
+
+            <section class="sheet-lore">
+                <h2 class="lore-title">Histórico de Desenvolvimento</h2>
+                <div id="dinHistorico" class="lore-text" style="line-height: 1.6;">--</div>
+
+                <h2 class="lore-title" style="margin-top: 30px;">Doutrina de Engajamento e Táticas</h2>
+                <div id="dinTaticas" class="lore-text" style="line-height: 1.6">--</div>
+            </section>
+        </article>
+    </main>
+
+    <!-- MODAL DE EDIÇÃO DE TANQUES (CRUD ALTO COMANDO) -->
+    <div class="modal-overlay" id="edicaoTanqueModal">
+        <div class="modal-box"
+            style="max-width: 900px; width: 95%; max-height: 90vh; display: flex; flex-direction: column;">
+            <button class="fechar-modal" id="closeEdicaoModal">X</button>
+            <h2 class="modal-title">MODIFICAR DOSSIÊ: <span id="editNomeTitulo" style="color: #fff;">Tanque</span></h2>
+            <p class="modal-subtitle">Alteração restrita a Comandantes</p>
+
+            <div id="editFeedback" class="tactical-feedback"
+                style="display:none; padding:10px; margin-bottom:10px; font-size:12px; font-weight:bold;"></div>
+
+            <div style="flex: 1; overflow-y: auto; padding-right: 5px;">
+                <form id="formEdicaoTanque">
+                    <input type="hidden" id="editTankId">
+
+                    <!-- ABAS OTIMIZADAS DO EDITOR -->
+                    <div
+                        style="display: flex; gap: 10px; border-bottom: 1px solid #333; margin-bottom: 15px; padding-bottom: 10px;">
+                        <button type="button" id="tabFichaLore" class="btn-submit-militar"
+                            style="width: auto; padding: 6px 12px; font-size: 11px; background: #F2B400; color: #000;">FICHA
+                            TÉCNICA E LORE</button>
+                        <button type="button" id="tabGaleria" class="btn-submit-militar"
+                            style="width: auto; padding: 6px 12px; font-size: 11px; background: #333; color: #fff;">GALERIA
+                            DE FOTOS</button>
+                    </div>
+
+                    <!-- PAINEL 1: FICHA TÉCNICA + LORE UNIFICADOS -->
+                    <div id="painelFichaLore">
+
+                        <!-- NOVOS CAMPOS DE IDENTIDADE DO TANQUE -->
+                        <div
+                            style="background: #181818; padding: 10px; border: 1px solid #444; border-radius: 4px; margin-bottom: 20px;">
+                            <h3
+                                style="color:#F2B400; font-size:14px; margin-top:0; border-bottom:1px dashed #333; padding-bottom:5px;">
+                                IDENTIFICAÇÃO E CLASSIFICAÇÃO</h3>
+
+                            <div class="input-group">
+                                <label>Nome do Tanque</label>
+                                <input type="text" id="editNomePrincipal" required>
+                            </div>
+
+                            <!-- LINHA DE CLASSIFICAÇÃO (Cores, Função e Tier) -->
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px;">
+                                <div class="input-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+                                    <label>Classe (Define a Cor)</label>
+                                    <select id="editClasse"
+                                        style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px;">
+                                        <option value="Leve">Tanque Leve</option>
+                                        <option value="Médio">Tanque Médio</option>
+                                        <option value="Pesado">Tanque Pesado</option>
+                                        <option value="Caça-Tanques">Caça-Tanques</option>
+                                        <option value="SPAA">SPAA (Antiaérea)</option>
+                                    </select>
+                                </div>
+                                <div class="input-group" style="flex: 1; min-width: 150px; margin-bottom: 0;">
+                                    <label>Função Tática (Opcional)</label>
+                                    <input type="text" id="editFuncao" placeholder="Ex: Flanqueador, Brawler...">
+                                </div>
+                                <div class="input-group" style="flex: 1; min-width: 100px; margin-bottom: 0;">
+                                    <label>Nível (Tier)</label>
+                                    <select id="editNivel"
+                                        style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px;">
+                                        <option value="I">Nível I</option>
+                                        <option value="II">Nível II</option>
+                                        <option value="III">Nível III</option>
+                                        <option value="IV">Nível IV</option>
+                                        <option value="V">Nível V</option>
+                                        <option value="VI">Nível VI</option>
+                                        <option value="VII">Nível VII</option>
+                                        <option value="VIII">Nível VIII</option>
+                                        <option value="IX">Nível IX</option>
+                                        <option value="X">Nível X</option>
+                                        <option value="XI">Nível XI</option>
+                                        <option value="XII">Nível XII</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="input-group">
+                                <label>Descrição Breve (Resumo do Card da Nação - Máx 150 char)</label>
+                                <input type="text" id="editDescricaoBreve" maxlength="150"
+                                    placeholder="Ex: A rocha americana...">
+                            </div>
+                            <div class="input-group" style="margin-bottom:0;">
+                                <label>Caminho da Silhueta SVG (Aparece no Card)</label>
+                                <input type="text" id="editCaminhoImagem"
+                                    placeholder="Ex: WT - Artes/USA/USA Tanks/JUMBO/JUMBO shadow.svg">
+                            </div>
+                        </div>
+
+                        <div
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <p style="font-size: 11px; color: #aaa; margin: 0;">Reordene os atributos (setas). Valores
+                                vazios ficarão ocultos no site.</p>
+                            <button type="button" id="btnInjetarTemplate" class="btn-submit-militar"
+                                style="width: auto; margin: 0; padding: 6px 12px; background: #1A3668; color: #fff; font-size: 10px; font-weight: bold;">+
+                                TEMPLATE COMPLETO</button>
+                        </div>
+
+                        <!-- Lista Dinâmica de Atributos com Rolagem -->
+                        <div id="listaAtributosContainer" class="caixa-rolagem-atributos"></div>
+
+                        <!-- Add Novo Atributo -->
+                        <div
+                            style="display: flex; gap: 8px; align-items: flex-end; background: #181818; padding: 10px; border: 1px dashed #444; border-radius: 4px; margin-bottom: 20px;">
+                            <div class="input-group" style="margin: 0; flex: 1;">
+                                <label style="font-size: 10px;">Novo Atributo (Ex: Rotação da Torre)</label>
+                                <input type="text" id="novoAtributoChave" placeholder="Nome do atributo...">
+                            </div>
+                            <div class="input-group" style="margin: 0; flex: 2;">
+                                <label style="font-size: 10px;">Valor (Ex: 24 °/s)</label>
+                                <input type="text" id="novoAtributoValor" placeholder="Valor correspondente...">
+                            </div>
+                            <button type="button" id="btnAdicionarAtributo" class="btn-submit-militar"
+                                style="width: auto; margin: 0; padding: 10px 15px; background: #F2B400; color: #000; font-weight: bold;">ADICIONAR</button>
+                        </div>
+
+                        <!-- Blocos de Texto (Lore) -->
+                        <div class="input-group">
+                            <label>Histórico de Desenvolvimento <span style="color:#F2B400; font-size:10px;">(DICA: Use
+                                    **texto** para negrito e a tecla Enter para pular linha)</span></label>
+                            <textarea id="editHistorico" rows="4"
+                                style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px; font-family: monospace;"></textarea>
+                        </div>
+                        <div class="input-group">
+                            <label>Doutrina e Táticas <span style="color:#F2B400; font-size:10px;">(DICA: Use **texto**
+                                    para negrito e a tecla Enter para pular linha)</span></label>
+                            <textarea id="editTaticas" rows="4"
+                                style="width: 100%; padding: 8px; background: #111; color: #fff; border: 1px solid #444; border-radius: 4px; font-family: monospace;"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- PAINEL 2: GALERIA DE FOTOS -->
+                    <div id="painelGaleria" style="display: none;">
+                        <p style="font-size: 11px; color: #aaa; margin-bottom: 10px;">Defina os caminhos das imagens
+                            para construir o carrossel. O primeiro item é a capa.</p>
+
+                        <div id="listaGaleriaContainer" class="caixa-rolagem-atributos"></div>
+
+                        <div style="background: #181818; padding: 10px; border: 1px dashed #444; border-radius: 4px;">
+                            <div class="input-group" style="margin-bottom: 8px;">
+                                <label style="font-size: 10px;">Novo Caminho da Imagem (A partir da raiz)</label>
+                                <input type="text" id="novaFotoCaminho"
+                                    placeholder="Ex: WT - Artes/USA/USA Tanks/JUMBO/JUMBO_RaioX.webp">
+                            </div>
+                            <div style="display: flex; gap: 8px; align-items: flex-end;">
+                                <div class="input-group" style="margin: 0; flex: 1;">
+                                    <label style="font-size: 10px;">Legenda da Imagem</label>
+                                    <input type="text" id="novaFotoLegenda" placeholder="Ex: Visão em Raio-X">
+                                </div>
+                                <button type="button" id="btnAdicionarFoto" class="btn-submit-militar"
+                                    style="width: auto; margin: 0; padding: 10px 15px; background: #F2B400; color: #000; font-weight: bold;">ADICIONAR
+                                    FOTO</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 20px; border-top: 1px solid #333; padding-top: 15px; text-align: right;">
+                        <button type="button" id="btnExcluirDossie" class="btn-submit-militar"
+                            style="width: auto; background: var(--rus-vermelho); color: #fff; font-weight: bold; border: 1px solid #ff4d4d;">APAGAR
+                            REGISTRO TÁTICO</button>
+                        <button type="submit" id="btnSalvarDossie" class="btn-submit-militar"
+                            style="width: auto; background: #4caf50; color: #fff;">SALVAR ALTERAÇÕES NO DOSSIÊ</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- O CÉREBRO JAVASCRIPT DA FICHA E DO CRUD -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const tankId = urlParams.get('id');
+
+            const overlay = document.getElementById("loadingOverlay");
+            const container = document.getElementById("fichaContainer");
+            const modalEdicao = document.getElementById("edicaoTanqueModal");
+            const btnAbrirEdicao = document.getElementById("btnAbrirEdicao");
+            const btnFecharEdicao = document.getElementById("closeEdicaoModal");
+
+            let atributosDinamicos = [];
+            let galeriaDinamica = [];
+
+            if (!tankId) {
+                overlay.innerHTML = "<span style='color:red;'>ERRO TÁTICO: Blindado não especificado na URL.</span>";
+                return;
+            }
+
+            try {
+                const resposta = await fetch(`php/api/ficha_api.php?id=${tankId}`);
+                const json = await resposta.json();
+
+                if (json.status === "success") {
+                    const dados = json.dados;
+
+                    document.title = `${dados.nome} - Ficha Tática`;
+
+                    document.getElementById("dinNomeTanque").textContent = dados.nome;
+                    document.getElementById("dinTipoNivel").textContent = `${dados.tipo} | ${dados.nivel}`;
+                    document.getElementById("dinTipoNivel").style.backgroundColor = dados.cor_hex !== '#ffffff' ? dados.cor_hex : '#1A3668';
+
+                    // Dicionário de Cores Militares
+                    const coresClasse = {
+                        "Leve": "#FFD700",       // Amarelo
+                        "Médio": "#FF8C00",      // Laranja
+                        "Pesado": "#DC143C",     // Vermelho
+                        "Caça-Tanques": "#228B22", // Verde
+                        "SPAA": "#8A2BE2"        // Roxo/Rosa
+                    };
+
+                    // NOVO: Dicionário de Nomes Oficiais
+                    const nomesClasse = {
+                        "Leve": "Tanque Leve",
+                        "Médio": "Tanque Médio",
+                        "Pesado": "Tanque Pesado",
+                        "Caça-Tanques": "Caça-Tanques",
+                        "SPAA": "SPAA (Antiaérea)"
+                    };
+
+                    const classeDoBanco = dados.classe_veiculo || "Médio"; // Fallback
+                    const corFundo = coresClasse[classeDoBanco] || "#1A3668";
+                    const corTexto = classeDoBanco === "Leve" ? "#000000" : "#ffffff"; // Preto para amarelo dar leitura
+
+                    // Montagem do Texto Inteligente (Usa o nome oficial + Função Tática)
+                    let textoBadge = nomesClasse[classeDoBanco] || classeDoBanco;
+                    
+                    if (dados.tipo && dados.tipo.trim() !== "") { 
+                        textoBadge += ` (${dados.tipo})`; 
+                    }
+                    textoBadge += ` | ${dados.nivel || "Nível ?"}`;
+
+                    const badge = document.getElementById("dinTipoNivel");
+                    badge.textContent = textoBadge;
+                    badge.style.backgroundColor = corFundo;
+                    badge.style.color = corTexto;
+
+                    // ========================================================
+                    // INTERPRETADOR TÁTICO DE TEXTO (MARKDOWN E QUEBRAS)
+                    // ========================================================
+                    const formatarTextoTatico = (texto) => {
+                        if (!texto) return "";
+                        // 1. Substitui os asteriscos duplos por tags de negrito (Ex: **texto** vira <strong>texto</strong>)
+                        let formatado = texto.replace(/\*\*(.*?)\*\*/g, '<strong style="color: #F2B400;">$1</strong>');
+                        // 2. Transforma as quebras de linha do teclado (Enter) em quebras reais do HTML (<br>)
+                        formatado = formatado.replace(/\n/g, '<br>');
+                        return formatado;
+                    };
+
+                    document.getElementById("dinHistorico").innerHTML = dados.historico ? formatarTextoTatico(dados.historico) : "<p>Histórico classificado.</p>";
+                    document.getElementById("dinTaticas").innerHTML = dados.taticas ? formatarTextoTatico(dados.taticas) : "<p>Doutrina em formulação.</p>";
+
+                    // ========================================================
+                    // RECONSTRUÇÃO DA TABELA 100% DINÂMICA
+                    // ========================================================
+                    const corpoTabela = document.getElementById("tabelaEspecificacoesBody");
+
+                    if (dados.detalhes_extras && dados.detalhes_extras.trim() !== "" && dados.detalhes_extras !== "{}") {
+                        try {
+                            const parsedExtras = JSON.parse(dados.detalhes_extras);
+                            // Migração de objeto antigo ({}) para o array novo ([])
+                            if (!Array.isArray(parsedExtras)) {
+                                atributosDinamicos = Object.entries(parsedExtras).map(([k, v]) => ({ chave: k, valor: v }));
+                            } else {
+                                atributosDinamicos = parsedExtras;
+                            }
+                        } catch (e) { console.error("Falha ao ler JSON Extras"); }
+                    }
+
+                    // Se for um tanque velho que não tem o array preenchido, nós sugamos os dados das colunas do MySQL para montar a lista inicial
+                    const chavesLegado = [
+                        { chave: "Armamento Principal", valorDB: dados.armamento },
+                        { chave: "Munição Padrão", valorDB: "" },
+                        { chave: "Blindagem do Chassi", valorDB: dados.blindagem_chassi },
+                        { chave: "Blindagem da Torre", valorDB: dados.blindagem_torre },
+                        { chave: "Velocidade Máxima", valorDB: dados.velocidade }
+                    ];
+
+                    chavesLegado.forEach(legado => {
+                        if (!atributosDinamicos.some(attr => attr.chave === legado.chave)) {
+                            if (legado.valorDB) atributosDinamicos.push({ chave: legado.chave, valor: legado.valorDB });
+                        }
+                    });
+
+                    // Renderiza APENAS as linhas que não estão vazias para o público
+                    corpoTabela.innerHTML = "";
+                    atributosDinamicos.forEach(attr => {
+                        if (attr.valor.trim() !== "") {
+                            corpoTabela.insertAdjacentHTML("beforeend", `<tr><th>${attr.chave}</th><td>${attr.valor}</td></tr>`);
+                        }
+                    });
+
+                    // ========================================================
+                    // RENDERIZAÇÃO DA GALERIA
+                    // ========================================================
+                    const track = document.getElementById("tank-track");
+                    const caption = document.getElementById("tank-caption");
+                    const btnPrev = document.getElementById("btnPrev");
+                    const btnNext = document.getElementById("btnNext");
+
+                    if (dados.galeria_imagens && dados.galeria_imagens.trim() !== "") {
+                        try { galeriaDinamica = JSON.parse(dados.galeria_imagens); } catch (e) { }
+                    }
+
+                    if (galeriaDinamica.length > 0) {
+                        track.innerHTML = "";
+                        galeriaDinamica.forEach(img => {
+                            track.innerHTML += `<img src="${img.url}" alt="${img.legenda}" class="slide-item" width="800" height="450" style="object-fit: cover;">`;
+                        });
+                        caption.textContent = galeriaDinamica[0].legenda || "Visão Oficial em Combate";
+
+                        if (galeriaDinamica.length > 1) {
+                            btnPrev.style.display = "block";
+                            btnNext.style.display = "block";
+
+                            let slideAtual = 0;
+                            const atualizarSlide = () => {
+                                track.style.transform = `translateX(-${100 * slideAtual}%)`;
+                                caption.textContent = galeriaDinamica[slideAtual].legenda || "";
+                            };
+                            btnNext.onclick = () => { slideAtual = (slideAtual + 1) % galeriaDinamica.length; atualizarSlide(); };
+                            btnPrev.onclick = () => { slideAtual = (slideAtual - 1 + galeriaDinamica.length) % galeriaDinamica.length; atualizarSlide(); };
+                        }
+                    } else {
+                        // Imagem de salvaguarda (Fallback)
+                        const fallbackPath = dados.caminho_imagem.replace("shadow.svg", "foto.webp").replace("shadow.png", "foto.webp");
+                        document.getElementById("dinImagemPrincipal").src = fallbackPath;
+                        document.getElementById("dinImagemPrincipal").onerror = function () { this.src = dados.caminho_imagem; };
+                    }
+
+                    overlay.style.display = "none";
+                    container.style.display = "block";
+
+                    // ==========================================
+                    // ATIVAÇÃO DO BOTÃO EDITAR PARA ADMINS
+                    // ==========================================
+                    const perfilLocal = (localStorage.getItem("userRole") || "").toLowerCase();
+                    if (perfilLocal === "admin" && btnAbrirEdicao) {
+                        btnAbrirEdicao.style.display = "flex";
+
+                        btnAbrirEdicao.addEventListener("click", () => {
+                            document.getElementById("editTankId").value = dados.id;
+
+                            // PREENCHENDO OS CAMPOS NOVOS
+                            document.getElementById("editNomePrincipal").value = dados.nome || "";
+                            document.getElementById("editDescricaoBreve").value = dados.descricao_breve || "";
+                            document.getElementById("editCaminhoImagem").value = dados.caminho_imagem || "";
+
+                            document.getElementById("editNomeTitulo").textContent = dados.nome;
+                            document.getElementById("editHistorico").value = dados.historico || "";
+                            document.getElementById("editTaticas").value = dados.taticas || "";
+
+                            document.getElementById("editClasse").value = dados.classe_veiculo || "Médio";
+                            document.getElementById("editFuncao").value = dados.tipo || "";
+                            document.getElementById("editNivel").value = dados.nivel || "I";
+
+
+
+                            renderizarListaAtributos();
+                            renderizarListaGaleria();
+                            modalEdicao.classList.add("ativo");
+                        });
+                    }
+
+                } else {
+                    overlay.innerHTML = `<span style='color:red;'>${json.message}</span>`;
+                }
+            } catch (err) {
+                overlay.innerHTML = "<span style='color:red;'>FALHA CRÍTICA DE CONEXÃO.</span>";
+            }
+
+            // ==========================================
+            // LÓGICA INTERNA DO MODAL CRUD
+            // ==========================================
+            if (btnFecharEdicao) btnFecharEdicao.addEventListener("click", () => modalEdicao.classList.remove("ativo"));
+
+            const resetTabs = () => {
+                ["tabFichaLore", "tabGaleria"].forEach(id => {
+                    document.getElementById(id).style.background = "#333";
+                    document.getElementById(id).style.color = "#fff";
+                });
+                ["painelFichaLore", "painelGaleria"].forEach(id => {
+                    document.getElementById(id).style.display = "none";
+                });
+            };
+
+            document.getElementById("tabFichaLore").onclick = (e) => { resetTabs(); e.target.style.background = "#F2B400"; e.target.style.color = "#000"; document.getElementById("painelFichaLore").style.display = "block"; };
+            document.getElementById("tabGaleria").onclick = (e) => { resetTabs(); e.target.style.background = "#F2B400"; e.target.style.color = "#000"; document.getElementById("painelGaleria").style.display = "block"; };
+
+            // === GERENCIAMENTO ORDENADO DE ATRIBUTOS EXTRAS ===
+            function renderizarListaAtributos() {
+                const cont = document.getElementById("listaAtributosContainer");
+                cont.innerHTML = "";
+
+                atributosDinamicos.forEach((attr, index) => {
+                    const row = document.createElement("div");
+                    row.className = "attr-row";
+                    row.innerHTML = `
+                        <div style="display:flex; flex-direction:column; gap:2px;">
+                            <button type="button" class="btn-move btn-up" data-idx="${index}" title="Subir">▲</button>
+                            <button type="button" class="btn-move btn-down" data-idx="${index}" title="Descer">▼</button>
+                        </div>
+                        <input type="text" class="input-chave" data-idx="${index}" value="${attr.chave}" style="flex: 1;" placeholder="Atributo">
+                        <input type="text" class="input-valor" data-idx="${index}" value="${attr.valor}" style="flex: 2;" placeholder="Valor (Deixe vazio para ocultar)">
+                        <button type="button" class="btn-del-attr" data-idx="${index}" style="background:var(--rus-vermelho); color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:12px; padding:8px; font-weight:bold;">X</button>
+                    `;
+                    cont.appendChild(row);
+                });
+
+                // Salva o que foi digitado em tempo real
+                document.querySelectorAll(".input-chave").forEach(inp => {
+                    inp.onchange = (e) => atributosDinamicos[e.target.getAttribute("data-idx")].chave = e.target.value;
+                });
+                document.querySelectorAll(".input-valor").forEach(inp => {
+                    inp.onchange = (e) => atributosDinamicos[e.target.getAttribute("data-idx")].valor = e.target.value;
+                });
+
+                // Lógica Tática das Setas
+                document.querySelectorAll(".btn-up").forEach(btn => {
+                    btn.onclick = (e) => {
+                        const idx = parseInt(e.target.getAttribute("data-idx"));
+                        if (idx > 0) {
+                            [atributosDinamicos[idx - 1], atributosDinamicos[idx]] = [atributosDinamicos[idx], atributosDinamicos[idx - 1]];
+                            renderizarListaAtributos();
+                        }
+                    };
+                });
+                document.querySelectorAll(".btn-down").forEach(btn => {
+                    btn.onclick = (e) => {
+                        const idx = parseInt(e.target.getAttribute("data-idx"));
+                        if (idx < atributosDinamicos.length - 1) {
+                            [atributosDinamicos[idx + 1], atributosDinamicos[idx]] = [atributosDinamicos[idx], atributosDinamicos[idx + 1]];
+                            renderizarListaAtributos();
+                        }
+                    };
+                });
+                document.querySelectorAll(".btn-del-attr").forEach(btn => {
+                    btn.onclick = (e) => {
+                        atributosDinamicos.splice(parseInt(e.target.getAttribute("data-idx")), 1);
+                        renderizarListaAtributos();
+                    };
+                });
+            }
+
+            // TEMPLATE PADRÃO: Injeta todas as chaves básicas se elas já não existirem
+            document.getElementById("btnInjetarTemplate").addEventListener("click", () => {
+                const template = [
+                    "Armamento Principal", "Munição Padrão", "Blindagem do Chassi", "Blindagem da Torre",
+                    "Velocidade Máxima", "Tripulação", "Peso Total", "Motor", "Potência",
+                    "Velocidade de Ré", "Rotação da Torre", "Depressão do Canhão", "Estabilizador", "Visão Noturna"
+                ];
+                template.forEach(chaveNova => {
+                    if (!atributosDinamicos.some(attr => attr.chave === chaveNova)) {
+                        atributosDinamicos.push({ chave: chaveNova, valor: "" });
+                    }
+                });
+                renderizarListaAtributos();
+            });
+
+            document.getElementById("btnAdicionarAtributo").addEventListener("click", () => {
+                const c = document.getElementById("novoAtributoChave").value.trim();
+                const v = document.getElementById("novoAtributoValor").value.trim();
+                if (c) {
+                    atributosDinamicos.push({ chave: c, valor: v });
+                    document.getElementById("novoAtributoChave").value = "";
+                    document.getElementById("novoAtributoValor").value = "";
+                    renderizarListaAtributos();
+                }
+            });
+
+            // === GERENCIAMENTO DA GALERIA DE FOTOS ===
+            function renderizarListaGaleria() {
+                const cont = document.getElementById("listaGaleriaContainer");
+                cont.innerHTML = "";
+                galeriaDinamica.forEach((img, idx) => {
+                    cont.innerHTML += `
+                        <div style="display:flex; justify-content:space-between; align-items:center; background:#222; padding:8px 12px; border:1px solid #444; border-radius:3px;">
+                            <div style="font-size:11px; color:#aaa; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:85%;">
+                                <strong style="color:#F2B400;">${img.legenda}</strong><br>${img.url}
+                            </div>
+                            <button type="button" class="btn-del-img" data-index="${idx}" style="background:var(--rus-vermelho); color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:10px; padding:4px 8px; font-weight:bold;">X</button>
+                        </div>`;
+                });
+                document.querySelectorAll(".btn-del-img").forEach(btn => {
+                    btn.onclick = (e) => { galeriaDinamica.splice(parseInt(e.target.getAttribute("data-index")), 1); renderizarListaGaleria(); };
+                });
+            }
+
+            document.getElementById("btnAdicionarFoto").addEventListener("click", () => {
+                const url = document.getElementById("novaFotoCaminho").value.trim();
+                const legenda = document.getElementById("novaFotoLegenda").value.trim();
+                if (url) {
+                    galeriaDinamica.push({ url, legenda: legenda || "Visão Oficial em Combate" });
+                    document.getElementById("novaFotoCaminho").value = "";
+                    document.getElementById("novaFotoLegenda").value = "";
+                    renderizarListaGaleria();
+                }
+            });
+
+            // === SALVAMENTO GERAL DA FICHA ===
+            document.getElementById("formEdicaoTanque").addEventListener("submit", async (e) => {
+                e.preventDefault();
+                const btnSalvar = document.getElementById("btnSalvarDossie");
+                const txt = btnSalvar.innerHTML;
+                const fb = document.getElementById("editFeedback");
+
+                btnSalvar.disabled = true;
+                btnSalvar.innerHTML = "SALVANDO...";
+
+                try {
+                    let fd = new FormData();
+                    fd.append("id", document.getElementById("editTankId").value);
+
+                    // ENVIANDO OS CAMPOS NOVOS
+                    fd.append("nome", document.getElementById("editNomePrincipal").value);
+                    fd.append("descricao_breve", document.getElementById("editDescricaoBreve").value);
+                    fd.append("caminho_imagem", document.getElementById("editCaminhoImagem").value);
+
+                    // Extrai as informações de volta para as colunas legado do Banco, por garantia estrutural
+                    const getValor = (c) => { const f = atributosDinamicos.find(a => a.chave === c); return f ? f.valor : ""; };
+                    fd.append("armamento", getValor("Armamento Principal"));
+                    fd.append("velocidade", getValor("Velocidade Máxima"));
+                    fd.append("blindagem_chassi", getValor("Blindagem do Chassi"));
+                    fd.append("blindagem_torre", getValor("Blindagem da Torre"));
+
+                    fd.append("historico", document.getElementById("editHistorico").value);
+                    fd.append("taticas", document.getElementById("editTaticas").value);
+
+                    // Salva a estrutura completa ordenada
+                    fd.append("detalhes_extras", JSON.stringify(atributosDinamicos));
+                    fd.append("galeria_imagens", JSON.stringify(galeriaDinamica));
+
+                    fd.append("classe_veiculo", document.getElementById("editClasse").value);
+                    fd.append("tipo", document.getElementById("editFuncao").value);
+                    fd.append("nivel", document.getElementById("editNivel").value);
+
+                    const res = await fetch("php/api/atualizar_ficha.php", { method: "POST", body: fd });
+                    const json = await res.json();
+
+                    if (res.ok && json.status === "success") {
+                        fb.style.display = "block";
+                        fb.style.background = "#122a18"; fb.style.color = "#80ff9f"; fb.style.borderLeft = "4px solid #4caf50";
+                        fb.textContent = json.message;
+                        setTimeout(() => window.location.reload(), 1000);
+                    } else {
+                        fb.style.display = "block";
+                        fb.style.background = "#2a1212"; fb.style.color = "#ff8080"; fb.style.borderLeft = "4px solid var(--rus-vermelho)";
+                        fb.textContent = json.message || "Erro ao salvar.";
+                    }
+                } catch (err) {
+                    fb.style.display = "block";
+                    fb.textContent = "Falha crítica de comunicação com o servidor.";
+                } finally {
+                    btnSalvar.disabled = false;
+                    btnSalvar.innerHTML = txt;
+                }
+            });
+
+
+            // ==========================================
+            // EXCLUSÃO DE TANQUES (PROTOCOLO DE DESTRUIÇÃO)
+            // ==========================================
+            const btnExcluir = document.getElementById("btnExcluirDossie");
+            if (btnExcluir) {
+                btnExcluir.addEventListener("click", async () => {
+                    const nomeTanque = document.getElementById("editNomeTitulo").textContent;
+
+                    // Trava de Segurança Dupla (Confirmação do Navegador)
+                    const confirmacao = confirm(`ALERTA CRÍTICO DO ALTO COMANDO:\n\nTem certeza que deseja DELETAR PERMANENTEMENTE o dossiê do ${nomeTanque}?\n\nEsta ação destruirá todos os registros e não pode ser desfeita.`);
+
+                    if (confirmacao) {
+                        btnExcluir.disabled = true;
+                        btnExcluir.innerHTML = "INCINERANDO...";
+
+                        try {
+                            let fd = new FormData();
+                            fd.append("id", document.getElementById("editTankId").value);
+
+                            const res = await fetch("php/api/excluir_tanque.php", { method: "POST", body: fd });
+                            const json = await res.json();
+
+                            if (res.ok && json.status === "success") {
+                                alert("Dossiê incinerado com sucesso.");
+                                // Como o tanque não existe mais, mandamos o jogador de volta para a tela inicial
+                                window.location.href = "index.html";
+                            } else {
+                                alert("Erro ao apagar registro: " + (json.message || "Falha desconhecida."));
+                                btnExcluir.disabled = false;
+                                btnExcluir.innerHTML = "APAGAR REGISTRO TÁTICO";
+                            }
+                        } catch (err) {
+                            alert("Falha crítica de comunicação com os servidores.");
+                            btnExcluir.disabled = false;
+                            btnExcluir.innerHTML = "APAGAR REGISTRO TÁTICO";
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+
+</html>
