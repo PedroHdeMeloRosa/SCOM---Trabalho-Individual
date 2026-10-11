@@ -396,25 +396,32 @@ a {
     padding-right: 5px;
 }
 
-.fechar-modal {
-    position: sticky;
-    top: 0;
-    float: right;
-    background: #141414;
+.fechar-modal { 
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    width: 32px;
+    height: 32px;
+    background: #1e2021;
     color: #ff4d4d;
-    border: 1px solid #ff4d4d;
+    border: 1px solid #444;
     font-size: 16px;
     font-weight: bold;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    z-index: 50;
-    padding: 4px 10px;
-    border-radius: 4px;
-    transition: 0.2s;
+    z-index: 100;
+    padding: 0;
+    transition: all 0.2s ease;
 }
 
 .fechar-modal:hover {
     background: #ff4d4d;
     color: #fff;
+    border-color: #ff4d4d;
+    transform: scale(1.1);
 }
 
 .modal-title {
@@ -1567,15 +1574,7 @@ body.theme-night .tank-silhueta {
     }
 
     .nav-toggle-btn {
-        display: block;
-        border: 1px solid var(--dourado-titulos);
-        color: var(--dourado-titulos);
-        padding: 8px 12px;
-        border-radius: 4px;
-        background: var(--metal-cinza-escuro);
-        cursor: pointer;
-        font-weight: 700;
-        font-size: 14px;
+       display: none;
     }
 
     .top-navbar .nav-center,
