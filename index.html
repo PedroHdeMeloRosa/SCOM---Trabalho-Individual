@@ -5,181 +5,126 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>War Thunder Fandom WIKI</title>
+    
+    <!-- IMPORTAÇÃO DO CSS UNIFICADO (Pilar Estético) -->
     <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link rel="icon" href="WT%20-%20Artes/WT-ICO2.ico" type="image/png">
-    <meta name="description"
-        content="Enciclopédia tática de War Thunder. Descubra especificações, blindagens e doutrinas de combate dos principais blindados do jogo.">
-
-    <!-- Biblioteca Intl-Tel-Input para validação telefónica -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/css/intlTelInput.css">
-    <script src="https://cdn.jsdelivr.net/npm/intl-tel-input@23.0.10/build/js/intlTelInput.min.js"></script>
+    
+    <link rel="icon" href="WT - Artes/WT-ICO2.ico" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <meta name="description" content="Enciclopédia tática de War Thunder.">
 </head>
 
 <body>
-
-    <!-- BARRA DE NAVEGAÇÃO SUPERIOR -->
+    <!-- IMPORTAÇÃO DO CÉREBRO JAVASCRIPT UNIFICADO (Pilar Lógico) -->
     <script src="js/menu.min.js"></script>
     <script>injetarMenu('');</script>
 
-    <!-- Caixa que vai centralizar tudo - caixa externa geral -->
     <main class="ui-container">
-
-
-        <!-- Removemos a classe 'main-bg' para o texto flutuar no fundo metálico do body -->
         <section class="main-panel">
             <div class="presentation-section">
-
+                
+                <!-- CABEÇALHO DO VÍDEO -->
                 <div class="hero-gif-frame">
-                    <video class="hero-gif-img" autoplay loop muted playsinline
-                        poster="WT%20-%20Artes/WT%20-%20BG/cover-video.webp" aria-hidden="true">
-                        <source src="WT%20-%20Artes/WT%20-%20BG/0909_2_.webm" type="video/webm">
-                        <source src="WT%20-%20Artes/WT%20-%20BG/0909(2).mp4" type="video/mp4">
+                    <video class="hero-gif-img" autoplay loop muted playsinline poster="WT - Artes/WT - BG/cover-video.webp">
+                        <source src="WT - Artes/WT - BG/0909_2_.webm" type="video/webm">
+                        <source src="WT - Artes/WT - BG/0909(2).mp4" type="video/mp4">
                     </video>
-                    <div class="hero-gif-overlay">
-                        <h1 class="hero-gif-title">O CAMPO DE BATALHA AGUARDA!</h1>
-                    </div>
+                    <div class="hero-gif-overlay"><h1 class="hero-gif-title">O CAMPO DE BATALHA AGUARDA!</h1></div>
                 </div>
 
                 <h1 class="section-subtitle">SOBRE O JOGO</h1>
-                <p class="paragraph">
-                    <strong>War Thunder</strong> é o mais abrangente jogo militar MMO <i>free-to-play</i> dedicado à
-                    aviação, veículos blindados e embarcações navais do início do século XX até as mais modernas
-                    unidades de combate. Com um foco incomparável em realismo balístico e mecânicas de blindagem, o jogo
-                    exige mais do que apenas reflexos rápidos: a vitória depende de inteligência tática, conhecimento
-                    profundo da sua máquina e posicionamento impecável.
-                </p>
-
+                <p class="paragraph"><strong>War Thunder</strong> é o mais abrangente jogo militar MMO <i>free-to-play</i> dedicado à aviação, veículos blindados e embarcações navais do início do século XX até as mais modernas unidades de combate. Com um foco incomparável em realismo balístico e mecânicas de blindagem, o jogo exige mais do que apenas reflexos rápidos: a vitória depende de inteligência tática, conhecimento profundo da sua máquina e posicionamento impecável.</p>
+                
                 <h1 class="section-subtitle" style="margin-top: 30px;">FINALIDADE DESTA WIKI</h1>
-                <p class="paragraph">
-                    Sobreviver e dominar neste ambiente hostil requer estudo. O objetivo principal desta <strong>Central
-                        de Inteligência Tática</strong> é fornecer a você, comandante, acesso imediato e estruturado aos
-                    dados cruciais dos blindados mais icônicos do jogo. Através dos nossos registros, você aprenderá a
-                    explorar os pontos fracos inimigos, aplicar táticas avançadas (como o <i>Hull-Down</i> e
-                    <i>Sidescraping</i>) e dominar as doutrinas únicas de cada nação.
-                </p>
+                <p class="paragraph">Sobreviver e dominar neste ambiente hostil requer estudo. O objetivo principal desta <strong>Central de Inteligência Tática</strong> é fornecer a você, comandante, acesso imediato e estruturado aos dados cruciais dos blindados mais icônicos do jogo. Através dos nossos registros, você aprenderá a explorar os pontos fracos inimigos, aplicar táticas avançadas (como o <i>Hull-Down</i> e <i>Sidescraping</i>) e dominar as doutrinas únicas de cada nação.</p>
 
+                <!-- ESTATÍSTICAS RÁPIDAS -->
                 <div class="wiki-quick-stats">
-                    <div class="stat-badge">
-                        <span class="stat-icon">&#127758;</span>
-                        <span class="stat-text">5 NAÇÕES</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-icon">&#9874;</span>
-                        <span class="stat-text">15+ BLINDADOS</span>
-                    </div>
-                    <div class="stat-badge">
-                        <span class="stat-icon">&#128214;</span>
-                        <span class="stat-text">DOUTRINAS REAIS</span>
-                    </div>
+                    <div class="stat-badge"><span class="stat-icon">&#127758;</span><span class="stat-text" id="contadorNacoes">CARREGANDO...</span></div>
+                    <div class="stat-badge"><span class="stat-icon">&#9874;</span><span class="stat-text">15+ BLINDADOS</span></div>
+                    <div class="stat-badge"><span class="stat-icon">&#128214;</span><span class="stat-text">DOUTRINAS REAIS</span></div>
                 </div>
 
                 <div class="wiki-features-grid">
                     <div class="feature-box">
                         <h2 class="feature-title">&#128269; Fichas Técnicas</h2>
-                        <p class="feature-desc">Raio-X completo: armamento principal, espessura e deflexão de blindagem,
-                            e atributos de mobilidade de cada chassi.</p>
+                        <p class="feature-desc">Raio-X completo: armamento principal, espessura e deflexão de blindagem, e atributos de mobilidade de cada chassi.</p>
                     </div>
                     <div class="feature-box">
                         <h2 class="feature-title">&#9873; Guias de Engajamento</h2>
-                        <p class="feature-desc">Aprenda a ocultar pontos fracos, evitar munições letais e explorar o
-                            tempo de recarga (autoloader) da equipe adversária.</p>
+                        <p class="feature-desc">Aprenda a ocultar pontos fracos, evitar munições letais e explorar o tempo de recarga (autoloader) da equipe adversária.</p>
                     </div>
                 </div>
 
                 <div class="academic-note-box">
-                    <h1 class="section-subtitle" style="font-size: 18px; color: var(--metal-cinza-claro);">O PROJETO
-                        ACADÊMICO</h1>
+                    <h1 class="section-subtitle" style="font-size: 18px; color: var(--metal-cinza-claro);">O PROJETO ACADÊMICO</h1>
                     <p class="paragraph" style="font-size: 13px; font-style: italic;">
-                        Desenvolvido com extrema dedicação, este site possui objetivo primariamente acadêmico. Sua
-                        finalidade é demonstrar as capacidades e a evolução no desenvolvimento de sistemas web (HTML,
-                        CSS e JavaScript) do aluno do curso de <strong>Engenharia de Controle e Automação da UNESP
-                            Sorocaba</strong>.
-                        A arquitetura aqui apresentada foi construída do zero, focando em responsividade, interface
-                        multiplataforma e padronização UX/UI temática, servindo como uma base sólida para integrações de
-                        banco de dados futuras.
+                        Desenvolvido com extrema dedicação, este site possui objetivo primariamente acadêmico. Sua finalidade é demonstrar as capacidades e a evolução no desenvolvimento de sistemas web (HTML, CSS e JavaScript) do aluno do curso de <strong>Engenharia de Controle e Automação da UNESP Sorocaba</strong>. A arquitetura aqui apresentada foi construída do zero, focando em responsividade, interface multiplataforma e padronização UX/UI temática, servindo como uma base sólida para integrações de banco de dados futuras.
                     </p>
                 </div>
-
             </div>
-            <!-- AQUI FICAM AS CAIXAS DE SELEÇÃO DAS NAÇÕES -->
-            <div class="tank-selection">
-                <h1 class="section-subtitle center-text">OS TANQUES MAIS ICÔNICOS DAS 5 NAÇÕES PRINCIPAIS</h1>
 
-                <!-- TRILHO DA ESTEIRA HORIZONTAL -->
+            <!-- ÁREA DINÂMICA DAS NAÇÕES -->
+            <div class="tank-selection">
+                <div class="tank-selection-header">
+                    <h1 class="section-subtitle center-text" style="margin:0;">OS TANQUES MAIS ICÔNICOS</h1>
+                    <button id="btnNovaNacao" class="btn-submit-militar btn-militar-auto btn-militar-gold" style="display: none;">+ FUNDAR NOVA NAÇÃO</button>
+                </div>
+
                 <div class="esteira-nacoes">
-                    <div class="cards-container">
-                        <a href="nacao.html?id=1" class="nation-card card-usa">
-                            <h1 class="nation-title">E.U.A.</h1>
-                            <img class="tank-silhueta" src="WT%20-%20Artes/USA/USA%20Tanks/JUMBO/JUMBO%20shadow.svg"
-                                alt="Silhueta da sombra de um tanque Sherman">
-                            <div class="card-info-box">
-                                <p> "Mestres da versatilidade. Destacam-se pela excelente mobilidade, táticas de flanco,
-                                    e a melhor depressão de canhão do jogo, garantindo supremacia em terrenos
-                                    irregulares." </p>
-                            </div>
-                        </a>
-                        <a href="WT%20-%20Artes/GER/alemanha.html" class="nation-card card-ger">
-                            <h1 class="nation-title">ALEMANHA</h1>
-                            <img class="tank-silhueta"
-                                src="WT%20-%20Artes/GER/Ger%20Tanks/TIGER%20H1/TIGER%20H1%20shadow.svg"
-                                alt="Silhueta da sombra de um tanque Tiger-H">
-                            <div class="card-info-box">
-                                <p> "Sinônimo de poder de fogo e sobrevivência. Dominam combates a longa distância com
-                                    canhões de altíssima precisão e blindagens pesadas que punem qualquer erro inimigo."
-                                </p>
-                            </div>
-                        </a>
-                        <a href="WT%20-%20Artes/RUS/russia.html" class="nation-card card-rus">
-                            <h1 class="nation-title">RÚSSIA</h1>
-                            <img class="tank-silhueta"
-                                src="WT%20-%20Artes/RUS/RUS%20Tanks/T-34%2085/T-34%2085%20shadow.svg"
-                                alt="Silhueta da sombra de um tanque T-34 85">
-                            <div class="card-info-box">
-                                <p> "Agressividade pura e força bruta. Blindados com perfil baixo, blindagem
-                                    incrivelmente angulada e munições explosivas devastadoras, perfeitos para combate a
-                                    curta distância." </p>
-                            </div>
-                        </a>
-                        <a href="WT%20-%20Artes/JPN/japao.html" class="nation-card card-jpn">
-                            <h1 class="nation-title">JAPÃO</h1>
-                            <img class="tank-silhueta" src="WT%20-%20Artes/JPN/JPN%20Tanks/HO-RI/HO-Ri-Shadow.svg"
-                                alt="Silhueta da sombra de um tanque japonês">
-                            <div class="card-info-box">
-                                <p> "Letalidade e precisão. Famosos por sua recarga automática veloz e suspensão
-                                    hidropneumática, sacrificam a espessura da blindagem em prol de emboscadas e
-                                    agilidade tática extrema." </p>
-                            </div>
-                        </a>
-                        <a href="WT%20-%20Artes/SWE/suecia.html" class="nation-card card-swe">
-                            <h1 class="nation-title">SUÉCIA</h1>
-                            <img class="tank-silhueta"
-                                src="WT%20-%20Artes/SWE/SWE%20Tanks/BKAN%201/BKAN%201%20shadow.svg"
-                                alt="Silhueta da sombra de um tanque suíço">
-                            <div class="card-info-box">
-                                <p> "Engenharia cirúrgica e adaptabilidade. Uma árvore tecnológica que foca em poder de
-                                    fogo concentrado, perfis compactos e plataformas otimizadas para o combate em
-                                    terrenos montanhosos." </p>
-                            </div>
-                        </a>
+                    <div class="cards-container" id="nacoesCarrossel">
+                        <div style="color: #F2B400; font-family: monospace; text-align: center; width: 100%;">Carregando Nações Aliadas...</div>
                     </div>
                 </div>
             </div>
-
-            <p class="Dedicated-note">
-                Nota: Este site é um projeto acadêmico e não possui fins lucrativos. Todo o conteúdo apresentado é de
-                caráter educacional e informativo, sem qualquer intenção de violar direitos autorais ou propriedade
-                intelectual.
-            </p>
-            <p class="Dedicated-note">
-                Também é importante ressaltar que este site não é afiliado, patrocinado ou endossado pela Gaijin
-                Entertainment, desenvolvedora do jogo War Thunder. Todas as informações e imagens utilizadas são de
-                propriedade da Gaijin Entertainment e foram utilizadas apenas para fins educacionais e de demonstração.
-            </p>
-            <p class="Dedicated-note">
-                Também gostaria de agradecer a <strong>Amanda Segura M. Olivera</strong> pela ideia e inspiração para a
-                criação deste site, bem como por seu apoio e incentivo durante todo o processo de desenvolvimento.
-            </p>
-
+            
+            <p class="Dedicated-note">Nota: Este site é um projeto acadêmico e não possui fins lucrativos. Todo o conteúdo apresentado é de caráter educacional e informativo, sem qualquer intenção de violar direitos autorais ou propriedade intelectual.</p>
+            <p class="Dedicated-note">Também é importante ressaltar que este site não é afiliado, patrocinado ou endossado pela Gaijin Entertainment, desenvolvedora do jogo War Thunder. Todas as informações e imagens utilizadas são de propriedade da Gaijin Entertainment e foram utilizadas apenas para fins educacionais e de demonstração.</p>
+            <p class="Dedicated-note">Também gostaria de agradecer a <strong>Amanda Segura M. Olivera</strong> pela ideia e inspiração para a criação deste site, bem como por seu apoio e incentivo durante todo o processo de desenvolvimento.</p>
         </section>
     </main>
+
+    <!-- MODAL ÚNICO: CRIAR OU EDITAR NAÇÃO (HUD TÁTICO) -->
+    <div class="modal-overlay" id="modalGerenciarNacao">
+        <div class="modal-box">
+            <button class="fechar-modal" id="closeNacaoModalX">X SAIR</button>
+            <h2 id="tituloModalNacao" class="modal-title" style="border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 20px;">FUNDAR NOVA NAÇÃO</h2>
+            
+            <div class="modal-body-scroll">
+                <form id="formGerenciarNacao">
+                    <input type="hidden" id="nacaoId">
+                    
+                    <div class="input-group">
+                        <label>Nome Oficial da Nação</label>
+                        <input type="text" id="nacaoNome" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Cor Tema (Hexadecimal. Ex: #FF0000)</label>
+                        <input type="text" id="nacaoCor" placeholder="#0055A4">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Bandeira da Nação (Copie o caminho da imagem no Windows e cole abaixo)</label>
+                        <input type="text" id="nacaoBandeira" placeholder="Cole o caminho aqui...">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Ícone / Silhueta do Menu (Copie o caminho da imagem no Windows e cole abaixo)</label>
+                        <input type="text" id="nacaoSilhueta" placeholder="Cole o caminho aqui...">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Resumo Curto (Texto descritivo do card)</label>
+                        <textarea id="nacaoResumo" rows="3" placeholder="Ex: Mobilidade extrema e canhões automáticos letais..."></textarea>
+                    </div>
+
+                    <div class="editor-footer" style="justify-content: flex-end;">
+                        <button type="submit" id="btnSalvarNacao" class="btn-submit-militar btn-militar-auto btn-militar-green">SALVAR DADOS DA NAÇÃO</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
+</html>
