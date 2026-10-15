@@ -5,11 +5,24 @@ session_start();
 require_once '../config/database.php';
 header("Content-Type: application/json; charset=UTF-8");
 
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains"); // Força o uso de HTTPS
+
 // Trava Global: O usuário precisa estar autenticado
 if (!isset(\$_SESSION['user_id'])) {
     ob_clean();
     http_response_code(401);
     echo json_encode(["status" => "error", "message" => "Acesso não autorizado. Identifique-se."]);
+    exit;
+}
+
+// Trava de Segurança: Prevenção CSRF (Passo 1.2)
+$csrf_token = $_POST['csrf_token'] ?? '';
+if (empty($csrf_token) || $csrf_token !== $_SESSION['csrf_token']) {
+    ob_clean();
+    http_response_code(403);
+    echo json_encode(["status" => "error", "message" => "Falha de segurança: Token CSRF inválido ou ausente."]);
     exit;
 }
 

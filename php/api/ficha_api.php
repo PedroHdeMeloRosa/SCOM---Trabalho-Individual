@@ -5,6 +5,10 @@ ini_set('display_errors', 0);
 require_once '../config/database.php';
 header("Content-Type: application/json; charset=UTF-8");
 
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains"); // Força o uso de HTTPS
+
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {

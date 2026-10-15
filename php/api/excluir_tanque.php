@@ -14,6 +14,15 @@ if (!isset($_SESSION['user_id']) || $_SESSION['user_perfil'] !== 'admin') {
     exit;
 }
 
+// Trava de Segurança: Prevenção CSRF (Passo 1.2)
+$csrf_token = $_POST['csrf_token'] ?? '';
+if (empty($csrf_token) || $csrf_token !== $_SESSION['csrf_token']) {
+    ob_clean();
+    http_response_code(403);
+    echo json_encode(["status" => "error", "message" => "Falha de segurança: Token CSRF inválido ou ausente."]);
+    exit;
+}
+
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {

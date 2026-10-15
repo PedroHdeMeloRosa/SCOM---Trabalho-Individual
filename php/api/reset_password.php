@@ -6,6 +6,10 @@ require_once '../config/database.php';
 
 header("Content-Type: application/json; charset=UTF-8");
 
+header("X-Frame-Options: DENY");
+header("X-Content-Type-Options: nosniff");
+header("Strict-Transport-Security: max-age=31536000; includeSubDomains"); // Força o uso de HTTPS
+
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     ob_clean();
     http_response_code(405);
