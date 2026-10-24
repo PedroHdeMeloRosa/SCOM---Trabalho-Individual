@@ -17,8 +17,8 @@ $database = new Database();
 $db = $database->getConnection();
 
 try {
-    // Busca na tabela 'tanques' com JOIN na tabela 'nacoes' para pegar a sigla/nome[cite: 6, 7]
-    $query = "SELECT t.id, t.nome, t.url_pagina, t.caminho_imagem, n.nome AS nacao 
+    // Adicionadas as colunas classe_veiculo e nivel na busca
+    $query = "SELECT t.id, t.nome, t.url_pagina, t.caminho_imagem, t.classe_veiculo, t.nivel, n.nome AS nacao 
               FROM tanques t 
               LEFT JOIN nacoes n ON t.nacao_id = n.Id 
               WHERE t.nome LIKE :termo 
@@ -30,6 +30,13 @@ try {
     $stmt->execute();
 
     $resultados = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+    // Formatação limpa do Nível (Remove a palavra "Nível" se ela vier do banco, deixando só os algarismos romanos)
+    foreach ($resultados as &$resultado) {
+        if (!empty($resultado['nivel'])) {
+            $resultado['nivel'] = str_replace('Nível ', '', $resultado['nivel']);
+        }
+    }
 
     ob_clean();
     http_response_code(200);
