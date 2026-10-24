@@ -6,17 +6,13 @@ class Database {
 
     public function getConnection() {
         $this->conn = null;
-
-        // Caminho para o arquivo .env (na raiz do projeto, subindo duas pastas)
         $envPath = __DIR__ . '/../../.env';
         
-        // Valores padrão (fallback) caso o arquivo .env não exista
         $host = '127.0.0.1';
         $db_name = 'war_thunder_wiki';
         $username = 'root';
         $password = '';
 
-        // Se o .env existir, captura as credenciais blindadas
         if (file_exists($envPath)) {
             $env = parse_ini_file($envPath);
             if ($env) {
@@ -27,19 +23,24 @@ class Database {
             }
         }
 
+        // Evita o atraso de 1.5s do DNS IPv6 do Windows quando escrito 'localhost'
+        if (strtolower(trim($host)) === 'localhost') {
+            $host = '127.0.0.1';
+        }
+
         try {
-            // Criação da instância PDO
             $this->conn = new PDO(
-                "mysql:host=" . $host . ";dbname=" . $db_name . ";charset=utf8mb4",
+                "mysql:host={$host};dbname={$db_name};charset=utf8mb4",
                 $username,
-                $password
+                $password,
+                [
+                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+                    PDO::ATTR_PERSISTENT         => true // Reutiliza a conexão aberta (Ultra rápido)
+                ]
             );
-            
-            // Configura o PDO para lançar exceções em caso de erros severos
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            
-        } catch(PDOException $exception) {
-            echo "Erro de Conexão Tática: " . $exception->getMessage();
+        } catch (PDOException $exception) {
+            throw new Exception("Falha de conexão com a Base Central.");
         }
 
         return $this->conn;

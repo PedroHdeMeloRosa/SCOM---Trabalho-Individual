@@ -1,50 +1,35 @@
 <?php
 // Arquivo: php/api/excluir_tanque.php
-ob_start();
-ini_set('display_errors', 0);
-session_start();
-require_once '../config/database.php';
-header("Content-Type: application/json; charset=UTF-8");
+require_once '../config/bootstrap.php';
 
-// Trava de Segurança: Apenas Administradores podem apagar dados
-if (!isset($_SESSION['user_id']) || $_SESSION['user_perfil'] !== 'admin') {
-    ob_clean();
-    http_response_code(403);
-    echo json_encode(["status" => "error", "message" => "Acesso restrito ao Alto Comando."]);
-    exit;
-}
-
-// Trava de Segurança: Prevenção CSRF (Passo 1.2)
-$csrf_token = $_POST['csrf_token'] ?? '';
-if (empty($csrf_token) || $csrf_token !== $_SESSION['csrf_token']) {
-    ob_clean();
-    http_response_code(403);
-    echo json_encode(["status" => "error", "message" => "Falha de segurança: Token CSRF inválido ou ausente."]);
-    exit;
-}
+// Exige patente de Administrador e valida o Token CSRF automaticamente
+exigirAdmin();
 
 $id = filter_input(INPUT_POST, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
-    ob_clean();
-    echo json_encode(["status" => "error", "message" => "Identificação do veículo inválida."]);
-    exit;
+    responderJSON(["status" => "error", "message" => "Identificação do veículo inválida."], 400);
 }
 
-$database = new Database();
-$db = $database->getConnection();
-
 try {
-    // Ordem de exclusão direta na linha do ID selecionado
+    $database = new Database();
+    $db = $database->getConnection();
+
+    // 1. Captura o nome do tanque ANTES de excluí-lo
+    $stmtNome = $db->prepare("SELECT nome FROM tanques WHERE id = :id LIMIT 1");
+    $stmtNome->execute([':id' => $id]);
+    $nome_tanque = $stmtNome->fetchColumn() ?: "Projeto Desconhecido #{$id}";
+
+    // 2. Executa a exclusão (Obliteração)
     $stmt = $db->prepare("DELETE FROM tanques WHERE id = :id");
     $stmt->execute([':id' => $id]);
 
-    ob_clean();
-    http_response_code(200);
-    echo json_encode(["status" => "success", "message" => "Dossiê militar incinerado com sucesso."]);
-} catch (PDOException $e) {
-    ob_clean();
-    http_response_code(500);
-    echo json_encode(["status" => "error", "message" => "Falha no servidor: " . $e->getMessage()]);
+    // 3. Registra no Livro de Logs do Alto Comando
+    registrarAuditoria($db, $nome_tanque, 'VEÍCULO EXCLUÍDO', "Exclusão permanente do registro.");
+
+    responderJSON(["status" => "success", "message" => "Dossiê militar incinerado com sucesso."]);
+
+} catch (Exception $e) {
+    responderJSON(["status" => "error", "message" => "Falha no servidor: " . $e->getMessage()], 500);
 }
 ?>
