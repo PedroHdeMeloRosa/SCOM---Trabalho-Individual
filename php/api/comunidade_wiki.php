@@ -1,15 +1,15 @@
 <?php
-// Arquivo: php/api/comunidade_wiki.php
+// Arquivo: php/api/comunidade_wiki.php (Relatórios de Combate, Votos e Catálogo da Wiki)
 require_once '../config/bootstrap.php';
 
 $metodo = $_SERVER['REQUEST_METHOD'];
-$acao = $_POST['acao'] ?? $_GET['acao'] ?? '';
+$acao   = $_POST['acao'] ?? $_GET['acao'] ?? '';
 
 try {
     $database = new Database();
     $db = $database->getConnection();
 
-    // Garante que as tabelas existam mesmo se o SQL não tiver sido rodado manualmente
+    // Garante a existência das tabelas relacionais
     $db->exec("CREATE TABLE IF NOT EXISTS comentarios_tanques (
         id INT AUTO_INCREMENT PRIMARY KEY,
         tanque_id INT NOT NULL,
@@ -31,7 +31,7 @@ try {
         INDEX idx_comentario (comentario_id)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;");
 
-    $meuId = $_SESSION['user_id'] ?? 0;
+    $meuId     = $_SESSION['user_id'] ?? 0;
     $meuPerfil = obterPerfilSessao();
 
     // =========================================================================
@@ -81,17 +81,17 @@ try {
         ]);
         $linhas = $stmt->fetchAll();
 
-        // Organiza em árvore: Comentários Principais -> Array de Respostas
+        // Organização hierárquica (Threads aninhadas)
         $principais = [];
         $respostasPorPai = [];
 
         foreach ($linhas as $item) {
-            $item['id'] = (int)$item['id'];
-            $item['usuario_id'] = (int)$item['usuario_id'];
-            $item['parent_id'] = $item['parent_id'] ? (int)$item['parent_id'] : null;
-            $item['likes'] = (int)$item['likes'];
-            $item['dislikes'] = (int)$item['dislikes'];
-            $item['meu_voto'] = (int)$item['meu_voto'];
+            $item['id']           = (int)$item['id'];
+            $item['usuario_id']   = (int)$item['usuario_id'];
+            $item['parent_id']    = $item['parent_id'] ? (int)$item['parent_id'] : null;
+            $item['likes']        = (int)$item['likes'];
+            $item['dislikes']     = (int)$item['dislikes'];
+            $item['meu_voto']     = (int)$item['meu_voto'];
             $item['pode_excluir'] = ($meuPerfil === 'admin' || ($meuId > 0 && $meuId === $item['usuario_id']));
 
             if ($item['parent_id'] === null) {
@@ -102,7 +102,6 @@ try {
             }
         }
 
-        // Vincula as respostas aos seus comentários principais e ordena os mais recentes no topo
         foreach ($respostasPorPai as $paiId => $listaRespostas) {
             if (isset($principais[$paiId])) {
                 $principais[$paiId]['respostas'] = $listaRespostas;
@@ -119,15 +118,15 @@ try {
     }
 
     // =========================================================================
-    // 3. OPERAÇÕES DE ESCRITA (EXIGEM USUÁRIO LOGADO + TOKEN CSRF)
+    // 3. OPERAÇÕES DE MUTAÇÃO (EXIGEM USUÁRIO AUTENTICADO + TOKEN CSRF)
     // =========================================================================
     $usuarioLogadoId = exigirLogin();
     validarCSRF();
 
     // AÇÃO A: Publicar Comentário ou Resposta
     if ($metodo === 'POST' && $acao === 'publicar_comentario') {
-        $tanque_id = filter_input(INPUT_POST, 'tanque_id', FILTER_VALIDATE_INT);
-        $parent_id = filter_input(INPUT_POST, 'parent_id', FILTER_VALIDATE_INT) ?: null;
+        $tanque_id    = filter_input(INPUT_POST, 'tanque_id', FILTER_VALIDATE_INT);
+        $parent_id    = filter_input(INPUT_POST, 'parent_id', FILTER_VALIDATE_INT) ?: null;
         $conteudo_cru = trim($_POST['conteudo'] ?? '');
 
         if (!$tanque_id || mb_strlen($conteudo_cru) < 2) {
@@ -149,43 +148,44 @@ try {
             ':c' => $conteudo_limpo
         ]);
 
+        $novoComentarioId = $db->lastInsertId();
+        $tipoRelatorio = $parent_id ? "Resposta ao comentário #{$parent_id}" : "Comentário Principal";
+
+        // Observabilidade: Criação de Entidade com Timestamp
+        registrarLogApp("Criação de entidade: Relatório de Combate ({$tipoRelatorio}) ID #{$novoComentarioId} no Tanque #{$tanque_id} pelo Soldado ID {$usuarioLogadoId}", "ENTITY_CREATE");
+
         responderJSON(["status" => "success", "message" => "Relatório de combate transmitido!"]);
     }
 
     // AÇÃO B: Votar Like (1) ou Dislike (-1)
     if ($metodo === 'POST' && $acao === 'votar_comentario') {
         $comentario_id = filter_input(INPUT_POST, 'comentario_id', FILTER_VALIDATE_INT);
-        $tipo_voto = filter_input(INPUT_POST, 'voto', FILTER_VALIDATE_INT); // 1 ou -1
+        $tipo_voto     = filter_input(INPUT_POST, 'voto', FILTER_VALIDATE_INT);
 
         if (!$comentario_id || !in_array($tipo_voto, [1, -1])) {
             responderJSON(["status" => "error", "message" => "Parâmetros de avaliação inválidos."], 400);
         }
 
-        // Verifica se o usuário já votou neste comentário
         $stmtCheck = $db->prepare("SELECT voto FROM comentarios_votos WHERE comentario_id = :c AND usuario_id = :u LIMIT 1");
         $stmtCheck->execute([':c' => $comentario_id, ':u' => $usuarioLogadoId]);
         $votoAtual = $stmtCheck->fetchColumn();
 
         if ($votoAtual !== false) {
             if ((int)$votoAtual === $tipo_voto) {
-                // Clicou no mesmo botão: remove o voto (Toggle Off)
                 $db->prepare("DELETE FROM comentarios_votos WHERE comentario_id = :c AND usuario_id = :u")
                    ->execute([':c' => $comentario_id, ':u' => $usuarioLogadoId]);
                 $meuNovoVoto = 0;
             } else {
-                // Clicou no botão oposto: inverte o voto
                 $db->prepare("UPDATE comentarios_votos SET voto = :v WHERE comentario_id = :c AND usuario_id = :u")
                    ->execute([':v' => $tipo_voto, ':c' => $comentario_id, ':u' => $usuarioLogadoId]);
                 $meuNovoVoto = $tipo_voto;
             }
         } else {
-            // Primeiro voto neste comentário
             $db->prepare("INSERT INTO comentarios_votos (comentario_id, usuario_id, voto) VALUES (:c, :u, :v)")
                ->execute([':c' => $comentario_id, ':u' => $usuarioLogadoId, ':v' => $tipo_voto]);
             $meuNovoVoto = $tipo_voto;
         }
 
-        // Recalcula o placar atualizado do comentário
         $stmtCount = $db->prepare("
             SELECT COALESCE(SUM(CASE WHEN voto = 1 THEN 1 ELSE 0 END), 0) AS likes,
                    COALESCE(SUM(CASE WHEN voto = -1 THEN 1 ELSE 0 END), 0) AS dislikes
@@ -203,7 +203,7 @@ try {
         ]);
     }
 
-    // AÇÃO C: Excluir Comentário (Autor do comentário ou Admin)
+    // AÇÃO C: Excluir Comentário (Autor ou Administrador)
     if ($metodo === 'POST' && $acao === 'excluir_comentario') {
         $comentario_id = filter_input(INPUT_POST, 'comentario_id', FILTER_VALIDATE_INT);
         if (!$comentario_id) {
@@ -227,7 +227,7 @@ try {
             responderJSON(["status" => "error", "message" => "Permissão negada para apagar este registro."], 403);
         }
 
-        // Remove os votos, as respostas filhas e o próprio comentário
+        // Exclusão em cascata controlada
         $db->prepare("DELETE FROM comentarios_votos WHERE comentario_id = :id")->execute([':id' => $comentario_id]);
         $db->prepare("DELETE FROM comentarios_tanques WHERE parent_id = :id")->execute([':id' => $comentario_id]);
         $db->prepare("DELETE FROM comentarios_tanques WHERE id = :id")->execute([':id' => $comentario_id]);
@@ -236,12 +236,20 @@ try {
             registrarAuditoria($db, $alvo['nickname'], 'COMENTÁRIO REMOVIDO', "Moderação no comentário #{$comentario_id}");
         }
 
+        // Observabilidade: Exclusão de Entidade
+        $responsavel = ($meuPerfil === 'admin') ? "Admin ID {$usuarioLogadoId}" : "Autor ID {$usuarioLogadoId}";
+        registrarLogApp("Exclusão de entidade: Relatório de Combate ID #{$comentario_id} removido por {$responsavel}", "ENTITY_DELETE");
+
         responderJSON(["status" => "success", "message" => "Registro removido com sucesso."]);
     }
 
     responderJSON(["status" => "error", "message" => "Ação não reconhecida."], 400);
 
 } catch (Exception $e) {
-    responderJSON(["status" => "error", "message" => "Erro interno: " . $e->getMessage()], 500);
+    // Observabilidade: Registro técnico de erro interno em app.log
+    registrarLogApp("Erro interno (comunidade_wiki.php): " . $e->getMessage(), "ERROR");
+
+    // Resposta genérica sem vazamento de detalhes técnicos ao cliente
+    responderJSON(["status" => "error", "message" => "Erro interno no servidor ao processar a requisição comunitária."], 500);
 }
 ?>

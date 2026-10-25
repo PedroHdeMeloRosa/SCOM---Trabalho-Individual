@@ -62,5 +62,8 @@ try {
     ob_clean();
     http_response_code(500);
     echo json_encode(["status" => "error", "message" => "Erro ao redefinir a chave."]);
+
+    registrarLogApp("Erro interno: " . $e->getMessage(), "ERROR");
+    
     exit;
 }

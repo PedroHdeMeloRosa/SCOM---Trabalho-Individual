@@ -1,15 +1,22 @@
 <?php
 // Arquivo: php/api/logout.php
-session_start();
+require_once '../config/bootstrap.php';
 
-// Esvazia todas as variáveis da sessão atual
-$_SESSION = array();
+// Destrói todas as variáveis de sessão
+$_SESSION = [];
 
-// Destrói a sessão no servidor de forma irreversível
+// Invalida o cookie de sessão do navegador
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000,
+        $params["path"], $params["domain"],
+        $params["secure"], $params["httponly"]
+    );
+}
+
+// Oblitera a sessão no servidor
 session_destroy();
 
-// Retorna o aviso de sucesso para o Front-End
-header("Content-Type: application/json; charset=UTF-8");
-http_response_code(200);
-echo json_encode(["status" => "success", "message" => "Sessão encerrada com sucesso."]);
+registrarLogApp("Logout executado pelo usuário", "AUTH_LOGOUT");
+responderJSON(["status" => "success", "message" => "Desconexão concluída. Câmbio desligo."]);
 ?>

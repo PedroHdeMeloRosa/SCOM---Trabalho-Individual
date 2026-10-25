@@ -40,6 +40,10 @@ try {
                 ':silhueta' => $silhueta, ':resumo' => $resumo, ':lore' => $lore, ':id' => $id
             ]);
             registrarAuditoria($db, $nome, 'NAÇÃO ATUALIZADA', "ID: {$id}");
+            
+            // LOG DE APLICAÇÃO (Atualização)
+            registrarLogApp("Atualização de entidade: Nação ID {$id} alterada por um Admin", "ENTITY_UPDATE");
+
             responderJSON(["status" => "success", "message" => "Registros da Nação atualizados com sucesso!"]);
         } else {
             $loreInicial = $lore !== '' ? $lore : 'Doutrina pendente de desclassificação.';
@@ -48,7 +52,13 @@ try {
                 ':nome' => $nome, ':cor' => $cor, ':bandeira' => $bandeira,
                 ':silhueta' => $silhueta, ':resumo' => $resumo, ':lore' => $loreInicial
             ]);
+            
+            $novo_id = $db->lastInsertId(); // Captura o ID recém-criado
             registrarAuditoria($db, $nome, 'NAÇÃO FUNDADA', "Nova nação inserida");
+            
+            // LOG DE APLICAÇÃO: Criação de Entidade
+            registrarLogApp("Criação de entidade: Nova Nação '{$nome}' (ID: {$novo_id})", "ENTITY_CREATE");
+
             responderJSON(["status" => "success", "message" => "Nova Nação Fundada!"]);
         }
 
@@ -62,6 +72,10 @@ try {
         $db->commit();
 
         registrarAuditoria($db, "Nação #{$id}", 'NAÇÃO EXCLUÍDA', "Nação e frota removidas");
+        
+        // LOG DE APLICAÇÃO (Exclusão)
+        registrarLogApp("Exclusão de entidade: Nação ID {$id} obliterada", "ENTITY_DELETE");
+
         responderJSON(["status" => "success", "message" => "Nação e sua frota foram obliteradas."]);
 
     } elseif ($acao === 'novo_tanque') {
@@ -75,6 +89,10 @@ try {
         $novo_id = $db->lastInsertId();
 
         registrarAuditoria($db, $nome_provisorio, 'NOVO BLINDADO', "ID: {$novo_id} na Nação #{$nacao_id}");
+        
+        // LOG DE APLICAÇÃO: Criação de Entidade
+        registrarLogApp("Criação de entidade: Novo Blindado ID {$novo_id} alocado na Nação {$nacao_id}", "ENTITY_CREATE");
+
         responderJSON(["status" => "success", "message" => "Base criada.", "novo_id" => $novo_id]);
 
     } else {
@@ -82,6 +100,11 @@ try {
     }
 } catch (Exception $e) {
     if (isset($db) && $db->inTransaction()) $db->rollBack();
-    responderJSON(["status" => "error", "message" => $e->getMessage()], 500);
+    
+    // LOG DE APLICAÇÃO: Erro Interno com Stack Trace técnico
+    registrarLogApp("Erro interno de SQL (admin_index_api): " . $e->getMessage(), "ERROR");
+    
+    // Resposta legível ao Front-End (Ocultando detalhes do PDO)
+    responderJSON(["status" => "error", "message" => "Erro interno no servidor ao processar a operação."], 500);
 }
 ?>

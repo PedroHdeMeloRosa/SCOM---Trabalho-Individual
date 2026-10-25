@@ -1,50 +1,43 @@
 <?php
-// Arquivo: php/api/ficha_api.php
-ob_start();
-ini_set('display_errors', 0);
-require_once '../config/database.php';
-header("Content-Type: application/json; charset=UTF-8");
-
-header("X-Frame-Options: DENY");
-header("X-Content-Type-Options: nosniff");
-header("Strict-Transport-Security: max-age=31536000; includeSubDomains"); // Força o uso de HTTPS
+// Arquivo: php/api/ficha_api.php (Consulta Detalhada do Blindado e Doutrina Tática)
+require_once '../config/bootstrap.php';
 
 $id = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 if (!$id) {
-    ob_clean();
-    echo json_encode(["status" => "error", "message" => "Identificação do veículo não informada."]);
-    exit;
+    responderJSON(["status" => "error", "message" => "Identificação do veículo não informada ou inválida."], 400);
 }
 
-$database = new Database();
-$db = $database->getConnection();
-
 try {
-    // Puxa todos os dados do tanque e a cor/bandeira da nação correspondente
+    $database = new Database();
+    $db = $database->getConnection();
+
+    // Consulta os atributos do veículo e agrega metadados heráldicos da nação associada
     $query = "SELECT t.*, n.nome AS nacao_nome, n.cor_hex 
               FROM tanques t 
               LEFT JOIN nacoes n ON t.nacao_id = n.Id 
-              WHERE t.id = :id LIMIT 1";
-              
+              WHERE t.id = :id 
+              LIMIT 1";
+
     $stmt = $db->prepare($query);
-    $stmt->bindParam(':id', $id);
-    $stmt->execute();
-    
+    $stmt->execute([':id' => $id]);
+
     $tanque = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($tanque) {
-        ob_clean();
-        http_response_code(200);
-        echo json_encode(["status" => "success", "dados" => $tanque]);
+        responderJSON([
+            "status" => "success",
+            "dados"  => $tanque
+        ], 200);
     } else {
-        ob_clean();
-        http_response_code(404);
-        echo json_encode(["status" => "error", "message" => "Blindado não encontrado nos registros."]);
+        responderJSON([
+            "status"  => "error",
+            "message" => "Blindado não encontrado nos registros."
+        ], 404);
     }
+
 } catch (PDOException $e) {
-    ob_clean();
-    http_response_code(500);
-    echo json_encode(["status" => "error", "message" => "Erro na base central."]);
+    registrarLogApp("Erro interno (ficha_api.php): " . $e->getMessage(), "ERROR");
+    responderJSON(["status" => "error", "message" => "Erro na base central."], 500);
 }
 ?>

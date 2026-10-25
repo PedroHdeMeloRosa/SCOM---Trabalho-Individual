@@ -1,42 +1,49 @@
 <?php
-// Arquivo: php/api/perfil.php
+// Arquivo: php/api/perfil.php (Gestão de Dossiê Pessoal e Redefinição de Credencial)
 require_once '../config/bootstrap.php';
 
 $user_id = exigirLogin();
-$acao = $_GET['acao'] ?? $_POST['acao'] ?? '';
+$acao    = $_POST['acao'] ?? $_GET['acao'] ?? '';
+$metodo  = $_SERVER['REQUEST_METHOD'];
 
 try {
     $database = new Database();
     $db = $database->getConnection();
 
-    // ROTA GET: Busca todos os dados para o Dossiê de Visualização e Formulário
-    if ($_SERVER['REQUEST_METHOD'] === 'GET' && $acao === 'get') {
+    // 1. Consulta do Dossiê Pessoal (GET)
+    if ($metodo === 'GET' && $acao === 'get') {
         $stmt = $db->prepare("SELECT nome, sobrenome, nickname, email, email_contato, telefone, perfil, nacao_favorita, criado_em FROM usuarios WHERE id = :id LIMIT 1");
         $stmt->execute([':id' => $user_id]);
         $dados = $stmt->fetch();
 
-        responderJSON(["status" => "success", "dados" => $dados]);
+        responderJSON([
+            "status" => "success",
+            "dados"  => $dados
+        ]);
     }
 
-    // ROTAS POST: Exigem Token CSRF e confirmação da Senha Atual
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // 2. Operações Mutantes de Perfil e Credenciais (POST)
+    if ($metodo === 'POST') {
         validarCSRF();
 
-        $stmt = $db->prepare("SELECT senha_hash FROM usuarios WHERE id = :id LIMIT 1");
+        // Validação da Chave Atual antes de autorizar qualquer mutação de dados sensíveis
+        $stmt = $db->prepare("SELECT senha_hash, nickname, email FROM usuarios WHERE id = :id LIMIT 1");
         $stmt->execute([':id' => $user_id]);
         $userDB = $stmt->fetch();
 
         $senha_atual_fornecida = $_POST['senha_atual'] ?? '';
+
         if (!$userDB || !password_verify($senha_atual_fornecida, $userDB['senha_hash'])) {
+            registrarLogApp("Falha de autenticação: Senha incorreta informada na alteração de perfil do soldado ID {$user_id}", "AUTH_FAIL");
             responderJSON(["status" => "error", "message" => "Autorização negada: A senha atual está incorreta."], 401);
         }
 
-        // AÇÃO 1: Atualizar Dados Complementares
+        // Ação A: Atualização de Dados Cadastrais
         if ($acao === 'update_dados') {
-            $nome = htmlspecialchars(trim($_POST['nome'] ?? ''), ENT_QUOTES, 'UTF-8');
-            $sobrenome = htmlspecialchars(trim($_POST['sobrenome'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $nome          = htmlspecialchars(trim($_POST['nome'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $sobrenome     = htmlspecialchars(trim($_POST['sobrenome'] ?? ''), ENT_QUOTES, 'UTF-8');
             $email_contato = filter_input(INPUT_POST, 'email_contato', FILTER_SANITIZE_EMAIL);
-            $telefone = htmlspecialchars(trim($_POST['telefone'] ?? ''), ENT_QUOTES, 'UTF-8');
+            $telefone      = htmlspecialchars(trim($_POST['telefone'] ?? ''), ENT_QUOTES, 'UTF-8');
 
             if (empty($nome) || empty($sobrenome)) {
                 responderJSON(["status" => "error", "message" => "Nome e Sobrenome são obrigatórios."], 400);
@@ -53,27 +60,42 @@ try {
 
             $_SESSION['user_nome'] = $nome;
 
-            responderJSON(["status" => "success", "message" => "Dossiê pessoal atualizado com sucesso."]);
+            registrarLogApp("Atualização de dossiê: Soldado {$userDB['nickname']} (ID: {$user_id}) atualizou suas informações pessoais", "USER_ACTION");
+
+            responderJSON([
+                "status"  => "success",
+                "message" => "Dossiê pessoal atualizado com sucesso."
+            ]);
         }
 
-        // AÇÃO 2: Alterar Senha
+        // Ação B: Redefinição de Chave Criptográfica (Senha)
         if ($acao === 'update_senha') {
             $nova_senha = $_POST['nova_senha'] ?? '';
+
             if (strlen($nova_senha) < 8) {
                 responderJSON(["status" => "error", "message" => "A nova chave deve ter pelo menos 8 caracteres."], 400);
             }
 
             $hash = password_hash($nova_senha, PASSWORD_DEFAULT);
             $update = $db->prepare("UPDATE usuarios SET senha_hash = :hash WHERE id = :id");
-            $update->execute([':hash' => $hash, ':id' => $user_id]);
+            $update->execute([
+                ':hash' => $hash,
+                ':id'   => $user_id
+            ]);
 
-            responderJSON(["status" => "success", "message" => "Credencial tática alterada com sucesso!"]);
+            registrarLogApp("Segurança: Soldado {$userDB['nickname']} (ID: {$user_id}) redefiniu com sucesso sua chave criptográfica", "AUTH_SECURITY");
+
+            responderJSON([
+                "status"  => "success",
+                "message" => "Credencial tática alterada com sucesso!"
+            ]);
         }
     }
 
     responderJSON(["status" => "error", "message" => "Ação inválida."], 400);
 
 } catch (Exception $e) {
+    registrarLogApp("Erro interno (perfil.php): " . $e->getMessage(), "ERROR");
     responderJSON(["status" => "error", "message" => "Erro interno ao processar o perfil."], 500);
 }
 ?>

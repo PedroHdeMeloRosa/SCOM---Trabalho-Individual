@@ -92,4 +92,16 @@ function registrarAuditoria(PDO $db, string $alvoNick, string $acao, string $det
         // Continua silenciosamente se houver erro de permissão de escrita
     }
 }
+
+// Função para Observabilidade Básica (Requisito 10)
+function registrarLogApp($mensagem, $tipo = "INFO") {
+    $timestamp = date("Y-m-d H:i:s");
+    $ip = $_SERVER['REMOTE_ADDR'] ?? 'UNKNOWN';
+    $logEntry = "[$timestamp] [$tipo] [IP: $ip] $mensagem" . PHP_EOL;
+    
+    // Salva o log num arquivo de texto na pasta do servidor
+    $caminhoLog = __DIR__ . '/../../logs/app.log';
+    error_log($logEntry, 3, $caminhoLog);
+}
+
 ?>

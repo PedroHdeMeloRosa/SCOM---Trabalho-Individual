@@ -1,56 +1,52 @@
 <?php
-// Arquivo: php/api/recover.php
+// Arquivo: php/api/esqueci_senha.php (Despacho de Token de Redefinição via SMTP)
 ob_start();
 ini_set('display_errors', 0);
-require_once '../config/database.php';
 
-// Importa o PHPMailer (Ajuste o caminho se necessário)
+require_once '../config/bootstrap.php';
+
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
-require '../PHPMailer/Exception.php';
-require '../PHPMailer/PHPMailer.php';
-require '../PHPMailer/SMTP.php';
 
-header("Content-Type: application/json; charset=UTF-8");
+require_once '../PHPMailer/Exception.php';
+require_once '../PHPMailer/PHPMailer.php';
+require_once '../PHPMailer/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    http_response_code(405);
-    echo json_encode(["status" => "error", "message" => "Método não permitido."]); exit;
+    responderJSON(["status" => "error", "message" => "Método não permitido."], 405);
 }
 
 $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
 if (empty($email)) {
-    http_response_code(400);
-    echo json_encode(["status" => "error", "message" => "Informe o e-mail cadastrado."]); exit;
+    responderJSON(["status" => "error", "message" => "Informe o e-mail cadastrado."], 400);
 }
 
-$database = new Database();
-$db = $database->getConnection();
-
 try {
+    $database = new Database();
+    $db = $database->getConnection();
+
     $stmt = $db->prepare("SELECT id, nickname FROM usuarios WHERE email = :email LIMIT 1");
-    $stmt->bindParam(':email', $email);
-    $stmt->execute();
+    $stmt->execute([':email' => $email]);
 
     if ($stmt->rowCount() > 0) {
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
-        // Gera token de 6 caracteres (Fica melhor para o usuário digitar na tela)
-        $token = strtoupper(substr(bin2hex(random_bytes(3)), 0, 6)); 
+        // Geração de token alfanumérico seguro de 6 dígitos com expiração de 15 minutos
+        $token  = strtoupper(substr(bin2hex(random_bytes(3)), 0, 6));
         $expira = date('Y-m-d H:i:s', strtotime('+15 minutes'));
 
         $update = $db->prepare("UPDATE usuarios SET token_recuperacao = :token, token_expira = :expira WHERE id = :id");
-        $update->execute([':token' => $token, ':expira' => $expira, ':id' => $user['id']]);
+        $update->execute([
+            ':token'  => $token,
+            ':expira' => $expira,
+            ':id'     => $user['id']
+        ]);
 
-        // ==========================================
-        // DISPARO DO E-MAIL VIA SMTP DO GMAIL
-        // ==========================================
-        
-        // Busca as credenciais escondidas no arquivo .env
-        $envPath = __DIR__ . '/../../.env';
+        // Carregamento de credenciais SMTP via .env
+        $envPath  = __DIR__ . '/../../.env';
         $smtpUser = '';
         $smtpPass = '';
-        
+
         if (file_exists($envPath)) {
             $env = parse_ini_file($envPath);
             if ($env) {
@@ -60,32 +56,29 @@ try {
         }
 
         $mail = new PHPMailer(true);
+
         try {
-            // Configurações do Servidor
             $mail->isSMTP();
             $mail->Host       = 'smtp.gmail.com';
             $mail->SMTPAuth   = true;
-            $mail->Username   = $smtpUser; // Usa a variável do .env
-            $mail->Password   = $smtpPass; // Usa a variável do .env
+            $mail->Username   = $smtpUser;
+            $mail->Password   = $smtpPass;
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
             $mail->Port       = 465;
             $mail->CharSet    = 'UTF-8';
 
-            // Destinatário
             $mail->setFrom($smtpUser, 'SCOM - War Thunder Wiki');
             $mail->addAddress($email, $user['nickname']);
-
-            // Conteúdo do E-mail Estilizado (Tema Dark/Gold)
             $mail->isHTML(true);
             $mail->Subject = 'SCOM: Solicitação de Redefinição de Chave Criptográfica';
-            
+
             $htmlEmail = "
             <div style='background-color:#111; color:#fff; font-family:Arial, sans-serif; padding:30px; border: 2px solid #444; border-radius:8px; max-width:500px; margin:auto;'>
                 <div style='text-align:center; border-bottom:1px solid #F2B400; padding-bottom:15px; margin-bottom:20px;'>
                     <h2 style='color:#F2B400; margin:0; letter-spacing:2px;'>SCOM WT WIKI</h2>
                     <p style='color:#888; font-size:12px; margin-top:5px;'>COMANDO CENTRAL TÁTICO</p>
                 </div>
-                <p>Atenção Comandante <strong>{$user['nickname']}</strong>,</p>
+                <p>Atenção Comandante <strong>" . htmlspecialchars($user['nickname'], ENT_QUOTES, 'UTF-8') . "</strong>,</p>
                 <p>Recebemos uma solicitação de emergência para redefinir a sua chave de acesso aos nossos servidores.</p>
                 <div style='background-color:#1e1e1e; border-left:4px solid #F2B400; padding:15px; margin:20px 0; text-align:center;'>
                     <p style='margin:0; color:#aaa; font-size:12px;'>CÓDIGO DE AUTORIZAÇÃO (TOKEN):</p>
@@ -94,33 +87,37 @@ try {
                 <p style='color:#ff4d4d; font-size:12px;'>Este código de autorização tem validade máxima de <strong>15 minutos</strong>. Se você não solicitou esta alteração, ignore esta transmissão imediatamente; a sua chave atual permanece segura.</p>
                 <br>
                 <p style='font-size:11px; color:#666; text-align:center; border-top:1px dashed #333; padding-top:15px;'>Esta é uma transmissão automatizada. Não responda a este e-mail.</p>
-            </div>
-            ";
-            
+            </div>";
+
             $mail->Body = $htmlEmail;
             $mail->send();
 
-            ob_clean();
-            http_response_code(200);
-            echo json_encode(["status" => "success", "message" => "Transmissão efetuada. Verifique sua caixa de e-mail (e a pasta Spam)."]);
-            exit;
+            // Observabilidade: Registro da emissão de token com sucesso
+            registrarLogApp("Token de recuperação emitido e despachado para: {$email}", "AUTH_RECOVERY");
+
         } catch (Exception $e) {
-            ob_clean();
-            http_response_code(500);
-            echo json_encode(["status" => "error", "message" => "Falha no satélite de comunicação. Não foi possível despachar o e-mail."]);
-            exit;
+            // Observabilidade: Falha no transporte SMTP
+            registrarLogApp("Falha no satélite SMTP ao despachar token ({$email}): " . $mail->ErrorInfo, "ERROR");
+
+            if (ob_get_length()) ob_clean();
+            responderJSON(["status" => "error", "message" => "Falha no satélite de comunicação. Não foi possível despachar o e-mail."], 500);
         }
+    } else {
+        // E-mail não localizado: Registra no log para auditoria de segurança
+        registrarLogApp("Solicitação de token para e-mail não registrado: {$email}", "AUTH_FAIL");
     }
 
-    ob_clean();
-    http_response_code(200);
-    echo json_encode(["status" => "success", "message" => "Se o e-mail estiver registrado, as instruções foram despachadas."]);
-    exit;
+    // Resposta uniforme independente da existência do e-mail para mitigar enumeração
+    if (ob_get_length()) ob_clean();
+    responderJSON([
+        "status"  => "success",
+        "message" => "Se o e-mail estiver registrado em nossa base tática, as instruções de recuperação foram despachadas para sua caixa postal (verifique também a pasta Spam)."
+    ], 200);
 
 } catch (PDOException $e) {
-    ob_clean();
-    http_response_code(500);
-    echo json_encode(["status" => "error", "message" => "Erro interno no servidor de dados."]);
-    exit;
+    registrarLogApp("Erro interno de banco (esqueci_senha.php): " . $e->getMessage(), "ERROR");
+
+    if (ob_get_length()) ob_clean();
+    responderJSON(["status" => "error", "message" => "Erro interno no servidor de dados."], 500);
 }
 ?>
