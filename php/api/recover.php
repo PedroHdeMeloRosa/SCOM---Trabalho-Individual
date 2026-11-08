@@ -8,9 +8,9 @@ require_once '../config/bootstrap.php';
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require_once '../PHPMailer/Exception.php';
-require_once '../PHPMailer/PHPMailer.php';
-require_once '../PHPMailer/SMTP.php';
+require_once __DIR__ . '/../PHPMailer-master/src/Exception.php';
+require_once __DIR__ . '/../PHPMailer-master/src/PHPMailer.php';
+require_once __DIR__ . '/../PHPMailer-master/src/SMTP.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     responderJSON(["status" => "error", "message" => "Método não permitido."], 405);
