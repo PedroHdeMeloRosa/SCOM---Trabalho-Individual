@@ -102,3 +102,98 @@
 [2026-10-25 15:53:27] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Siri Casudo' (ID: 69) atualizado por um Administrador
 [2026-10-25 15:54:18] [ENTITY_DELETE] [IP: ::1] Exclusão de entidade: Blindado 'Siri Casudo' (ID: 69) obliterado
 [2026-10-25 15:54:27] [ENTITY_DELETE] [IP: ::1] Exclusão de entidade: Nação ID 10 obliterada
+[2026-10-27 18:04:37] [AUTH_SUCCESS] [IP: ::1] Login bem-sucedido: admin#01@wtwiki.com (Perfil: admin)
+[2026-10-27 18:06:14] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 5 alterada por um Admin
+[2026-10-27 18:06:34] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 5 alterada por um Admin
+[2026-10-27 18:07:05] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 1 alterada por um Admin
+[2026-10-27 18:07:21] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 1 alterada por um Admin
+[2026-10-27 18:07:55] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 1 alterada por um Admin
+[2026-10-27 18:08:12] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 1 alterada por um Admin
+[2026-10-27 19:00:32] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'M18 Hellcat' (ID: 2) atualizado por um Administrador
+[2026-10-27 19:01:07] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-11 Urutu' (ID: 36) atualizado por um Administrador
+[2026-10-27 19:01:46] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-11 Urutu' (ID: 36) atualizado por um Administrador
+[2026-10-27 19:02:27] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:02:50] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:03:01] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:03:17] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:03:59] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:04:30] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:04:49] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-9 Cascavel' (ID: 57) atualizado por um Administrador
+[2026-10-27 19:14:04] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-T1 Osório' (ID: 58) atualizado por um Administrador
+[2026-10-27 19:14:33] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-T1 Osório' (ID: 58) atualizado por um Administrador
+[2026-10-27 19:16:21] [AUTH_LOGOUT] [IP: ::1] Logout executado pelo usuário
+[2026-10-27 19:16:27] [AUTH_SUCCESS] [IP: ::1] Login bem-sucedido: admin#01@wtwiki.com (Perfil: admin)
+[2026-10-27 19:18:45] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-T1 Osório' (ID: 58) atualizado por um Administrador
+[2026-10-27 19:19:11] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-T1 Osório' (ID: 58) atualizado por um Administrador
+[2026-10-27 19:19:33] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'EE-T1 Osório' (ID: 58) atualizado por um Administrador
+[2026-10-27 19:19:55] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 7 alterada por um Admin
+[2026-10-27 19:20:53] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger II) Pz.Kpfw. VI Ausf. B' (ID: 39) atualizado por um Administrador
+[2026-10-27 19:21:43] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 2 alterada por um Admin
+[2026-10-27 19:22:20] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Panther D) Pz.Kpfw. V Panther Ausf. D' (ID: 37) atualizado por um Administrador
+[2026-10-27 19:23:56] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Panther D) Pz.Kpfw. V Panther Ausf. D' (ID: 37) atualizado por um Administrador
+[2026-10-27 19:25:52] [AUTH_LOGOUT] [IP: ::1] Logout executado pelo usuário
+[2026-10-27 19:25:58] [AUTH_SUCCESS] [IP: ::1] Login bem-sucedido: membrocomum@gmail.com (Perfil: visitante)
+[2026-10-29 20:30:57] [AUTH_SUCCESS] [IP: ::1] Login bem-sucedido: admin#01@wtwiki.com (Perfil: admin)
+[2026-10-29 20:31:25] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'T95 (Doom Turtle)' (ID: 4) atualizado por um Administrador
+[2026-10-29 20:33:46] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'T95 (Doom Turtle)' (ID: 4) atualizado por um Administrador
+[2026-10-29 20:34:10] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'M1A2 Abrams' (ID: 5) atualizado por um Administrador
+[2026-10-29 20:38:46] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Panther D) Pz.Kpfw. V Panther Ausf. D' (ID: 37) atualizado por um Administrador
+[2026-10-29 20:39:41] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Panther D) Pz.Kpfw. V Panther Ausf. D' (ID: 37) atualizado por um Administrador
+[2026-10-29 20:39:59] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Panther D) Pz.Kpfw. V Panther Ausf. D' (ID: 37) atualizado por um Administrador
+[2026-10-29 20:41:36] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Panther D) Pz.Kpfw. V Panther Ausf. D' (ID: 37) atualizado por um Administrador
+[2026-10-29 20:42:24] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger H1) Pz.Kpfw. VI Tiger Ausf. H1' (ID: 38) atualizado por um Administrador
+[2026-10-29 20:42:45] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger H1) Pz.Kpfw. VI Tiger Ausf. H1' (ID: 38) atualizado por um Administrador
+[2026-10-29 20:44:59] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger H1) Pz.Kpfw. VI Tiger Ausf. H1' (ID: 38) atualizado por um Administrador
+[2026-10-29 20:45:12] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger H1) Pz.Kpfw. VI Tiger Ausf. H1' (ID: 38) atualizado por um Administrador
+[2026-10-29 20:46:16] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger II) Pz.Kpfw. VI Ausf. B' (ID: 39) atualizado por um Administrador
+[2026-10-29 20:47:30] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger II) Pz.Kpfw. VI Ausf. B' (ID: 39) atualizado por um Administrador
+[2026-10-29 20:49:43] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger II) Pz.Kpfw. VI Ausf. B' (ID: 39) atualizado por um Administrador
+[2026-10-29 20:50:59] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '(Tiger II) Pz.Kpfw. VI Ausf. B' (ID: 39) atualizado por um Administrador
+[2026-10-29 20:51:49] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '38 cm Sturmmörser (Sturmtiger)' (ID: 40) atualizado por um Administrador
+[2026-10-29 20:52:40] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '38 cm Sturmmörser (Sturmtiger)' (ID: 40) atualizado por um Administrador
+[2026-10-29 20:54:33] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado '38 cm Sturmmörser (Sturmtiger)' (ID: 40) atualizado por um Administrador
+[2026-10-30 02:26:45] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'MAUS - Panzerkampfwagen VIII Maus' (ID: 41) atualizado por um Administrador
+[2026-10-30 02:28:00] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 3 alterada por um Admin
+[2026-10-30 02:28:18] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 2 alterada por um Admin
+[2026-10-30 02:29:31] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 3 alterada por um Admin
+[2026-10-30 02:32:00] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'T-34-85' (ID: 42) atualizado por um Administrador
+[2026-10-30 02:32:18] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'T-34-85' (ID: 42) atualizado por um Administrador
+[2026-10-30 02:34:31] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'T-34-85' (ID: 42) atualizado por um Administrador
+[2026-10-30 02:46:27] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'IS-3' (ID: 44) atualizado por um Administrador
+[2026-10-30 02:47:05] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'IS-3' (ID: 44) atualizado por um Administrador
+[2026-10-30 02:50:49] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Object 279' (ID: 45) atualizado por um Administrador
+[2026-10-30 02:51:45] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Object 279' (ID: 45) atualizado por um Administrador
+[2026-10-30 02:56:42] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Object 279' (ID: 45) atualizado por um Administrador
+[2026-10-30 02:58:54] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SU-100' (ID: 46) atualizado por um Administrador
+[2026-10-30 02:59:18] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SU-100' (ID: 46) atualizado por um Administrador
+[2026-10-30 03:00:05] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SU-100' (ID: 46) atualizado por um Administrador
+[2026-10-30 03:02:50] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 4 alterada por um Admin
+[2026-10-30 03:03:08] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 4 alterada por um Admin
+[2026-11-08 18:09:54] [AUTH_SUCCESS] [IP: ::1] Login bem-sucedido: admin#01@wtwiki.com (Perfil: admin)
+[2026-11-08 18:10:05] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'MAUS - Panzerkampfwagen VIII Maus' (ID: 41) atualizado por um Administrador
+[2026-11-08 18:10:48] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SU-100' (ID: 46) atualizado por um Administrador
+[2026-11-08 18:11:03] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SU-100' (ID: 46) atualizado por um Administrador
+[2026-11-08 18:11:33] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'IS-3' (ID: 44) atualizado por um Administrador
+[2026-11-08 18:12:20] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Nação ID 3 alterada por um Admin
+[2026-11-08 18:13:51] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Chi-Ha LG' (ID: 47) atualizado por um Administrador
+[2026-11-08 18:14:06] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Chi-Ha LG' (ID: 47) atualizado por um Administrador
+[2026-11-08 18:14:18] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Chi-Ha LG' (ID: 47) atualizado por um Administrador
+[2026-11-08 18:14:53] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Ho-Ri Production' (ID: 48) atualizado por um Administrador
+[2026-11-08 18:15:15] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Ho-Ri Production' (ID: 48) atualizado por um Administrador
+[2026-11-08 18:16:24] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Type 74' (ID: 50) atualizado por um Administrador
+[2026-11-08 18:16:51] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Type 74' (ID: 50) atualizado por um Administrador
+[2026-11-08 18:17:07] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Type 74' (ID: 50) atualizado por um Administrador
+[2026-11-08 18:17:30] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Type 74' (ID: 50) atualizado por um Administrador
+[2026-11-08 18:19:39] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Type 90' (ID: 51) atualizado por um Administrador
+[2026-11-08 18:20:05] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Type 90' (ID: 51) atualizado por um Administrador
+[2026-11-08 18:21:10] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Strv 103A' (ID: 54) atualizado por um Administrador
+[2026-11-08 18:21:35] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Strv 103A' (ID: 54) atualizado por um Administrador
+[2026-11-08 18:21:47] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Strv 103A' (ID: 54) atualizado por um Administrador
+[2026-11-08 18:22:44] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Ikv 91 (demonstração de exclusão de perfil)' (ID: 55) atualizado por um Administrador
+[2026-11-08 18:23:14] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Strv 122A' (ID: 56) atualizado por um Administrador
+[2026-11-08 18:24:02] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'BT-42' (ID: 59) atualizado por um Administrador
+[2026-11-08 18:24:16] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'BT-42' (ID: 59) atualizado por um Administrador
+[2026-11-08 18:24:48] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SAV 20.12.48' (ID: 60) atualizado por um Administrador
+[2026-11-08 18:25:02] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'SAV 20.12.48' (ID: 60) atualizado por um Administrador
+[2026-11-08 18:25:41] [ENTITY_UPDATE] [IP: ::1] Atualização de entidade: Blindado 'Strv 122A' (ID: 56) atualizado por um Administrador
+[2026-11-08 18:46:52] [AUTH_LOGOUT] [IP: ::1] Logout executado pelo usuário

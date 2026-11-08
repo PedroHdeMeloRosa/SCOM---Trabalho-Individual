@@ -98,4 +98,3 @@ try {
     registrarLogApp("Erro interno (perfil.php): " . $e->getMessage(), "ERROR");
     responderJSON(["status" => "error", "message" => "Erro interno ao processar o perfil."], 500);
 }
-?>

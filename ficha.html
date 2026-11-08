@@ -1,28 +1,31 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Base de Dados - Ficha Tática</title>
-    
+
     <!-- IMPORTAÇÃO DO CSS UNIFICADO (Pilar Estético) -->
-    <link rel="stylesheet" href="css/style.css">
-    
+    <link rel="stylesheet" href="css/style.css?v=1.0">
+
     <link rel="icon" href="WT - Artes/WT-ICO2.ico" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 </head>
 
 <body>
     <!-- IMPORTAÇÃO DO CÉREBRO JAVASCRIPT UNIFICADO (Pilar Lógico) -->
-    <script src="js/menu.min.js"></script>
+    <script src="js/menu.min.js?v=1.0"></script>
     <script>injetarMenu('');</script>
 
     <main class="ui-container ui-container-relative">
         <div id="loadingOverlay">CARREGANDO DOSSIÊ MILITAR...</div>
-        
+
         <div class="top-bar-controls">
-            <a href="javascript:history.back()" id="btnVoltarArvore" class="back-button" style="margin: 0;">&#9664; VOLTAR À PÁGINA ANTERIOR</a>
-            <button id="btnAbrirEdicao" class="btn-submit-militar btn-militar-auto btn-militar-gold" style="display: none;">
+            <a href="javascript:history.back()" id="btnVoltarArvore" class="back-button" style="margin: 0;">&#9664;
+                VOLTAR À PÁGINA ANTERIOR</a>
+            <button id="btnAbrirEdicao" class="btn-submit-militar btn-militar-auto btn-militar-gold"
+                style="display: none;">
                 <span class="material-symbols-outlined" style="font-size: 18px;">edit_document</span> EDITAR DOSSIÊ
             </button>
         </div>
@@ -36,19 +39,25 @@
             <section class="sheet-content">
                 <figure class="carousel-wrapper">
                     <div class="carousel-track" id="tank-track">
-                        <img id="dinImagemPrincipal" src="" alt="Visão do Tanque" class="slide-item" loading="lazy">
+                        <!-- IMAGEM PRINCIPAL ATUALIZADA: Adicionado onclick, cursor pointer e object-fit -->
+                        <img id="dinImagemPrincipal" src="" alt="Visão do Tanque" class="slide-item" loading="lazy" 
+                             onclick="abrirLightbox(this.src, document.getElementById('dinNomeTanque').innerText)" 
+                             style="cursor: pointer; object-fit: contain; width: 100%; max-height: 450px;">
                     </div>
                     <button id="btnPrev" class="carousel-btn prev" aria-label="Imagem Anterior">&#9664;</button>
                     <button id="btnNext" class="carousel-btn next" aria-label="Próxima Imagem">&#9654;</button>
-                    <figcaption id="tank-caption" class="carousel-caption" aria-live="polite">Visão Oficial em Combate</figcaption>
+                    <figcaption id="tank-caption" class="carousel-caption" aria-live="polite">Visão Oficial em Combate
+                    </figcaption>
                 </figure>
-                
+
                 <aside class="sheet-data">
                     <h2 class="data-title">Especificações Técnicas</h2>
-                    <table class="data-table"><tbody id="tabelaEspecificacoesBody"></tbody></table>
+                    <table class="data-table">
+                        <tbody id="tabelaEspecificacoesBody"></tbody>
+                    </table>
                 </aside>
             </section>
-            
+
             <section class="sheet-lore">
                 <h2 class="lore-title">Histórico de Desenvolvimento</h2>
                 <div id="dinHistorico" class="lore-text">--</div>
@@ -68,15 +77,17 @@
             <div class="modal-body-scroll">
                 <form id="formEdicaoTanque">
                     <input type="hidden" id="editTankId">
-                    
+
                     <div class="editor-tabs">
-                        <button type="button" id="tabFichaLore" class="btn-submit-militar btn-militar-auto tab-btn active">FICHA TÉCNICA E LORE</button>
-                        <button type="button" id="tabGaleria" class="btn-submit-militar btn-militar-auto tab-btn inactive">GALERIA DE FOTOS</button>
+                        <button type="button" id="tabFichaLore"
+                            class="btn-submit-militar btn-militar-auto tab-btn active">FICHA TÉCNICA E LORE</button>
+                        <button type="button" id="tabGaleria"
+                            class="btn-submit-militar btn-militar-auto tab-btn inactive">GALERIA DE FOTOS</button>
                     </div>
 
                     <!-- PAINEL 1: FICHA TÉCNICA E LORE -->
                     <div id="painelFichaLore" class="editor-panel active">
-                        
+
                         <div class="editor-section">
                             <h3 class="editor-section-title">IDENTIFICAÇÃO E CLASSIFICAÇÃO</h3>
 
@@ -84,19 +95,27 @@
                                 <label>Nome do Blindado</label>
                                 <input type="text" id="editNomePrincipal" required>
                             </div>
-                            
+
                             <div class="input-group">
                                 <label>Exército Pertencente</label>
                                 <select id="editNacaoId">
-                                    <option value="1">E.U.A.</option><option value="2">Alemanha</option><option value="3">Rússia</option><option value="4">Japão</option><option value="5">Suécia</option>
+                                    <option value="1">E.U.A.</option>
+                                    <option value="2">Alemanha</option>
+                                    <option value="3">Rússia</option>
+                                    <option value="4">Japão</option>
+                                    <option value="5">Suécia</option>
                                 </select>
                             </div>
-                            
+
                             <div class="input-row">
                                 <div class="input-group input-col">
                                     <label>Classe (Define a Cor)</label>
                                     <select id="editClasse">
-                                        <option value="Leve">Tanque Leve</option><option value="Médio">Tanque Médio</option><option value="Pesado">Tanque Pesado</option><option value="Caça-Tanques">Caça-Tanques</option><option value="SPAA">SPAA (Antiaérea)</option>
+                                        <option value="Leve">Tanque Leve</option>
+                                        <option value="Médio">Tanque Médio</option>
+                                        <option value="Pesado">Tanque Pesado</option>
+                                        <option value="Caça-Tanques">Caça-Tanques</option>
+                                        <option value="SPAA">SPAA (Antiaérea)</option>
                                     </select>
                                 </div>
                                 <div class="input-group input-col">
@@ -106,54 +125,107 @@
                                 <div class="input-group input-col">
                                     <label>Nível</label>
                                     <select id="editNivel">
-                                        <option value="I">Nível I</option><option value="II">Nível II</option><option value="III">Nível III</option><option value="IV">Nível IV</option><option value="V">Nível V</option><option value="VI">Nível VI</option><option value="VII">Nível VII</option>
+                                        <option value="I">Nível I</option>
+                                        <option value="II">Nível II</option>
+                                        <option value="III">Nível III</option>
+                                        <option value="IV">Nível IV</option>
+                                        <option value="V">Nível V</option>
+                                        <option value="VI">Nível VI</option>
+                                        <option value="VII">Nível VII</option>
                                     </select>
                                 </div>
                             </div>
-                            
-                            <div class="input-group"><label>Descrição Breve</label><input type="text" id="editDescricaoBreve" maxlength="150" placeholder="Resumo do Card..."></div>
-                            <div class="input-group" style="margin-bottom:0;"><label>Caminho da Silhueta SVG</label><input type="text" id="editCaminhoImagem"></div>
+
+                            <div class="input-group"><label>Descrição Breve</label><input type="text"
+                                    id="editDescricaoBreve" maxlength="150" placeholder="Resumo do Card..."></div>
+                            <div class="input-group" style="margin-bottom:0;">
+                                <!-- LABEL ATUALIZADA -->
+                                <label>Caminho da Imagem Principal (Silhueta SVG)</label>
+                                <input type="text" id="editCaminhoImagem">
+                            </div>
                         </div>
 
                         <div class="editor-section-header">
-                            <p class="editor-section-desc">Reordene os atributos (setas). Valores vazios ficam ocultos na ficha.</p>
-                            <button type="button" id="btnInjetarTemplate" class="btn-submit-militar btn-militar-auto btn-militar-blue">+ INJETAR TEMPLATE PADRÃO</button>
-                        </div>
-                        
-                        <div id="listaAtributosContainer" class="caixa-rolagem-atributos"></div>
-                        
-                        <div class="editor-section input-row" style="align-items: flex-end; border: 1px dashed #444;">
-                            <div class="input-group input-col"><label>Novo Atributo</label><input type="text" id="novoAtributoChave"></div>
-                            <div class="input-group input-col" style="flex: 2;"><label>Valor Tático</label><input type="text" id="novoAtributoValor"></div>
-                            <button type="button" id="btnAdicionarAtributo" class="btn-submit-militar btn-militar-auto btn-militar-gold">ADICIONAR</button>
+                            <p class="editor-section-desc">Reordene os atributos (setas). Valores vazios ficam ocultos
+                                na ficha.</p>
+                            <button type="button" id="btnInjetarTemplate"
+                                class="btn-submit-militar btn-militar-auto btn-militar-blue">+ INJETAR TEMPLATE
+                                PADRÃO</button>
                         </div>
 
-                        <div class="input-group"><label>Histórico de Desenvolvimento</label><textarea id="editHistorico" rows="4"></textarea></div>
-                        <div class="input-group"><label>Doutrina e Táticas</label><textarea id="editTaticas" rows="4"></textarea></div>
+                        <div id="listaAtributosContainer" class="caixa-rolagem-atributos"></div>
+
+                        <div class="editor-section input-row" style="align-items: flex-end; border: 1px dashed #444;">
+                            <div class="input-group input-col"><label>Novo Atributo</label><input type="text"
+                                    id="novoAtributoChave"></div>
+                            <div class="input-group input-col" style="flex: 2;"><label>Valor Tático</label><input
+                                    type="text" id="novoAtributoValor"></div>
+                            <button type="button" id="btnAdicionarAtributo"
+                                class="btn-submit-militar btn-militar-auto btn-militar-gold">ADICIONAR</button>
+                        </div>
+
+                        <div class="input-group"><label>Histórico de Desenvolvimento</label><textarea id="editHistorico"
+                                rows="4"></textarea></div>
+                        <div class="input-group"><label>Doutrina e Táticas</label><textarea id="editTaticas"
+                                rows="4"></textarea></div>
                     </div>
 
                     <!-- PAINEL 2: GALERIA -->
                     <div id="painelGaleria" class="editor-panel">
-                        <p class="editor-section-desc" style="margin-bottom: 10px;">A primeira imagem da lista atuará como a capa do dossiê.</p>
-                        
+                        <p class="editor-section-desc" style="margin-bottom: 10px;">A primeira imagem da lista atuará
+                            como a capa do dossiê.</p>
+
                         <div id="listaGaleriaContainer" class="caixa-rolagem-atributos"></div>
-                        
+
                         <div class="editor-section" style="border: 1px dashed #444;">
-                            <div class="input-group" style="margin-bottom: 8px;"><label>Caminho da Imagem (Ex: WT - Artes/USA/...)</label><input type="text" id="novaFotoCaminho"></div>
+                            <div class="input-group" style="margin-bottom: 8px;"><label>Caminho da Imagem (Ex: WT -
+                                    Artes/USA/...)</label><input type="text" id="novaFotoCaminho"></div>
                             <div class="input-row" style="align-items: flex-end;">
-                                <div class="input-group input-col"><label>Legenda da Imagem</label><input type="text" id="novaFotoLegenda"></div>
-                                <button type="button" id="btnAdicionarFoto" class="btn-submit-militar btn-militar-auto btn-militar-gold">ANEXAR FOTO</button>
+                                <div class="input-group input-col"><label>Legenda da Imagem</label><input type="text"
+                                        id="novaFotoLegenda"></div>
+                                <button type="button" id="btnAdicionarFoto"
+                                    class="btn-submit-militar btn-militar-auto btn-militar-gold">ANEXAR FOTO</button>
                             </div>
                         </div>
                     </div>
 
                     <div class="editor-footer">
-                        <button type="button" id="btnExcluirDossie" class="btn-submit-militar btn-militar-auto btn-militar-red">APAGAR REGISTRO TÁTICO</button>
-                        <button type="submit" id="btnSalvarDossie" class="btn-submit-militar btn-militar-auto btn-militar-green">SALVAR ALTERAÇÕES</button>
+                        <button type="button" id="btnExcluirDossie"
+                            class="btn-submit-militar btn-militar-auto btn-militar-red">APAGAR REGISTRO TÁTICO</button>
+                        <button type="submit" id="btnSalvarDossie"
+                            class="btn-submit-militar btn-militar-auto btn-militar-green">SALVAR ALTERAÇÕES</button>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+    
+    <!-- Modal Lightbox para Imagens -->
+    <div id="imageLightbox" class="lightbox-modal">
+        <span class="lightbox-close" onclick="fecharLightbox()">&times;</span>
+        <img class="lightbox-content" id="lightboxImg" src="">
+        <div id="lightboxCaption" class="lightbox-caption"></div>
+    </div>
+
+<script>
+    // Funções de controle do Lightbox
+function abrirLightbox(src, legenda) {
+    document.getElementById('lightboxImg').src = src;
+    document.getElementById('lightboxCaption').innerText = legenda || 'Visão Técnica do Veículo';
+    document.getElementById('imageLightbox').classList.add('active');
+}
+
+function fecharLightbox() {
+    document.getElementById('imageLightbox').classList.remove('active');
+}
+
+// Fecha o lightbox se o usuário clicar no fundo escuro (fora da imagem)
+document.getElementById('imageLightbox').addEventListener('click', function(e) {
+    if (e.target !== document.getElementById('lightboxImg')) {
+        fecharLightbox();
+    }
+});
+</script>    
 </body>
+
 </html>

@@ -1721,3 +1721,52 @@ body.theme-night .tank-silhueta {
     .comp-selectors-row { grid-template-columns: 1fr; gap: 12px; }
     .comp-table { font-size: 11px; }
 }
+
+/* =========================================
+   LIGHTBOX MODAL (EXPANSÃO DE IMAGENS)
+   ========================================= */
+.lightbox-modal {
+    display: none;
+    position: fixed;
+    z-index: 9999; /* Fica acima de tudo */
+    left: 0; top: 0; width: 100%; height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(5px);
+    align-items: center; justify-content: center;
+    flex-direction: column;
+}
+.lightbox-modal.active {
+    display: flex; /* Acionado via JavaScript */
+}
+.lightbox-content {
+    max-width: 90%; 
+    max-height: 80vh;
+    border: 3px solid #d4af37; /* Borda dourada padrão do seu layout */
+    border-radius: 5px;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.9);
+    object-fit: contain;
+    animation: zoomIn 0.3s ease;
+}
+.lightbox-caption {
+    color: #e0e0e0;
+    font-size: 1.2rem;
+    margin-top: 15px;
+    text-align: center;
+    text-shadow: 2px 2px 4px #000;
+    font-family: inherit;
+}
+.lightbox-close {
+    position: absolute;
+    top: 20px; right: 35px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.lightbox-close:hover { color: #d4af37; }
+
+@keyframes zoomIn {
+    from { transform: scale(0.8); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
+}   
